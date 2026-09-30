@@ -1,0 +1,32 @@
+{
+  "net_price_component": "SFA_NET_PRICE",
+  "aid_component": "SFA_AID",
+  "graduation_component": "GR_DERIVED",
+  "headlines": [
+    {
+      "metric_id": "average_net_price",
+      "display_name": "Average net price",
+      "description": "Estimated annual cost after grants and scholarships for aided full-time, first-time students",
+      "component": "SFA_NET_PRICE",
+      "variable": "NPGRN2",
+      "unit": "usd",
+      "favorable_direction": "lower"
+    },
+    {
+      "metric_id": "pell_share",
+      "display_name": "Pell Grant recipient share",
+      "description": "Undergraduates receiving a federal need-based Pell Grant",
+      "component": "SFA_AID",
+      "variable": "UPGRNTP",
+      "unit": "percent",
+      "favorable_direction": "higher"
+    }
+  ],
+  "income_bands": [
+    {"band_id": "income_0_30", "display_name": "$0 to $30,000", "variable": "NPT412", "favorable_direction": "lower"},
+    {"band_id": "income_30_48", "display_name": "$30,001 to $48,000", "variable": "NPT422", "favorable_direction": "lower"},
+    {"band_id": "income_48_75", "display_name": "$48,001 to $75,000", "variable": "NPT432", "favorable_direction": "lower"},
+    {"band_id": "income_75_110", "display_name": "$75,001 to $110,000", "variable": "NPT442", "favorable_direction": "lower"},
+    {"band_id": "income_over_110", "display_name": "Over $110,000", "variable": "NPT452", "favorable_direction": "lower"}
+  ]
+}

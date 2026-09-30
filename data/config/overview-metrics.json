@@ -1,0 +1,50 @@
+{
+  "metrics": [
+    {
+      "metric_id": "undergraduate_enrollment",
+      "display_name": "Undergraduate enrollment",
+      "description": "Students enrolled for credit in the selected fall term",
+      "interpretation": "Fall undergraduate headcount.",
+      "unit": "students"
+    },
+    {
+      "metric_id": "acceptance_rate",
+      "display_name": "Acceptance rate",
+      "description": "Share of applicants admitted",
+      "interpretation": "Applicants offered admission.",
+      "unit": "percent"
+    },
+    {
+      "metric_id": "retention_rate",
+      "display_name": "First-year retention rate",
+      "description": "Prior fall’s full-time, first-time cohort",
+      "interpretation": "Full-time, first-time students returning.",
+      "unit": "percent",
+      "favorable_direction": "higher"
+    },
+    {
+      "metric_id": "six_year_graduation_rate",
+      "display_name": "Six-year graduation rate",
+      "description": "Applicable bachelor’s cohort completing within six years",
+      "interpretation": "Full-time, first-time bachelor’s completion.",
+      "unit": "percent",
+      "favorable_direction": "higher"
+    },
+    {
+      "metric_id": "average_net_price",
+      "display_name": "Average net price",
+      "description": "Annual cost remaining after grants and scholarships",
+      "interpretation": "Annual cost after grants and scholarships.",
+      "unit": "usd",
+      "favorable_direction": "lower"
+    },
+    {
+      "metric_id": "pell_share",
+      "display_name": "Pell Grant recipient share",
+      "description": "Undergraduates receiving a federal Pell Grant",
+      "interpretation": "Undergraduates receiving Pell Grants.",
+      "unit": "percent",
+      "favorable_direction": "higher"
+    }
+  ]
+}

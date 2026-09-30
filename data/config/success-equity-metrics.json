@@ -1,0 +1,53 @@
+{
+  "small_cohort_minimum": 10,
+  "outcomes": [
+    {
+      "metric_id": "retention",
+      "display_name": "First-year retention",
+      "description": "Full-time, first-time students who returned the following fall",
+      "component": "EF_RETENTION",
+      "variable": "RET_PCF",
+      "favorable_direction": "higher"
+    },
+    {
+      "metric_id": "four_year_graduation",
+      "display_name": "Four-year graduation",
+      "description": "2017 full-time, first-time bachelor’s cohort completing within four years",
+      "component": "GR_DERIVED",
+      "variable": "GBA4RTT",
+      "favorable_direction": "higher"
+    },
+    {
+      "metric_id": "six_year_graduation",
+      "display_name": "Six-year graduation",
+      "description": "2017 full-time, first-time bachelor’s cohort completing within six years",
+      "component": "GR_DERIVED",
+      "variable": "GBA6RTT",
+      "favorable_direction": "higher"
+    },
+    {
+      "metric_id": "pell_six_year_graduation",
+      "display_name": "Pell-recipient graduation",
+      "description": "Pell Grant recipients in the 2017 bachelor’s cohort completing within six years",
+      "component": "GR_DERIVED",
+      "variable": "PGBA6RT",
+      "favorable_direction": "higher"
+    }
+  ],
+  "subgroups": [
+    {"category": "Reported sex", "subgroup_id": "men", "display_name": "Men", "variable": "GBA6RTM"},
+    {"category": "Reported sex", "subgroup_id": "women", "display_name": "Women", "variable": "GBA6RTW"},
+    {"category": "Race/ethnicity", "subgroup_id": "american_indian", "display_name": "American Indian or Alaska Native", "variable": "GBA6RTAN"},
+    {"category": "Race/ethnicity", "subgroup_id": "asian", "display_name": "Asian", "variable": "GBA6RTAS"},
+    {"category": "Race/ethnicity", "subgroup_id": "pacific_islander", "display_name": "Native Hawaiian or Other Pacific Islander", "variable": "GBA6RTNH"},
+    {"category": "Race/ethnicity", "subgroup_id": "black", "display_name": "Black or African American", "variable": "GBA6RTBK"},
+    {"category": "Race/ethnicity", "subgroup_id": "hispanic", "display_name": "Hispanic or Latino", "variable": "GBA6RTHS"},
+    {"category": "Race/ethnicity", "subgroup_id": "white", "display_name": "White", "variable": "GBA6RTWH"},
+    {"category": "Race/ethnicity", "subgroup_id": "multiracial", "display_name": "Two or more races", "variable": "GBA6RT2M"},
+    {"category": "Race/ethnicity", "subgroup_id": "unknown", "display_name": "Race/ethnicity unknown", "variable": "GBA6RTUN"},
+    {"category": "Race/ethnicity", "subgroup_id": "nonresident", "display_name": "U.S. nonresident", "variable": "GBA6RTNR"},
+    {"category": "Financial aid", "subgroup_id": "pell", "display_name": "Pell Grant recipients", "variable": "PGBA6RT"},
+    {"category": "Financial aid", "subgroup_id": "subsidized_loan", "display_name": "Subsidized loan recipients", "variable": "SSBA6RT"},
+    {"category": "Financial aid", "subgroup_id": "neither", "display_name": "Neither Pell nor subsidized loan", "variable": "NRBA6RT"}
+  ]
+}

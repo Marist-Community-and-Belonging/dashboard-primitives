@@ -1,0 +1,446 @@
+{
+  "release": {
+    "collection_year": "2020\u201321",
+    "release_type": "final",
+    "retrieved_at": "2026-09-25",
+    "source": "NCES/IPEDS final Complete Data Files"
+  },
+  "institution_count": 19,
+  "data_year": "2019\u201320",
+  "headlines": [
+    {
+      "metric_id": "average_net_price",
+      "display_name": "Average net price",
+      "description": "Estimated annual cost after grants and scholarships for aided full-time, first-time students",
+      "component": "SFA_NET_PRICE",
+      "variable": "NPGRN2",
+      "unit": "usd",
+      "favorable_direction": "lower",
+      "value": 38797.0,
+      "data_year": "2019\u201320",
+      "peer": {
+        "count": 10,
+        "median": 37329.5,
+        "q1": 34453.25,
+        "q3": 41211.5
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 34899.5,
+        "q1": 29918.5,
+        "q3": 38567.0
+      }
+    },
+    {
+      "metric_id": "pell_share",
+      "display_name": "Pell Grant recipient share",
+      "description": "Undergraduates receiving a federal need-based Pell Grant",
+      "component": "SFA_AID",
+      "variable": "UPGRNTP",
+      "unit": "percent",
+      "favorable_direction": "higher",
+      "value": 15.0,
+      "data_year": "2019\u201320",
+      "peer": {
+        "count": 10,
+        "median": 14.5,
+        "q1": 13.25,
+        "q3": 20.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 12.5,
+        "q1": 10.75,
+        "q3": 17.0
+      }
+    }
+  ],
+  "income_bands": [
+    {
+      "band_id": "income_0_30",
+      "display_name": "$0 to $30,000",
+      "variable": "NPT412",
+      "favorable_direction": "lower",
+      "marist": 24902.0,
+      "peer": {
+        "count": 10,
+        "median": 25755.0,
+        "q1": 21274.5,
+        "q3": 29632.25
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 15052.5,
+        "q1": 11356.0,
+        "q3": 23268.25
+      }
+    },
+    {
+      "band_id": "income_30_48",
+      "display_name": "$30,001 to $48,000",
+      "variable": "NPT422",
+      "favorable_direction": "lower",
+      "marist": 25958.0,
+      "peer": {
+        "count": 10,
+        "median": 23968.0,
+        "q1": 22024.75,
+        "q3": 30061.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 16176.0,
+        "q1": 11144.0,
+        "q3": 26205.75
+      }
+    },
+    {
+      "band_id": "income_48_75",
+      "display_name": "$48,001 to $75,000",
+      "variable": "NPT432",
+      "favorable_direction": "lower",
+      "marist": 30498.0,
+      "peer": {
+        "count": 10,
+        "median": 29897.0,
+        "q1": 26216.75,
+        "q3": 32758.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 19584.0,
+        "q1": 18066.25,
+        "q3": 27362.0
+      }
+    },
+    {
+      "band_id": "income_75_110",
+      "display_name": "$75,001 to $110,000",
+      "variable": "NPT442",
+      "favorable_direction": "lower",
+      "marist": 35139.0,
+      "peer": {
+        "count": 10,
+        "median": 33341.0,
+        "q1": 31180.0,
+        "q3": 36154.25
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 29160.5,
+        "q1": 24997.0,
+        "q3": 36318.75
+      }
+    },
+    {
+      "band_id": "income_over_110",
+      "display_name": "Over $110,000",
+      "variable": "NPT452",
+      "favorable_direction": "lower",
+      "marist": 42411.0,
+      "peer": {
+        "count": 10,
+        "median": 40003.0,
+        "q1": 38104.5,
+        "q3": 44205.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 50945.5,
+        "q1": 48653.25,
+        "q3": 54020.0
+      }
+    }
+  ],
+  "institutions": [
+    {
+      "unitid": 192819,
+      "institution_name": "Marist University",
+      "group": "marist",
+      "average_net_price": 38797.0,
+      "pell_share": 15.0,
+      "graduation_rate": 85.0,
+      "income_net_prices": {
+        "income_0_30": 24902.0,
+        "income_30_48": 25958.0,
+        "income_48_75": 30498.0,
+        "income_75_110": 35139.0,
+        "income_over_110": 42411.0
+      }
+    },
+    {
+      "unitid": 198516,
+      "institution_name": "Elon University",
+      "group": "peer",
+      "average_net_price": 39401.0,
+      "pell_share": 9.0,
+      "graduation_rate": 83.0,
+      "income_net_prices": {
+        "income_0_30": 27491.0,
+        "income_30_48": 20762.0,
+        "income_48_75": 29909.0,
+        "income_75_110": 33928.0,
+        "income_over_110": 44112.0
+      }
+    },
+    {
+      "unitid": 129242,
+      "institution_name": "Fairfield University",
+      "group": "peer",
+      "average_net_price": 43173.0,
+      "pell_share": 10.0,
+      "graduation_rate": 82.0,
+      "income_net_prices": {
+        "income_0_30": 21044.0,
+        "income_30_48": 21807.0,
+        "income_48_75": 25929.0,
+        "income_75_110": 30670.0,
+        "income_over_110": 40878.0
+      }
+    },
+    {
+      "unitid": 191649,
+      "institution_name": "Hofstra University",
+      "group": "peer",
+      "average_net_price": 34011.0,
+      "pell_share": 22.0,
+      "graduation_rate": 65.0,
+      "income_net_prices": {
+        "income_0_30": 30346.0,
+        "income_30_48": 29656.0,
+        "income_48_75": 33635.0,
+        "income_75_110": 36657.0,
+        "income_over_110": 35479.0
+      }
+    },
+    {
+      "unitid": 163046,
+      "institution_name": "Loyola University Maryland",
+      "group": "peer",
+      "average_net_price": 37375.0,
+      "pell_share": 14.0,
+      "graduation_rate": 81.0,
+      "income_net_prices": {
+        "income_0_30": 27197.0,
+        "income_30_48": 30197.0,
+        "income_48_75": 29885.0,
+        "income_75_110": 32710.0,
+        "income_over_110": 39009.0
+      }
+    },
+    {
+      "unitid": 217402,
+      "institution_name": "Providence College",
+      "group": "peer",
+      "average_net_price": 37284.0,
+      "pell_share": 14.0,
+      "graduation_rate": 85.0,
+      "income_net_prices": {
+        "income_0_30": 19043.0,
+        "income_30_48": 18864.0,
+        "income_48_75": 26014.0,
+        "income_75_110": 32754.0,
+        "income_over_110": 48172.0
+      }
+    },
+    {
+      "unitid": 130226,
+      "institution_name": "Quinnipiac University",
+      "group": "peer",
+      "average_net_price": 41815.0,
+      "pell_share": 15.0,
+      "graduation_rate": 76.0,
+      "income_net_prices": {
+        "income_0_30": 33763.0,
+        "income_30_48": 34727.0,
+        "income_48_75": 37175.0,
+        "income_75_110": 40199.0,
+        "income_over_110": 44432.0
+      }
+    },
+    {
+      "unitid": 130253,
+      "institution_name": "Sacred Heart University",
+      "group": "peer",
+      "average_net_price": 43313.0,
+      "pell_share": 17.0,
+      "graduation_rate": 73.0,
+      "income_net_prices": {
+        "income_0_30": 36454.0,
+        "income_30_48": 35484.0,
+        "income_48_75": 39777.0,
+        "income_75_110": 43387.0,
+        "income_over_110": 44236.0
+      }
+    },
+    {
+      "unitid": 215770,
+      "institution_name": "Saint Joseph's University",
+      "group": "peer",
+      "average_net_price": 35780.0,
+      "pell_share": 13.0,
+      "graduation_rate": 81.0,
+      "income_net_prices": {
+        "income_0_30": 24313.0,
+        "income_30_48": 23963.0,
+        "income_48_75": 26825.0,
+        "income_75_110": 30232.0,
+        "income_over_110": 37803.0
+      }
+    },
+    {
+      "unitid": 186584,
+      "institution_name": "Seton Hall University",
+      "group": "peer",
+      "average_net_price": 33652.0,
+      "pell_share": 26.0,
+      "graduation_rate": 72.0,
+      "income_net_prices": {
+        "income_0_30": 21252.0,
+        "income_30_48": 23973.0,
+        "income_48_75": 30127.0,
+        "income_75_110": 34646.0,
+        "income_over_110": 39128.0
+      }
+    },
+    {
+      "unitid": 195474,
+      "institution_name": "Siena College",
+      "group": "peer",
+      "average_net_price": 29625.0,
+      "pell_share": 25.0,
+      "graduation_rate": 81.0,
+      "income_net_prices": {
+        "income_0_30": 21342.0,
+        "income_30_48": 22678.0,
+        "income_48_75": 25498.0,
+        "income_75_110": 30299.0,
+        "income_over_110": 33940.0
+      }
+    },
+    {
+      "unitid": 164924,
+      "institution_name": "Boston College",
+      "group": "aspirant",
+      "average_net_price": 30192.0,
+      "pell_share": 13.0,
+      "graduation_rate": 92.0,
+      "income_net_prices": {
+        "income_0_30": 10212.0,
+        "income_30_48": 7075.0,
+        "income_48_75": 17098.0,
+        "income_75_110": 23632.0,
+        "income_over_110": 50368.0
+      }
+    },
+    {
+      "unitid": 211291,
+      "institution_name": "Bucknell University",
+      "group": "aspirant",
+      "average_net_price": 39359.0,
+      "pell_share": 10.0,
+      "graduation_rate": 88.0,
+      "income_net_prices": {
+        "income_0_30": 22722.0,
+        "income_30_48": 28153.0,
+        "income_48_75": 26956.0,
+        "income_75_110": 37106.0,
+        "income_over_110": 55823.0
+      }
+    },
+    {
+      "unitid": 166124,
+      "institution_name": "College of the Holy Cross",
+      "group": "aspirant",
+      "average_net_price": 32061.0,
+      "pell_share": 17.0,
+      "graduation_rate": 93.0,
+      "income_net_prices": {
+        "income_0_30": 14544.0,
+        "income_30_48": 17357.0,
+        "income_48_75": 20142.0,
+        "income_75_110": 31109.0,
+        "income_over_110": 51523.0
+      }
+    },
+    {
+      "unitid": 191241,
+      "institution_name": "Fordham University",
+      "group": "aspirant",
+      "average_net_price": 41569.0,
+      "pell_share": 18.0,
+      "graduation_rate": 83.0,
+      "income_net_prices": {
+        "income_0_30": 26202.0,
+        "income_30_48": 26121.0,
+        "income_48_75": 31221.0,
+        "income_75_110": 36795.0,
+        "income_over_110": 45933.0
+      }
+    },
+    {
+      "unitid": 213385,
+      "institution_name": "Lafayette College",
+      "group": "aspirant",
+      "average_net_price": 28735.0,
+      "pell_share": 12.0,
+      "graduation_rate": 90.0,
+      "income_net_prices": {
+        "income_0_30": 11728.0,
+        "income_30_48": 12400.0,
+        "income_48_75": 13393.0,
+        "income_75_110": 19462.0,
+        "income_over_110": 49560.0
+      }
+    },
+    {
+      "unitid": 213543,
+      "institution_name": "Lehigh University",
+      "group": "aspirant",
+      "average_net_price": 29098.0,
+      "pell_share": 17.0,
+      "graduation_rate": 88.0,
+      "income_net_prices": {
+        "income_0_30": 15561.0,
+        "income_30_48": 14995.0,
+        "income_48_75": 19026.0,
+        "income_75_110": 27212.0,
+        "income_over_110": 61351.0
+      }
+    },
+    {
+      "unitid": 167358,
+      "institution_name": "Northeastern University",
+      "group": "aspirant",
+      "average_net_price": 37738.0,
+      "pell_share": 11.0,
+      "graduation_rate": 90.0,
+      "income_net_prices": {
+        "income_0_30": 10240.0,
+        "income_30_48": 7376.0,
+        "income_48_75": 18389.0,
+        "income_75_110": 25452.0,
+        "income_over_110": 43276.0
+      }
+    },
+    {
+      "unitid": 216597,
+      "institution_name": "Villanova University",
+      "group": "aspirant",
+      "average_net_price": 38303.0,
+      "pell_share": 10.0,
+      "graduation_rate": 92.0,
+      "income_net_prices": {
+        "income_0_30": 24907.0,
+        "income_30_48": 26460.0,
+        "income_48_75": 28580.0,
+        "income_75_110": 36160.0,
+        "income_over_110": 53419.0
+      }
+    }
+  ],
+  "methodology": {
+    "net_price": "Average net price estimates annual cost of attendance after grants and scholarships for aided full-time, first-time students.",
+    "income_bands": "Income-band values cover full-time, first-time students awarded Title IV federal financial aid. Peer and aspirant values are institution-level medians."
+  }
+}

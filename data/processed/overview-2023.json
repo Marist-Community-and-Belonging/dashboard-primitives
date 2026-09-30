@@ -1,0 +1,989 @@
+{
+  "release": {
+    "collection_year": "2023\u201324",
+    "release_type": "final",
+    "retrieved_at": "2026-09-25",
+    "source": "NCES/IPEDS final data files"
+  },
+  "institution_count": 19,
+  "metrics": [
+    {
+      "metric_id": "undergraduate_enrollment",
+      "display_name": "Undergraduate enrollment",
+      "description": "Students enrolled for credit in fall 2023",
+      "interpretation": "Fall undergraduate headcount.",
+      "unit": "students",
+      "favorable_direction": null,
+      "value": 5545.0,
+      "data_year": "Fall 2023",
+      "collection_year": "2023\u201324",
+      "cohort_year": null,
+      "release_type": "final",
+      "source_component": "DRVEF2023",
+      "source_variable": "EFUG",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 5514.5,
+        "q1": 4350.25,
+        "q3": 6242.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 6437.0,
+        "q1": 3643.25,
+        "q3": 10139.0
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 5545.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 6402.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 4968.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 6224.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 3987.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 4191.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 6248.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 6960.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 4828.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 6061.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 3497.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 10083.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 3846.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 3035.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 10307.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 2764.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 5811.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 15891.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 7063.0,
+          "status_flag": null
+        }
+      ]
+    },
+    {
+      "metric_id": "acceptance_rate",
+      "display_name": "Acceptance rate",
+      "description": "Share of applicants admitted",
+      "interpretation": "Applicants offered admission.",
+      "unit": "percent",
+      "favorable_direction": null,
+      "value": 65.0,
+      "data_year": "Fall 2023",
+      "collection_year": "2023\u201324",
+      "cohort_year": null,
+      "release_type": "final",
+      "source_component": "DRVADM2023",
+      "source_variable": "DVADM01",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 71.0,
+        "q1": 67.25,
+        "q3": 76.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 27.0,
+        "q1": 19.75,
+        "q3": 31.25
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 65.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 67.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 45.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 71.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 76.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 49.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 77.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 68.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 86.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 79.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 71.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 16.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 32.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 21.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 56.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 31.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 29.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 6.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 25.0,
+          "status_flag": null
+        }
+      ]
+    },
+    {
+      "metric_id": "retention_rate",
+      "display_name": "First-year retention rate",
+      "description": "Prior fall\u2019s full-time, first-time cohort",
+      "interpretation": "Full-time, first-time students returning.",
+      "unit": "percent",
+      "favorable_direction": "higher",
+      "value": 89.0,
+      "data_year": "Fall 2023",
+      "collection_year": "2023\u201324",
+      "cohort_year": null,
+      "release_type": "final",
+      "source_component": "EF2023D",
+      "source_variable": "RET_PCF",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 86.5,
+        "q1": 85.0,
+        "q3": 89.5
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 94.0,
+        "q1": 92.75,
+        "q3": 95.25
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 89.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 90.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 90.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 83.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 86.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 91.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 87.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 85.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 88.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 85.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 84.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 95.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 96.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 93.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 88.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 92.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 93.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 98.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 95.0,
+          "status_flag": null
+        }
+      ]
+    },
+    {
+      "metric_id": "six_year_graduation_rate",
+      "display_name": "Six-year graduation rate",
+      "description": "2017 bachelor\u2019s cohort completing by 2023",
+      "interpretation": "Full-time, first-time bachelor\u2019s completion within six years.",
+      "unit": "percent",
+      "favorable_direction": "higher",
+      "value": 80.0,
+      "data_year": "2023 status year",
+      "collection_year": "2023\u201324",
+      "cohort_year": "2017 entering cohort",
+      "release_type": "final",
+      "source_component": "DRVGR2023",
+      "source_variable": "GBA6RTT",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 78.5,
+        "q1": 74.5,
+        "q3": 82.25
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 89.5,
+        "q1": 87.5,
+        "q3": 90.25
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 80.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 83.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 84.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 67.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 80.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 88.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 77.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 74.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 80.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 71.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 76.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 91.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 86.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 90.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 80.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 88.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 89.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 90.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 92.0,
+          "status_flag": null
+        }
+      ]
+    },
+    {
+      "metric_id": "average_net_price",
+      "display_name": "Average net price",
+      "description": "Annual cost remaining after grants and scholarships",
+      "interpretation": "Annual cost after grants and scholarships.",
+      "unit": "usd",
+      "favorable_direction": "lower",
+      "value": 40106.0,
+      "data_year": "2022\u201323",
+      "collection_year": "2023\u201324",
+      "cohort_year": null,
+      "release_type": "final",
+      "source_component": "sfa2223_p2",
+      "source_variable": "NPGRN2",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 38012.0,
+        "q1": 33373.25,
+        "q3": 45086.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 35112.5,
+        "q1": 34368.25,
+        "q3": 38081.0
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 40106.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 41849.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 47630.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 35687.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 31857.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 46645.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 39632.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 46165.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 36392.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 31642.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 32602.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 32590.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 38486.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 35455.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 45368.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 34728.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 33289.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 34770.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 37946.0,
+          "status_flag": null
+        }
+      ]
+    },
+    {
+      "metric_id": "pell_share",
+      "display_name": "Pell Grant recipient share",
+      "description": "Undergraduates receiving a federal Pell Grant",
+      "interpretation": "Undergraduates receiving Pell Grants.",
+      "unit": "percent",
+      "favorable_direction": "higher",
+      "value": 15.0,
+      "data_year": "2022\u201323",
+      "collection_year": "2023\u201324",
+      "cohort_year": null,
+      "release_type": "final",
+      "source_component": "sfa2223_p1",
+      "source_variable": "UPGRNTP",
+      "status_flag": null,
+      "peer": {
+        "count": 10,
+        "median": 17.0,
+        "q1": 13.5,
+        "q3": 21.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 12.5,
+        "q1": 11.75,
+        "q3": 15.75
+      },
+      "institutions": [
+        {
+          "unitid": 192819,
+          "institution_name": "Marist University",
+          "group": "marist",
+          "value": 15.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 198516,
+          "institution_name": "Elon University",
+          "group": "peer",
+          "value": 9.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 129242,
+          "institution_name": "Fairfield University",
+          "group": "peer",
+          "value": 7.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191649,
+          "institution_name": "Hofstra University",
+          "group": "peer",
+          "value": 24.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 163046,
+          "institution_name": "Loyola University Maryland",
+          "group": "peer",
+          "value": 18.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 217402,
+          "institution_name": "Providence College",
+          "group": "peer",
+          "value": 13.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130226,
+          "institution_name": "Quinnipiac University",
+          "group": "peer",
+          "value": 16.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 130253,
+          "institution_name": "Sacred Heart University",
+          "group": "peer",
+          "value": 15.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 215770,
+          "institution_name": "Saint Joseph's University",
+          "group": "peer",
+          "value": 18.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 186584,
+          "institution_name": "Seton Hall University",
+          "group": "peer",
+          "value": 30.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 195474,
+          "institution_name": "Siena College",
+          "group": "peer",
+          "value": 23.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 164924,
+          "institution_name": "Boston College",
+          "group": "aspirant",
+          "value": 13.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 211291,
+          "institution_name": "Bucknell University",
+          "group": "aspirant",
+          "value": 11.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 166124,
+          "institution_name": "College of the Holy Cross",
+          "group": "aspirant",
+          "value": 15.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 191241,
+          "institution_name": "Fordham University",
+          "group": "aspirant",
+          "value": 21.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213385,
+          "institution_name": "Lafayette College",
+          "group": "aspirant",
+          "value": 10.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 213543,
+          "institution_name": "Lehigh University",
+          "group": "aspirant",
+          "value": 18.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 167358,
+          "institution_name": "Northeastern University",
+          "group": "aspirant",
+          "value": 12.0,
+          "status_flag": null
+        },
+        {
+          "unitid": 216597,
+          "institution_name": "Villanova University",
+          "group": "aspirant",
+          "value": 12.0,
+          "status_flag": null
+        }
+      ]
+    }
+  ]
+}

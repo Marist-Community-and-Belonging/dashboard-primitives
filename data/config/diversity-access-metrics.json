@@ -1,0 +1,20 @@
+{
+  "composition_component": "EF_DERIVED",
+  "enrollment_variable": "EFUG",
+  "women_variable": "PCUENRW",
+  "graduation_component": "GR_DERIVED",
+  "graduation_variable": "GBA6RTT",
+  "pell_component": "SFA_AID",
+  "pell_variable": "UPGRNTP",
+  "categories": [
+    {"category_id": "white", "display_name": "White", "variable": "PCUENRWH"},
+    {"category_id": "black", "display_name": "Black or African American", "variable": "PCUENRBK"},
+    {"category_id": "hispanic", "display_name": "Hispanic or Latino", "variable": "PCUENRHS"},
+    {"category_id": "asian", "display_name": "Asian", "variable": "PCUENRAS"},
+    {"category_id": "pacific_islander", "display_name": "Native Hawaiian or Other Pacific Islander", "variable": "PCUENRNH"},
+    {"category_id": "american_indian", "display_name": "American Indian or Alaska Native", "variable": "PCUENRAN"},
+    {"category_id": "multiracial", "display_name": "Two or more races", "variable": "PCUENR2M"},
+    {"category_id": "unknown", "display_name": "Race/ethnicity unknown", "variable": "PCUENRUN"},
+    {"category_id": "nonresident", "display_name": "U.S. nonresident", "variable": "PCUENRNR"}
+  ]
+}

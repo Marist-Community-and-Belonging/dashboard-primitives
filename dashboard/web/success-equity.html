@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Marist University student success and equity comparisons using reproducible IPEDS data.">
+    <meta name="color-scheme" content="light">
+    <title>Success &amp; Equity · Marist IPEDS Benchmark</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/dashboard.css">
+    <script src="/assets/vendor/d3.v7.min.js" defer></script>
+    <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/features.js" defer></script>
+    <script src="/assets/collapsible.js" defer></script>
+    <script src="/assets/year-selector.js" defer></script>
+    <script src="/assets/comparison-highlights.js" defer></script>
+    <script src="/assets/reveals.js" defer></script>
+    <script src="/assets/trends.js" defer></script>
+    <script src="/assets/success-equity.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+    <header class="site-header">
+      <div class="masthead">
+        <a class="identity" href="/"><img class="university-logo" src="/assets/marist-university-logo.png" alt="Marist University"><span class="product-name">IPEDS Benchmark</span></a>
+        <a class="method-link" href="#methodology">Data and methodology</a>
+      </div>
+      <nav class="section-nav" aria-label="Dashboard sections">
+        <a href="/">Overview</a>
+        <a href="/marist-profile">Marist Profile</a>
+        <a href="/diversity-access">Diversity &amp; Access</a>
+        <a href="/success-equity" aria-current="page">Success &amp; Equity</a>
+        <a href="/affordability-resources">Affordability</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div><p class="eyebrow">Success &amp; Equity</p><h1 id="page-title">Student success and equity</h1><p class="lede">Retention and graduation outcomes, including results for reported student groups.</p></div>
+        <dl class="release-summary" aria-label="Dataset summary"><div><dt>Collection</dt><dd id="collection-year">2023–24</dd></div><div><dt>Institutions</dt><dd id="institution-count">19</dd></div><div><dt>Release</dt><dd id="release-type">Final</dd></div></dl>
+      </section>
+      <p class="data-note" id="data-status" role="status">Loading the verified IPEDS success dataset…</p>
+
+      <section class="dashboard-section" data-feature="success_outcomes" data-collapsible aria-labelledby="outcomes-heading">
+        <div class="section-heading"><div><h2 id="outcomes-heading">Institution-wide outcomes</h2><p>Marist values with peer and aspirant medians and middle ranges.</p></div><form class="year-filter"><label for="year-select">Collection year</label><div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div><small id="year-availability">Loading available years…</small></form></div>
+        <div class="legend" aria-label="Chart legend"><span><i class="key-marist"></i>Marist</span><span><i class="key-peer"></i>Peer middle 50%</span><span><i class="key-aspirant"></i>Aspirant middle 50%</span></div>
+        <p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p>
+        <div id="outcome-grid" class="outcome-grid"></div>
+        <details class="detail-disclosure"><summary>View exact values</summary><div class="table-scroll compact-table"><table><caption class="sr-only">Institution-wide outcome comparisons</caption><thead><tr><th scope="col">Outcome</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Peer middle 50%</th><th scope="col">Aspirant median</th><th scope="col">Aspirant middle 50%</th><th scope="col">Cohort</th></tr></thead><tbody id="outcome-table-body"></tbody></table></div></details>
+      </section>
+
+      <section class="dashboard-section" data-feature="success_trend" data-collapsible aria-labelledby="success-trend-heading">
+        <div class="section-heading"><div><h2 id="success-trend-heading">Five-year outcome trends</h2><p>Institution-wide retention and six-year graduation rates.</p></div></div>
+        <div id="success-trends" class="trend-grid trend-grid-two"></div>
+      </section>
+
+      <section class="dashboard-section" data-feature="success_equity_gaps" data-collapsible aria-labelledby="equity-heading">
+        <div class="section-heading table-heading"><div><h2 id="equity-heading">Six-year graduation equity gaps</h2><p id="equity-description">Each dot shows a subgroup’s difference from Marist’s institution-wide result.</p></div><a class="download-link" href="/api/v1/success-equity/export.csv" download>Download CSV</a></div>
+        <div id="equity-chart" class="equity-chart"></div>
+        <details class="detail-disclosure"><summary>View exact subgroup values</summary><div class="table-scroll compact-table institution-table-wrap"><table><caption class="sr-only">Marist subgroup six-year graduation outcomes and comparison medians</caption><thead><tr><th scope="col">Population</th><th scope="col">Marist rate</th><th scope="col">Gap</th><th scope="col">Peer median</th><th scope="col">Aspirant median</th></tr></thead><tbody id="equity-table-body"></tbody></table></div></details>
+      </section>
+
+      <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
+        <div><p class="eyebrow">Methodology</p><h2 id="methodology-heading">Rates are descriptive, not rankings</h2></div>
+        <div class="methodology-copy"><p id="cohort-method"></p><p>Subgroup gaps equal the subgroup rate minus Marist’s institution-wide six-year rate. Missing values remain unavailable. Peer and aspirant bands use institution-level medians and inclusive interquartile ranges.</p><a href="https://nces.ed.gov/ipeds/use-the-data">Official IPEDS data source</a></div>
+      </section>
+    </main>
+    <footer><p>Public institutional comparison. No composite ranking. <a href="https://www.marist.edu/offices/institutional-research/peer-aspirant">Marist’s official peer and aspirant lists</a>.</p><p>U.S. Department of Education · NCES · IPEDS</p></footer>
+  </body>
+</html>

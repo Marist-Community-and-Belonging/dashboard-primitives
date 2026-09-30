@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Marist University undergraduate diversity and access comparisons using reproducible IPEDS data.">
+    <meta name="color-scheme" content="light">
+    <title>Diversity &amp; Access · Marist IPEDS Benchmark</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/dashboard.css">
+    <script src="/assets/vendor/d3.v7.min.js" defer></script>
+    <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/features.js" defer></script>
+    <script src="/assets/collapsible.js" defer></script>
+    <script src="/assets/year-selector.js" defer></script>
+    <script src="/assets/reveals.js" defer></script>
+    <script src="/assets/trends.js" defer></script>
+    <script src="/assets/diversity-access.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+    <header class="site-header">
+      <div class="masthead">
+        <a class="identity" href="/">
+          <img class="university-logo" src="/assets/marist-university-logo.png" alt="Marist University">
+          <span class="product-name">IPEDS Benchmark</span>
+        </a>
+        <a class="method-link" href="#methodology">Data and methodology</a>
+      </div>
+      <nav class="section-nav" aria-label="Dashboard sections">
+        <a href="/">Overview</a>
+        <a href="/marist-profile">Marist Profile</a>
+        <a href="/diversity-access" aria-current="page">Diversity &amp; Access</a>
+        <a href="/success-equity">Success &amp; Equity</a>
+        <a href="/affordability-resources">Affordability</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Diversity &amp; Access</p>
+          <h1 id="page-title">Enrollment diversity and access</h1>
+          <p class="lede">Undergraduate composition and access measures for Marist, peers, and aspirants.</p>
+        </div>
+        <dl class="release-summary" aria-label="Dataset summary">
+          <div><dt>Collection</dt><dd id="collection-year">2023–24</dd></div>
+          <div><dt>Institutions</dt><dd id="institution-count">19</dd></div>
+          <div><dt>Release</dt><dd id="release-type">Final</dd></div>
+        </dl>
+      </section>
+
+      <p class="data-note" id="data-status" role="status">Loading the verified IPEDS diversity and access dataset…</p>
+
+      <section class="dashboard-section" data-feature="diversity_composition" data-collapsible aria-labelledby="composition-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="composition-heading">Undergraduate composition</h2>
+            <p>Marist compared with enrollment-weighted peer and aspirant aggregates.</p>
+          </div>
+          <form class="year-filter"><label for="year-select">Collection year</label><div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div><small id="year-availability">Loading available years…</small></form>
+        </div>
+        <p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p>
+        <p class="section-callout" id="diversity-callout"></p>
+        <div id="composition-legend" class="composition-legend" aria-label="Race and ethnicity legend"></div>
+        <div id="composition-chart" class="composition-chart"></div>
+        <details class="detail-disclosure"><summary>View exact composition values</summary><div class="table-scroll compact-table">
+          <table>
+            <caption class="sr-only">Undergraduate composition shares for Marist, peer aggregate, and aspirant aggregate</caption>
+            <thead id="composition-table-head"></thead>
+            <tbody id="composition-table-body"></tbody>
+          </table>
+        </div></details>
+        <p class="chart-note" id="composition-note"></p>
+      </section>
+
+      <section class="dashboard-section" data-feature="diversity_trend" data-collapsible aria-labelledby="diversity-trend-heading">
+        <div class="section-heading"><div><h2 id="diversity-trend-heading">Five-year diversity trend</h2><p>Undergraduate diversity index for Marist and the median comparison institutions.</p></div></div>
+        <div id="diversity-trend" class="trend-grid"></div>
+      </section>
+
+      <section class="dashboard-section access-section" data-feature="diversity_access" data-collapsible aria-labelledby="access-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="access-heading">Access indicators</h2>
+            <p>Visible measures of international enrollment, reported sex, and socioeconomic access.</p>
+          </div>
+        </div>
+        <div id="access-grid" class="access-grid"></div>
+      </section>
+
+      <section class="dashboard-section" data-feature="diversity_gaps" data-collapsible aria-labelledby="gap-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="gap-heading">Representation gaps</h2>
+            <p>Marist’s reported share minus the median institution in each comparison group.</p>
+          </div>
+        </div>
+        <div id="gap-heatmap" class="gap-heatmap"></div>
+        <details class="detail-disclosure"><summary>View exact gap values</summary><div class="table-scroll compact-table">
+          <table>
+            <caption class="sr-only">Marist representation gaps in percentage points</caption>
+            <thead><tr><th scope="col">Population</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Gap</th><th scope="col">Aspirant median</th><th scope="col">Gap</th></tr></thead>
+            <tbody id="gap-table-body"></tbody>
+          </table>
+        </div></details>
+      </section>
+
+      <section class="dashboard-section" data-feature="diversity_scatter" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">
+        <div class="section-heading table-heading">
+          <div>
+            <h2 id="scatter-heading">Diversity and graduation</h2>
+            <p>Undergraduate diversity index versus six-year graduation rate; bubble size represents enrollment.</p>
+          </div>
+          <a class="download-link" href="/api/v1/diversity-access/export.csv" download>Download CSV</a>
+        </div>
+        <div id="scatterplot" class="scatterplot"></div>
+        <details class="detail-disclosure"><summary>View institution values</summary><div class="table-scroll compact-table institution-table-wrap">
+          <table>
+            <caption class="sr-only">Institution values represented in the diversity and graduation scatterplot</caption>
+            <thead><tr><th scope="col">Institution</th><th scope="col">Group</th><th scope="col">Diversity index</th><th scope="col">Six-year graduation</th><th scope="col">Undergraduate enrollment</th></tr></thead>
+            <tbody id="scatter-table-body"></tbody>
+          </table>
+        </div></details>
+      </section>
+
+      <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
+        <div>
+          <p class="eyebrow">Methodology</p>
+          <h2 id="methodology-heading">Population detail without a composite ranking</h2>
+        </div>
+        <div class="methodology-copy">
+          <p id="composition-method"></p>
+          <p id="diversity-method"></p>
+          <p>IPEDS reports men and women for these fall enrollment vintages. Categories and labels follow the applicable federal dictionary; zero, missing, and unavailable values remain distinct.</p>
+          <a href="https://nces.ed.gov/ipeds/use-the-data">Official IPEDS data source</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Public institutional comparison. No composite ranking. <a href="https://www.marist.edu/offices/institutional-research/peer-aspirant">Marist’s official peer and aspirant lists</a>.</p>
+      <p>U.S. Department of Education · NCES · IPEDS</p>
+    </footer>
+  </body>
+</html>

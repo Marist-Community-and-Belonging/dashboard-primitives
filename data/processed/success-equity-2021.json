@@ -1,0 +1,934 @@
+{
+  "release": {
+    "collection_year": "2021\u201322",
+    "release_type": "final",
+    "retrieved_at": "2026-09-25",
+    "source": "NCES/IPEDS final Complete Data Files"
+  },
+  "institution_count": 19,
+  "cohort_year": "2015 entering cohort",
+  "institution_rate": 82.0,
+  "outcomes": [
+    {
+      "metric_id": "retention",
+      "display_name": "First-year retention",
+      "description": "Full-time, first-time students who returned the following fall",
+      "component": "EF_RETENTION",
+      "variable": "RET_PCF",
+      "favorable_direction": "higher",
+      "data_year": "Fall 2021",
+      "value": 86.0,
+      "peer": {
+        "count": 10,
+        "median": 87.5,
+        "q1": 83.75,
+        "q3": 88.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 94.5,
+        "q1": 91.0,
+        "q3": 96.0
+      }
+    },
+    {
+      "metric_id": "four_year_graduation",
+      "display_name": "Four-year graduation",
+      "description": "Full-time, first-time bachelor\u2019s students in the 2015 cohort completing within four years",
+      "component": "GR_DERIVED",
+      "variable": "GBA4RTT",
+      "favorable_direction": "higher",
+      "data_year": "2021 status year",
+      "cohort_year": "2015 entering cohort",
+      "value": 75.0,
+      "peer": {
+        "count": 10,
+        "median": 76.5,
+        "q1": 69.75,
+        "q3": 78.5
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 84.0,
+        "q1": 78.0,
+        "q3": 88.0
+      }
+    },
+    {
+      "metric_id": "six_year_graduation",
+      "display_name": "Six-year graduation",
+      "description": "Full-time, first-time bachelor\u2019s students in the 2015 cohort completing within six years",
+      "component": "GR_DERIVED",
+      "variable": "GBA6RTT",
+      "favorable_direction": "higher",
+      "data_year": "2021 status year",
+      "cohort_year": "2015 entering cohort",
+      "value": 82.0,
+      "peer": {
+        "count": 10,
+        "median": 80.5,
+        "q1": 74.0,
+        "q3": 83.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 89.5,
+        "q1": 87.75,
+        "q3": 91.0
+      }
+    },
+    {
+      "metric_id": "pell_six_year_graduation",
+      "display_name": "Pell-recipient graduation",
+      "description": "Pell Grant recipients in the 2015 cohort completing within six years",
+      "component": "GR_DERIVED",
+      "variable": "PGBA6RT",
+      "favorable_direction": "higher",
+      "data_year": "2021 status year",
+      "cohort_year": "2015 entering cohort",
+      "value": 78.0,
+      "peer": {
+        "count": 10,
+        "median": 73.5,
+        "q1": 67.0,
+        "q3": 77.5
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 87.0,
+        "q1": 85.75,
+        "q3": 88.5
+      }
+    }
+  ],
+  "subgroups": [
+    {
+      "category": "Reported sex",
+      "subgroup_id": "men",
+      "display_name": "Men",
+      "variable": "GBA6RTM",
+      "value": 79.0,
+      "gap": -3.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 76.5,
+        "q1": 72.75,
+        "q3": 81.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 88.0,
+        "q1": 85.75,
+        "q3": 90.0
+      }
+    },
+    {
+      "category": "Reported sex",
+      "subgroup_id": "women",
+      "display_name": "Women",
+      "variable": "GBA6RTW",
+      "value": 84.0,
+      "gap": 2.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 83.0,
+        "q1": 78.25,
+        "q3": 84.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 91.0,
+        "q1": 89.75,
+        "q3": 92.25
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "american_indian",
+      "display_name": "American Indian or Alaska Native",
+      "variable": "GBA6RTAN",
+      "value": 100.0,
+      "gap": 18.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 7,
+        "median": 50.0,
+        "q1": 21.5,
+        "q3": 83.5
+      },
+      "aspirant": {
+        "count": 4,
+        "median": 100.0,
+        "q1": 100.0,
+        "q3": 100.0
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "asian",
+      "display_name": "Asian",
+      "variable": "GBA6RTAS",
+      "value": 83.0,
+      "gap": 1.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 73.5,
+        "q1": 70.25,
+        "q3": 84.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 89.5,
+        "q1": 88.5,
+        "q3": 90.75
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "pacific_islander",
+      "display_name": "Native Hawaiian or Other Pacific Islander",
+      "variable": "GBA6RTNH",
+      "value": null,
+      "gap": null,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 8,
+        "median": 89.0,
+        "q1": 67.0,
+        "q3": 100.0
+      },
+      "aspirant": {
+        "count": 3,
+        "median": 100.0,
+        "q1": 100.0,
+        "q3": 100.0
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "black",
+      "display_name": "Black or African American",
+      "variable": "GBA6RTBK",
+      "value": 72.0,
+      "gap": -10.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 70.0,
+        "q1": 64.25,
+        "q3": 74.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 85.5,
+        "q1": 80.75,
+        "q3": 87.0
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "hispanic",
+      "display_name": "Hispanic or Latino",
+      "variable": "GBA6RTHS",
+      "value": 76.0,
+      "gap": -6.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 72.5,
+        "q1": 68.5,
+        "q3": 79.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 88.5,
+        "q1": 84.25,
+        "q3": 90.0
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "white",
+      "display_name": "White",
+      "variable": "GBA6RTWH",
+      "value": 83.0,
+      "gap": 1.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 82.5,
+        "q1": 77.75,
+        "q3": 84.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 90.0,
+        "q1": 87.0,
+        "q3": 92.25
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "multiracial",
+      "display_name": "Two or more races",
+      "variable": "GBA6RT2M",
+      "value": 87.0,
+      "gap": 5.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 71.0,
+        "q1": 67.0,
+        "q3": 75.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 86.5,
+        "q1": 79.5,
+        "q3": 89.0
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "unknown",
+      "display_name": "Race/ethnicity unknown",
+      "variable": "GBA6RTUN",
+      "value": 82.0,
+      "gap": 0.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 79.0,
+        "q1": 66.5,
+        "q3": 93.25
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 90.5,
+        "q1": 85.75,
+        "q3": 92.25
+      }
+    },
+    {
+      "category": "Race/ethnicity",
+      "subgroup_id": "nonresident",
+      "display_name": "U.S. nonresident",
+      "variable": "GBA6RTNR",
+      "value": 79.0,
+      "gap": -3.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 65.5,
+        "q1": 60.5,
+        "q3": 72.25
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 88.5,
+        "q1": 85.5,
+        "q3": 90.0
+      }
+    },
+    {
+      "category": "Financial aid",
+      "subgroup_id": "pell",
+      "display_name": "Pell Grant recipients",
+      "variable": "PGBA6RT",
+      "value": 78.0,
+      "gap": -4.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 73.5,
+        "q1": 67.0,
+        "q3": 77.5
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 87.0,
+        "q1": 85.75,
+        "q3": 88.5
+      }
+    },
+    {
+      "category": "Financial aid",
+      "subgroup_id": "subsidized_loan",
+      "display_name": "Subsidized loan recipients",
+      "variable": "SSBA6RT",
+      "value": 82.0,
+      "gap": 0.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 79.0,
+        "q1": 74.75,
+        "q3": 82.75
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 91.0,
+        "q1": 88.75,
+        "q3": 92.0
+      }
+    },
+    {
+      "category": "Financial aid",
+      "subgroup_id": "neither",
+      "display_name": "Neither Pell nor subsidized loan",
+      "variable": "NRBA6RT",
+      "value": 82.0,
+      "gap": 0.0,
+      "numerator": null,
+      "denominator": null,
+      "peer": {
+        "count": 10,
+        "median": 81.5,
+        "q1": 77.5,
+        "q3": 85.0
+      },
+      "aspirant": {
+        "count": 8,
+        "median": 89.5,
+        "q1": 87.75,
+        "q3": 91.25
+      }
+    }
+  ],
+  "institutions": [
+    {
+      "unitid": 192819,
+      "institution_name": "Marist University",
+      "group": "marist",
+      "outcomes": {
+        "retention": 86.0,
+        "four_year_graduation": 75.0,
+        "six_year_graduation": 82.0,
+        "pell_six_year_graduation": 78.0
+      },
+      "subgroups": {
+        "men": 79.0,
+        "women": 84.0,
+        "american_indian": 100.0,
+        "asian": 83.0,
+        "pacific_islander": null,
+        "black": 72.0,
+        "hispanic": 76.0,
+        "white": 83.0,
+        "multiracial": 87.0,
+        "unknown": 82.0,
+        "nonresident": 79.0,
+        "pell": 78.0,
+        "subsidized_loan": 82.0,
+        "neither": 82.0
+      }
+    },
+    {
+      "unitid": 198516,
+      "institution_name": "Elon University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 88.0,
+        "four_year_graduation": 79.0,
+        "six_year_graduation": 83.0,
+        "pell_six_year_graduation": 79.0
+      },
+      "subgroups": {
+        "men": 78.0,
+        "women": 87.0,
+        "american_indian": 0.0,
+        "asian": 68.0,
+        "pacific_islander": 100.0,
+        "black": 81.0,
+        "hispanic": 79.0,
+        "white": 84.0,
+        "multiracial": 84.0,
+        "unknown": 88.0,
+        "nonresident": 86.0,
+        "pell": 79.0,
+        "subsidized_loan": 77.0,
+        "neither": 86.0
+      }
+    },
+    {
+      "unitid": 129242,
+      "institution_name": "Fairfield University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 89.0,
+        "four_year_graduation": 82.0,
+        "six_year_graduation": 84.0,
+        "pell_six_year_graduation": 78.0
+      },
+      "subgroups": {
+        "men": 83.0,
+        "women": 85.0,
+        "american_indian": null,
+        "asian": 70.0,
+        "pacific_islander": null,
+        "black": 71.0,
+        "hispanic": 87.0,
+        "white": 85.0,
+        "multiracial": 67.0,
+        "unknown": 84.0,
+        "nonresident": 67.0,
+        "pell": 78.0,
+        "subsidized_loan": 85.0,
+        "neither": 85.0
+      }
+    },
+    {
+      "unitid": 191649,
+      "institution_name": "Hofstra University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 80.0,
+        "four_year_graduation": 60.0,
+        "six_year_graduation": 70.0,
+        "pell_six_year_graduation": 63.0
+      },
+      "subgroups": {
+        "men": 68.0,
+        "women": 71.0,
+        "american_indian": 43.0,
+        "asian": 68.0,
+        "pacific_islander": 78.0,
+        "black": 58.0,
+        "hispanic": 59.0,
+        "white": 74.0,
+        "multiracial": 67.0,
+        "unknown": 74.0,
+        "nonresident": 64.0,
+        "pell": 63.0,
+        "subsidized_loan": 69.0,
+        "neither": 73.0
+      }
+    },
+    {
+      "unitid": 163046,
+      "institution_name": "Loyola University Maryland",
+      "group": "peer",
+      "outcomes": {
+        "retention": 88.0,
+        "four_year_graduation": 77.0,
+        "six_year_graduation": 81.0,
+        "pell_six_year_graduation": 73.0
+      },
+      "subgroups": {
+        "men": 77.0,
+        "women": 83.0,
+        "american_indian": null,
+        "asian": 88.0,
+        "pacific_islander": 100.0,
+        "black": 76.0,
+        "hispanic": 79.0,
+        "white": 82.0,
+        "multiracial": 74.0,
+        "unknown": 33.0,
+        "nonresident": 25.0,
+        "pell": 73.0,
+        "subsidized_loan": 83.0,
+        "neither": 81.0
+      }
+    },
+    {
+      "unitid": 217402,
+      "institution_name": "Providence College",
+      "group": "peer",
+      "outcomes": {
+        "retention": 92.0,
+        "four_year_graduation": 85.0,
+        "six_year_graduation": 89.0,
+        "pell_six_year_graduation": 80.0
+      },
+      "subgroups": {
+        "men": 87.0,
+        "women": 91.0,
+        "american_indian": 100.0,
+        "asian": 91.0,
+        "pacific_islander": 100.0,
+        "black": 74.0,
+        "hispanic": 86.0,
+        "white": 90.0,
+        "multiracial": 80.0,
+        "unknown": 95.0,
+        "nonresident": 74.0,
+        "pell": 80.0,
+        "subsidized_loan": 91.0,
+        "neither": 90.0
+      }
+    },
+    {
+      "unitid": 130226,
+      "institution_name": "Quinnipiac University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 87.0,
+        "four_year_graduation": 77.0,
+        "six_year_graduation": 80.0,
+        "pell_six_year_graduation": 74.0
+      },
+      "subgroups": {
+        "men": 75.0,
+        "women": 83.0,
+        "american_indian": 100.0,
+        "asian": 78.0,
+        "pacific_islander": 0.0,
+        "black": 69.0,
+        "hispanic": 73.0,
+        "white": 83.0,
+        "multiracial": 68.0,
+        "unknown": 74.0,
+        "nonresident": 62.0,
+        "pell": 74.0,
+        "subsidized_loan": 79.0,
+        "neither": 82.0
+      }
+    },
+    {
+      "unitid": 130253,
+      "institution_name": "Sacred Heart University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 86.0,
+        "four_year_graduation": 69.0,
+        "six_year_graduation": 73.0,
+        "pell_six_year_graduation": 62.0
+      },
+      "subgroups": {
+        "men": 72.0,
+        "women": 74.0,
+        "american_indian": null,
+        "asian": 71.0,
+        "pacific_islander": 100.0,
+        "black": 63.0,
+        "hispanic": 66.0,
+        "white": 76.0,
+        "multiracial": 75.0,
+        "unknown": 64.0,
+        "nonresident": 50.0,
+        "pell": 62.0,
+        "subsidized_loan": 74.0,
+        "neither": 77.0
+      }
+    },
+    {
+      "unitid": 215770,
+      "institution_name": "Saint Joseph's University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 89.0,
+        "four_year_graduation": 76.0,
+        "six_year_graduation": 83.0,
+        "pell_six_year_graduation": 76.0
+      },
+      "subgroups": {
+        "men": 82.0,
+        "women": 84.0,
+        "american_indian": 50.0,
+        "asian": 86.0,
+        "pacific_islander": 67.0,
+        "black": 75.0,
+        "hispanic": 72.0,
+        "white": 85.0,
+        "multiracial": 75.0,
+        "unknown": 95.0,
+        "nonresident": 67.0,
+        "pell": 76.0,
+        "subsidized_loan": 82.0,
+        "neither": 85.0
+      }
+    },
+    {
+      "unitid": 186584,
+      "institution_name": "Seton Hall University",
+      "group": "peer",
+      "outcomes": {
+        "retention": 83.0,
+        "four_year_graduation": 66.0,
+        "six_year_graduation": 72.0,
+        "pell_six_year_graduation": 65.0
+      },
+      "subgroups": {
+        "men": 64.0,
+        "women": 79.0,
+        "american_indian": 67.0,
+        "asian": 76.0,
+        "pacific_islander": 67.0,
+        "black": 53.0,
+        "hispanic": 68.0,
+        "white": 77.0,
+        "multiracial": 65.0,
+        "unknown": 61.0,
+        "nonresident": 60.0,
+        "pell": 65.0,
+        "subsidized_loan": 74.0,
+        "neither": 75.0
+      }
+    },
+    {
+      "unitid": 195474,
+      "institution_name": "Siena College",
+      "group": "peer",
+      "outcomes": {
+        "retention": 82.0,
+        "four_year_graduation": 72.0,
+        "six_year_graduation": 77.0,
+        "pell_six_year_graduation": 73.0
+      },
+      "subgroups": {
+        "men": 76.0,
+        "women": 78.0,
+        "american_indian": 0.0,
+        "asian": 71.0,
+        "pacific_islander": null,
+        "black": 68.0,
+        "hispanic": 70.0,
+        "white": 80.0,
+        "multiracial": 47.0,
+        "unknown": 100.0,
+        "nonresident": 86.0,
+        "pell": 73.0,
+        "subsidized_loan": 79.0,
+        "neither": 79.0
+      }
+    },
+    {
+      "unitid": 164924,
+      "institution_name": "Boston College",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 95.0,
+        "four_year_graduation": 88.0,
+        "six_year_graduation": 91.0,
+        "pell_six_year_graduation": 85.0
+      },
+      "subgroups": {
+        "men": 90.0,
+        "women": 92.0,
+        "american_indian": null,
+        "asian": 89.0,
+        "pacific_islander": 100.0,
+        "black": 85.0,
+        "hispanic": 88.0,
+        "white": 92.0,
+        "multiracial": 86.0,
+        "unknown": 90.0,
+        "nonresident": 90.0,
+        "pell": 85.0,
+        "subsidized_loan": 92.0,
+        "neither": 91.0
+      }
+    },
+    {
+      "unitid": 211291,
+      "institution_name": "Bucknell University",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 91.0,
+        "four_year_graduation": 83.0,
+        "six_year_graduation": 88.0,
+        "pell_six_year_graduation": 87.0
+      },
+      "subgroups": {
+        "men": 86.0,
+        "women": 90.0,
+        "american_indian": null,
+        "asian": 87.0,
+        "pacific_islander": null,
+        "black": 90.0,
+        "hispanic": 90.0,
+        "white": 87.0,
+        "multiracial": 89.0,
+        "unknown": 100.0,
+        "nonresident": 96.0,
+        "pell": 87.0,
+        "subsidized_loan": 91.0,
+        "neither": 87.0
+      }
+    },
+    {
+      "unitid": 166124,
+      "institution_name": "College of the Holy Cross",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 96.0,
+        "four_year_graduation": 90.0,
+        "six_year_graduation": 93.0,
+        "pell_six_year_graduation": 91.0
+      },
+      "subgroups": {
+        "men": 91.0,
+        "women": 94.0,
+        "american_indian": 100.0,
+        "asian": 95.0,
+        "pacific_islander": null,
+        "black": 82.0,
+        "hispanic": 93.0,
+        "white": 94.0,
+        "multiracial": 78.0,
+        "unknown": 92.0,
+        "nonresident": 89.0,
+        "pell": 91.0,
+        "subsidized_loan": 93.0,
+        "neither": 93.0
+      }
+    },
+    {
+      "unitid": 191241,
+      "institution_name": "Fordham University",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 88.0,
+        "four_year_graduation": 78.0,
+        "six_year_graduation": 83.0,
+        "pell_six_year_graduation": 79.0
+      },
+      "subgroups": {
+        "men": 83.0,
+        "women": 83.0,
+        "american_indian": 100.0,
+        "asian": 83.0,
+        "pacific_islander": 100.0,
+        "black": 77.0,
+        "hispanic": 79.0,
+        "white": 86.0,
+        "multiracial": 80.0,
+        "unknown": 81.0,
+        "nonresident": 75.0,
+        "pell": 79.0,
+        "subsidized_loan": 87.0,
+        "neither": 83.0
+      }
+    },
+    {
+      "unitid": 213385,
+      "institution_name": "Lafayette College",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 91.0,
+        "four_year_graduation": 85.0,
+        "six_year_graduation": 88.0,
+        "pell_six_year_graduation": 87.0
+      },
+      "subgroups": {
+        "men": 87.0,
+        "women": 89.0,
+        "american_indian": null,
+        "asian": 90.0,
+        "pacific_islander": null,
+        "black": 86.0,
+        "hispanic": 78.0,
+        "white": 89.0,
+        "multiracial": 75.0,
+        "unknown": 87.0,
+        "nonresident": 90.0,
+        "pell": 87.0,
+        "subsidized_loan": 89.0,
+        "neither": 88.0
+      }
+    },
+    {
+      "unitid": 213543,
+      "institution_name": "Lehigh University",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 94.0,
+        "four_year_graduation": 78.0,
+        "six_year_graduation": 87.0,
+        "pell_six_year_graduation": 86.0
+      },
+      "subgroups": {
+        "men": 85.0,
+        "women": 90.0,
+        "american_indian": 100.0,
+        "asian": 90.0,
+        "pacific_islander": 100.0,
+        "black": 74.0,
+        "hispanic": 86.0,
+        "white": 87.0,
+        "multiracial": 89.0,
+        "unknown": 93.0,
+        "nonresident": 88.0,
+        "pell": 86.0,
+        "subsidized_loan": 88.0,
+        "neither": 88.0
+      }
+    },
+    {
+      "unitid": 167358,
+      "institution_name": "Northeastern University",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 97.0,
+        "four_year_graduation": 0.0,
+        "six_year_graduation": 91.0,
+        "pell_six_year_graduation": 90.0
+      },
+      "subgroups": {
+        "men": 90.0,
+        "women": 92.0,
+        "american_indian": 100.0,
+        "asian": 93.0,
+        "pacific_islander": null,
+        "black": 90.0,
+        "hispanic": 90.0,
+        "white": 91.0,
+        "multiracial": 92.0,
+        "unknown": 91.0,
+        "nonresident": 87.0,
+        "pell": 90.0,
+        "subsidized_loan": 91.0,
+        "neither": 91.0
+      }
+    },
+    {
+      "unitid": 216597,
+      "institution_name": "Villanova University",
+      "group": "aspirant",
+      "outcomes": {
+        "retention": 96.0,
+        "four_year_graduation": 88.0,
+        "six_year_graduation": 91.0,
+        "pell_six_year_graduation": 88.0
+      },
+      "subgroups": {
+        "men": 89.0,
+        "women": 93.0,
+        "american_indian": null,
+        "asian": 89.0,
+        "pacific_islander": null,
+        "black": 86.0,
+        "hispanic": 89.0,
+        "white": 93.0,
+        "multiracial": 87.0,
+        "unknown": 82.0,
+        "nonresident": 81.0,
+        "pell": 88.0,
+        "subsidized_loan": 92.0,
+        "neither": 92.0
+      }
+    }
+  ],
+  "small_cohort_policy": {
+    "minimum": 10,
+    "counts_available": false,
+    "message": "Subgroup rates are descriptive and are not ranked."
+  }
+}

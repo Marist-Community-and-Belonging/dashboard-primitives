@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A year-by-year profile of Marist University using reproducible final IPEDS data.">
+    <meta name="color-scheme" content="light">
+    <title>Marist Profile · Marist IPEDS Benchmark</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/dashboard.css">
+    <script src="/assets/vendor/d3.v7.min.js" defer></script>
+    <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/collapsible.js" defer></script>
+    <script src="/assets/year-selector.js" defer></script>
+    <script src="/assets/reveals.js" defer></script>
+    <script src="/assets/marist-profile.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+    <header class="site-header">
+      <div class="masthead">
+        <a class="identity" href="/">
+          <img class="university-logo" src="/assets/marist-university-logo.png" alt="Marist University">
+          <span class="product-name">IPEDS Benchmark</span>
+        </a>
+        <a class="method-link" href="#methodology">Data and methodology</a>
+      </div>
+      <nav class="section-nav" aria-label="Dashboard sections">
+        <a href="/">Overview</a>
+        <a href="/marist-profile" aria-current="page">Marist Profile</a>
+        <a href="/diversity-access">Diversity &amp; Access</a>
+        <a href="/success-equity">Success &amp; Equity</a>
+        <a href="/affordability-resources">Affordability</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Marist at a glance</p>
+          <h1 id="page-title">Marist University profile</h1>
+          <p class="lede">A focused view of enrollment, student composition, outcomes, and affordability across available final IPEDS years.</p>
+        </div>
+        <dl class="release-summary" aria-label="Dataset summary">
+          <div><dt>Collection</dt><dd id="collection-year">Loading</dd></div>
+          <div><dt>Institution</dt><dd>Marist</dd></div>
+          <div><dt>Release</dt><dd id="release-type">Final</dd></div>
+        </dl>
+      </section>
+
+      <p class="data-note" id="data-status" role="status">Loading the verified Marist profile…</p>
+
+      <section class="dashboard-section profile-snapshot" data-collapsible aria-labelledby="profile-snapshot-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="profile-snapshot-heading">Selected-year snapshot</h2>
+            <p>One institutional profile assembled from the same final sources used throughout the dashboard.</p>
+          </div>
+          <form class="year-filter">
+            <label for="year-select">Collection year</label>
+            <div class="year-control">
+              <select id="year-select" name="year" aria-describedby="year-availability"></select>
+              <span id="active-release" class="active-release"></span>
+            </div>
+            <small id="year-availability">Loading available years…</small>
+          </form>
+        </div>
+        <div class="profile-grid">
+          <article class="profile-panel profile-enrollment" aria-labelledby="profile-enrollment-heading">
+            <header><h3 id="profile-enrollment-heading">Enrollment and admissions</h3><p id="profile-enrollment-year"></p></header>
+            <div id="profile-enrollment-values" class="profile-value-grid"></div>
+          </article>
+
+          <article class="profile-panel profile-composition" aria-labelledby="profile-composition-heading">
+            <header><h3 id="profile-composition-heading">Undergraduate composition</h3><p id="profile-composition-year"></p></header>
+            <div id="profile-composition-chart" class="profile-composition-chart"></div>
+            <div id="profile-composition-legend" class="composition-legend profile-legend"></div>
+            <div id="profile-sex-values" class="profile-inline-values"></div>
+          </article>
+
+          <article class="profile-panel profile-outcomes" aria-labelledby="profile-outcomes-heading">
+            <header><h3 id="profile-outcomes-heading">Student outcomes</h3><p id="profile-outcomes-year"></p></header>
+            <div id="profile-outcome-values" class="profile-value-grid profile-value-grid-four"></div>
+          </article>
+
+          <article class="profile-panel profile-affordability" aria-labelledby="profile-affordability-heading">
+            <header><h3 id="profile-affordability-heading">Affordability and access</h3><p id="profile-affordability-year"></p></header>
+            <div id="profile-affordability-values" class="profile-value-grid"></div>
+          </article>
+        </div>
+
+        <details class="detail-disclosure">
+          <summary>View selected-year values</summary>
+          <div class="table-scroll compact-table">
+            <table>
+              <caption class="sr-only">Marist University selected-year profile values</caption>
+              <thead><tr><th scope="col">Area</th><th scope="col">Measure</th><th scope="col">Value</th><th scope="col">Data year or cohort</th></tr></thead>
+              <tbody id="profile-values-body"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section class="dashboard-section" data-collapsible aria-labelledby="profile-trends-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="profile-trends-heading">Marist across available years</h2>
+            <p>Each trend follows Marist only. Definitions and populations remain tied to the applicable collection and cohort.</p>
+          </div>
+          <a class="download-link" href="/api/v1/export.csv" download>Download selected-year CSV</a>
+        </div>
+        <div id="profile-trends" class="profile-trend-grid"></div>
+        <details class="detail-disclosure">
+          <summary>View all yearly values</summary>
+          <div class="table-scroll compact-table">
+            <table>
+              <caption class="sr-only">Marist University values for every available final collection</caption>
+              <thead id="profile-history-head"></thead>
+              <tbody id="profile-history-body"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
+        <div>
+          <p class="eyebrow">Methodology</p>
+          <h2 id="methodology-heading">One institution, consistent final sources</h2>
+        </div>
+        <div class="methodology-copy">
+          <p>This page presents Marist values only. Measures retain the populations, data years, and cohort years defined by IPEDS, so values on the same collection page may refer to different reporting periods.</p>
+          <a href="https://nces.ed.gov/ipeds/use-the-data">Official IPEDS data source</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Public institutional profile. Final IPEDS collections only.</p>
+      <p>U.S. Department of Education · NCES · IPEDS</p>
+    </footer>
+  </body>
+</html>

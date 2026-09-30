@@ -1,0 +1,405 @@
+{
+  "source": "NCES/IPEDS final data files",
+  "base_url": "https://nces.ed.gov/ipeds/tablefiles/zipfiles",
+  "releases": [
+    {
+      "collection_year": "2019\u201320",
+      "directory": "2019",
+      "release_type": "final",
+      "released_at": "2021-12",
+      "retrieved_at": "2026-09-25",
+      "source": "NCES/IPEDS final Complete Data Files",
+      "archives": {
+        "ADM_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/ADM2019.zip",
+          "path": "downloads/ADM2019.zip",
+          "member": "adm2019_rv.csv",
+          "sha256": "908034d862377d3214f1e0395cdb34dd041049682c553d1fb391f9eda8196aa5"
+        },
+        "EF_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2019A.zip",
+          "path": "downloads/EF2019A.zip",
+          "member": "ef2019a_rv.csv",
+          "sha256": "6ad08d19451a5a777acff44623f992a250a730fc30388da73b1b74be418b3c24"
+        },
+        "EF_RETENTION": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2019D.zip",
+          "path": "downloads/EF2019D.zip",
+          "member": "ef2019d_rv.csv",
+          "sha256": "0d43cc9d7ec2d16a8bdb9bc6a21d30b8f39f9ed0d2637e4232e3d6605964133d"
+        },
+        "GR_AID_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/GR2019_PELL_SSL.zip",
+          "path": "downloads/GR2019_PELL_SSL.zip",
+          "member": "gr2019_pell_ssl_rv.csv",
+          "sha256": "e098530dfb8da3ef42c8b16e39cfeaf1cd0fa1ef423ff2227f5433583eed9b8b"
+        },
+        "GR_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/GR2019.zip",
+          "path": "downloads/GR2019.zip",
+          "member": "gr2019_rv.csv",
+          "sha256": "fa3acfa2845586c27c94b0dbc4cfb8488bd5daadc26edec6def2518164d37d20"
+        },
+        "HD": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/HD2019.zip",
+          "path": "downloads/HD2019.zip",
+          "member": "hd2019.csv",
+          "sha256": "727cb3484666e5fea8669ce0fb2ad4606ed19531b47cf428d6748072d7e7ab26"
+        },
+        "SFA": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/SFA1819.zip",
+          "path": "downloads/SFA1819.zip",
+          "member": "sfa1819_rv.csv",
+          "sha256": "067f172c7bb37d8510ca7fabe02e591041c34ca163e1a14f36fe65f44530463d"
+        }
+      },
+      "components": {
+        "ADM_DERIVED": {
+          "path": "final/DRVADM2019.csv",
+          "source_table": "DRVADM2019",
+          "sha256": "9b73559bb850e54382bc4c9a622558f7ec72844ebd1beb99965594bbf3d1a6c4"
+        },
+        "EF_DERIVED": {
+          "path": "final/DRVEF2019.csv",
+          "source_table": "DRVEF2019",
+          "sha256": "cebe69fdeed45b0c1c8fc47c3365ae4a8e734c0027393d4aef083fd577d6af70"
+        },
+        "EF_RETENTION": {
+          "path": "final/EF2019D.csv",
+          "source_table": "EF2019D",
+          "sha256": "6dc5dcfb2c7e14f55c3a94b74fc9fdb6aefa8d372260210aa46d9ada940eeffc"
+        },
+        "GR_DERIVED": {
+          "path": "final/DRVGR2019.csv",
+          "source_table": "DRVGR2019",
+          "sha256": "ef2db8d4de29367f3b0170903d61636778720f2349947c4446c8fbc98f18605b"
+        },
+        "SFA_AID": {
+          "path": "final/SFA1819.csv",
+          "source_table": "SFA1819",
+          "sha256": "fe98ccc11aa46d2f9fc5f69a281b7e861f57c2aad58a716acd39ceea12b2d9dc"
+        },
+        "SFA_NET_PRICE": {
+          "path": "final/SFA1819.csv",
+          "source_table": "SFA1819",
+          "sha256": "fe98ccc11aa46d2f9fc5f69a281b7e861f57c2aad58a716acd39ceea12b2d9dc"
+        },
+        "HD": {
+          "path": "final/HD2019.csv",
+          "source_table": "HD2019",
+          "sha256": "004f00ba58ecf5ccdc7fd839d382f191dd3cdc983ec9bb265a0cc0bb070994ac"
+        }
+      }
+    },
+    {
+      "collection_year": "2020\u201321",
+      "directory": "2020",
+      "release_type": "final",
+      "released_at": "2022-01",
+      "retrieved_at": "2026-09-25",
+      "source": "NCES/IPEDS final Complete Data Files",
+      "archives": {
+        "ADM_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/ADM2020.zip",
+          "path": "downloads/ADM2020.zip",
+          "member": "adm2020_rv.csv",
+          "sha256": "0cae5b25c7b973d4ad428a5442888a80968b2980201220cdcb1e9dab1162f696"
+        },
+        "EF_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2020A.zip",
+          "path": "downloads/EF2020A.zip",
+          "member": "ef2020a_rv.csv",
+          "sha256": "f7086937139d987b71bbba5cfab1de367fe970ee8076cb0899dec7e5a050adb2"
+        },
+        "EF_RETENTION": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2020D.zip",
+          "path": "downloads/EF2020D.zip",
+          "member": "ef2020d_rv.csv",
+          "sha256": "8e62639144d09f39878936d1df8eb62b5f6994ff85b8ccbb4e23bd79265ec7c0"
+        },
+        "GR_AID_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/GR2020_PELL_SSL.zip",
+          "path": "downloads/GR2020_PELL_SSL.zip",
+          "member": "gr2020_pell_ssl_rv.csv",
+          "sha256": "819c1327be36a909df6c0886b7413f5b53b666e1e9ba7e0c437aa083df0101da"
+        },
+        "GR_RAW": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/GR2020.zip",
+          "path": "downloads/GR2020.zip",
+          "member": "gr2020_rv.csv",
+          "sha256": "a2c2165399656b5034c4eaae82d729a4818b2ba4741baea401d0c910f3009aac"
+        },
+        "HD": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/HD2020.zip",
+          "path": "downloads/HD2020.zip",
+          "member": "hd2020.csv",
+          "sha256": "cfbdf04201f4be4ae6f98b3800424b6fffd498ec2932f34d287b3d9f17aa3475"
+        },
+        "SFA": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/SFA1920.zip",
+          "path": "downloads/SFA1920.zip",
+          "member": "sfa1920_rv.csv",
+          "sha256": "610ca5f899d8f55c3f69467cd7e9d6d41fe2ad3c0bca9cd044836317edebdc8b"
+        }
+      },
+      "components": {
+        "ADM_DERIVED": {
+          "path": "final/DRVADM2020.csv",
+          "source_table": "DRVADM2020",
+          "sha256": "7f8586ba75f1fcbf009bde740af3243f3ded62ce7d0f629f3c1a074e8d716b9b"
+        },
+        "EF_DERIVED": {
+          "path": "final/DRVEF2020.csv",
+          "source_table": "DRVEF2020",
+          "sha256": "d3d6e50e74cf877059e4e756ebb570370289ce1d01e15accc53ade448003fc51"
+        },
+        "EF_RETENTION": {
+          "path": "final/EF2020D.csv",
+          "source_table": "EF2020D",
+          "sha256": "d2a603887ba2f133935420f4adb7c13851462f7a55e3873f677e259a5210c6c2"
+        },
+        "GR_DERIVED": {
+          "path": "final/DRVGR2020.csv",
+          "source_table": "DRVGR2020",
+          "sha256": "43120c64b31e89e426ac56b068c8e04de4509a0c718aaf3c1d46386a2ac400c6"
+        },
+        "SFA_AID": {
+          "path": "final/SFA1920.csv",
+          "source_table": "SFA1920",
+          "sha256": "b653fda535c70315d19b856acdae99e4fbe39c1cef09c96fa2cca7d15c8b2eca"
+        },
+        "SFA_NET_PRICE": {
+          "path": "final/SFA1920.csv",
+          "source_table": "SFA1920",
+          "sha256": "b653fda535c70315d19b856acdae99e4fbe39c1cef09c96fa2cca7d15c8b2eca"
+        },
+        "HD": {
+          "path": "final/HD2020.csv",
+          "source_table": "HD2020",
+          "sha256": "d541123236075775da3bcdfc527a452946a78e805c1f5f9d8a3fc02f384e4e83"
+        }
+      }
+    },
+    {
+      "collection_year": "2021\u201322",
+      "directory": "2021",
+      "release_type": "final",
+      "released_at": "2024-01",
+      "retrieved_at": "2026-09-25",
+      "source": "NCES/IPEDS final Complete Data Files",
+      "archives": {
+        "ADM_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVADM2021.zip",
+          "path": "downloads/DRVADM2021.zip",
+          "member": "drvadm2021_rv.csv",
+          "sha256": "d7a8fd4cfdfd5b04f8eb774815b62318cb837f7d2c2f2a95c54dafb61995d919"
+        },
+        "EF_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVEF2021.zip",
+          "path": "downloads/DRVEF2021.zip",
+          "member": "drvef2021_rv.csv",
+          "sha256": "5f07dd405cb270703e5819a2c53c653a5bd503521493d614d36f8d92f2616517"
+        },
+        "EF_RETENTION": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2021D.zip",
+          "path": "downloads/EF2021D.zip",
+          "member": "ef2021d_rv.csv",
+          "sha256": "88da0e5e1f22d0ba62a1a995ec434a34f8fafea55bd8f5aed32aabe1031d1fcb"
+        },
+        "GR_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVGR2021.zip",
+          "path": "downloads/DRVGR2021.zip",
+          "member": "drvgr2021_rv.csv",
+          "sha256": "e58c1dd80aacd447cc31ab7f503333ac7ebfc2d038500ea6230a11152bc16548"
+        },
+        "HD": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/HD2021.zip",
+          "path": "downloads/HD2021.zip",
+          "member": "hd2021.csv",
+          "sha256": "6ea1a974e2994cfcf066b4910bcdad7b0df6f927e6871f3d55532af94b965389"
+        },
+        "SFA": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/SFA2021.zip",
+          "path": "downloads/SFA2021.zip",
+          "member": "sfa2021_rv.csv",
+          "sha256": "6f3cf9bc762d0829ac5b2357fc401074adb1ccf9262f63397a3ec431135330b5"
+        }
+      },
+      "components": {
+        "ADM_DERIVED": {
+          "path": "final/DRVADM2021.csv",
+          "source_table": "DRVADM2021",
+          "sha256": "b11effdfbba9bd0a01aa9cc45d5357422c1b900b59f50fe178a01c158986d536"
+        },
+        "EF_DERIVED": {
+          "path": "final/DRVEF2021.csv",
+          "source_table": "DRVEF2021",
+          "sha256": "c65024c3772a9e358516046e580c5e1ad8bf6f0b03c0848acd913732a0434020"
+        },
+        "EF_RETENTION": {
+          "path": "final/EF2021D.csv",
+          "source_table": "EF2021D",
+          "sha256": "b8b9e2ff96f1b24d145c59136524db20ed26898efdb1b7d33baff53adeccea15"
+        },
+        "GR_DERIVED": {
+          "path": "final/DRVGR2021.csv",
+          "source_table": "DRVGR2021",
+          "sha256": "03b57680db5b8d7ae29c131dded4576e4ada1936ca21d3d27e24d32b3aee27ab"
+        },
+        "SFA_AID": {
+          "path": "final/SFA2021.csv",
+          "source_table": "SFA2021",
+          "sha256": "ab6f2759770c84643a6f4391eddb25136c6ab6c75ef9f17f20c2484830c8aa1b"
+        },
+        "SFA_NET_PRICE": {
+          "path": "final/SFA2021.csv",
+          "source_table": "SFA2021",
+          "sha256": "ab6f2759770c84643a6f4391eddb25136c6ab6c75ef9f17f20c2484830c8aa1b"
+        },
+        "HD": {
+          "path": "final/HD2021.csv",
+          "source_table": "HD2021",
+          "sha256": "0e804468cc5bb5d55ef0bf547dbe97aad79e93ee5586a6918c88efa305674b6c"
+        }
+      }
+    },
+    {
+      "collection_year": "2022\u201323",
+      "directory": "2022",
+      "release_type": "final",
+      "released_at": "2025-01",
+      "retrieved_at": "2026-09-25",
+      "source": "NCES/IPEDS final Complete Data Files",
+      "archives": {
+        "ADM_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVADM2022.zip",
+          "path": "downloads/DRVADM2022.zip",
+          "member": "drvadm2022_rv.csv",
+          "sha256": "625037ff70eeb112efc76283d4f63405e3bcc070db60e4d60ab57cfda2c5d210"
+        },
+        "EF_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVEF2022.zip",
+          "path": "downloads/DRVEF2022.zip",
+          "member": "drvef2022_rv.csv",
+          "sha256": "847b4acdafd06cbf89b69895194e2b316de41cb5d0f48bccea557523677ca48e"
+        },
+        "EF_RETENTION": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/EF2022D.zip",
+          "path": "downloads/EF2022D.zip",
+          "member": "ef2022d_rv.csv",
+          "sha256": "fb040f5ae6b54653e9bb048d9417dd636a7cd9467eaa251811647adb93a1bf70"
+        },
+        "GR_DERIVED": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/DRVGR2022.zip",
+          "path": "downloads/DRVGR2022.zip",
+          "member": "drvgr2022_rv.csv",
+          "sha256": "46714378398c9a46a913e72f040aacd9c64b761ee2759c6f83c01f821cc6bccd"
+        },
+        "HD": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/HD2022.zip",
+          "path": "downloads/HD2022.zip",
+          "member": "hd2022.csv",
+          "sha256": "e36389b793741bf6886b8d85fa9b42614644162b0d0b1d024a663a9c1865c782"
+        },
+        "SFA": {
+          "url": "https://nces.ed.gov/ipeds/datacenter/data/SFA2122.zip",
+          "path": "downloads/SFA2122.zip",
+          "member": "sfa2122_rv.csv",
+          "sha256": "e35e88134466e600741a0bc1438ef0db97ca0630a368bad358a2e4baaf8f1ccf"
+        }
+      },
+      "components": {
+        "ADM_DERIVED": {
+          "path": "final/DRVADM2022.csv",
+          "source_table": "DRVADM2022",
+          "sha256": "0b2f257f88ae3f1cbf973bcb79ab75abe8bdc18104bb1c37dc9a4815ad178dc8"
+        },
+        "EF_DERIVED": {
+          "path": "final/DRVEF2022.csv",
+          "source_table": "DRVEF2022",
+          "sha256": "d048063259b2b1072c10c210b841d3183de9f45ebf7a9f743b9cdc5380aa47a5"
+        },
+        "EF_RETENTION": {
+          "path": "final/EF2022D.csv",
+          "source_table": "EF2022D",
+          "sha256": "21559bc2f8acd4f3043c5f1f7d249978df60ad15bdc550116ffcb13e6a8e2a07"
+        },
+        "GR_DERIVED": {
+          "path": "final/DRVGR2022.csv",
+          "source_table": "DRVGR2022",
+          "sha256": "37bc53e8f44fc098eee0c662e892db821c4a46ee7f3d8712547a1ee243bf4def"
+        },
+        "SFA_AID": {
+          "path": "final/SFA2122.csv",
+          "source_table": "SFA2122",
+          "sha256": "8b13bc3d7f803a714780146dd7989afa5eae2a8564d449ceb7bd4f0ca8a34e72"
+        },
+        "SFA_NET_PRICE": {
+          "path": "final/SFA2122.csv",
+          "source_table": "SFA2122",
+          "sha256": "8b13bc3d7f803a714780146dd7989afa5eae2a8564d449ceb7bd4f0ca8a34e72"
+        },
+        "HD": {
+          "path": "final/HD2022.csv",
+          "source_table": "HD2022",
+          "sha256": "6242a95f8d9e72a6f3a38448263ca04778946baaebae5940e52fac85df06bddf"
+        }
+      }
+    },
+    {
+      "collection_year": "2023\u201324",
+      "directory": "2023",
+      "release_type": "final",
+      "released_at": "2026-03-02",
+      "retrieved_at": "2026-09-25",
+      "bundle": {
+        "path": "IPEDS_2023-24_Final.zip",
+        "member": "IPEDS202324.accdb",
+        "sha256": "5a29f4b8d0fbdd5e091015e286dbddcecdf8d423926521a8af560967cd376629",
+        "etag": "\"1dcaa74f085a5bc\"",
+        "last_modified": "Mon, 02 Mar 2026 18:47:02 GMT"
+      },
+      "dictionary": {
+        "path": "final/IPEDS202324Tablesdoc.xlsx",
+        "sha256": "1e3f210f8479fb66fc203d60f01efb6e6d825b316f1a36fb96ffc7dca217384a"
+      },
+      "components": {
+        "ADM_DERIVED": {
+          "path": "final/DRVADM2023.csv",
+          "source_table": "DRVADM2023",
+          "sha256": "46ea5b4db2368732730b501964a55ecba9d0235263a30364c80aac04739a543f"
+        },
+        "EF_DERIVED": {
+          "path": "final/DRVEF2023.csv",
+          "source_table": "DRVEF2023",
+          "sha256": "d00415dd11ba71bdb7e1555bed2383f7c3085523605bf0c6c997d68d5430890d"
+        },
+        "EF_RETENTION": {
+          "path": "final/EF2023D.csv",
+          "source_table": "EF2023D",
+          "sha256": "9c908444ad1e444957316022fbd56fbc59bcd7e3d3d7baa5d1a2ed385210756d"
+        },
+        "GR_DERIVED": {
+          "path": "final/DRVGR2023.csv",
+          "source_table": "DRVGR2023",
+          "sha256": "2f6be916b86f6b814d1b35f4d3439e19d5665dbfa9158c17732850d11244aade"
+        },
+        "SFA_AID": {
+          "path": "final/sfa2223_p1.csv",
+          "source_table": "sfa2223_p1",
+          "sha256": "b615dab10732b9e1a49310c5a78e657387e052560841020804f18ca2d89638a9"
+        },
+        "SFA_NET_PRICE": {
+          "path": "final/sfa2223_p2.csv",
+          "source_table": "sfa2223_p2",
+          "sha256": "f4e8ed588d511e1066db2b55694e3ad187b0d50fc881af56c1a9c43d413b9305"
+        },
+        "HD": {
+          "path": "final/HD2023.csv",
+          "source_table": "HD2023",
+          "sha256": "a9ad21f9113dc4fc3f863e89c1ceb2b353571dce28f58413a0520515cc78cc63"
+        }
+      }
+    }
+  ]
+}
