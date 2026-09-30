@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/assets/dashboard.css">
     <script src="/assets/vendor/d3.v7.min.js" defer></script>
     <script src="/assets/tooltips.js" defer></script>
-    <script src="/assets/features.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
     <script src="/assets/year-selector.js" defer></script>
     <script src="/assets/reveals.js" defer></script>
@@ -52,7 +51,7 @@
 
       <p class="data-note" id="data-status" role="status">Loading the verified IPEDS diversity and access dataset…</p>
 
-      <section class="dashboard-section" data-feature="diversity_composition" data-collapsible aria-labelledby="composition-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="composition-heading">
         <div class="section-heading">
           <div>
             <h2 id="composition-heading">Undergraduate composition</h2>
@@ -74,12 +73,12 @@
         <p class="chart-note" id="composition-note"></p>
       </section>
 
-      <section class="dashboard-section" data-feature="diversity_trend" data-collapsible aria-labelledby="diversity-trend-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="diversity-trend-heading">
         <div class="section-heading"><div><h2 id="diversity-trend-heading">Five-year diversity trend</h2><p>Undergraduate diversity index for Marist and the median comparison institutions.</p></div></div>
         <div id="diversity-trend" class="trend-grid"></div>
       </section>
 
-      <section class="dashboard-section access-section" data-feature="diversity_access" data-collapsible aria-labelledby="access-heading">
+      <section class="dashboard-section access-section" data-collapsible aria-labelledby="access-heading">
         <div class="section-heading">
           <div>
             <h2 id="access-heading">Access indicators</h2>
@@ -89,7 +88,7 @@
         <div id="access-grid" class="access-grid"></div>
       </section>
 
-      <section class="dashboard-section" data-feature="diversity_gaps" data-collapsible aria-labelledby="gap-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="gap-heading">
         <div class="section-heading">
           <div>
             <h2 id="gap-heading">Representation gaps</h2>
@@ -106,7 +105,7 @@
         </div></details>
       </section>
 
-      <section class="dashboard-section" data-feature="diversity_scatter" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">
+      <section class="dashboard-section" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">
         <div class="section-heading table-heading">
           <div>
             <h2 id="scatter-heading">Diversity and graduation</h2>

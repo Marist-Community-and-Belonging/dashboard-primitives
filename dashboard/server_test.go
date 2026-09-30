@@ -27,7 +27,6 @@ func TestDashboardRoutes(t *testing.T) {
 		{"/assets/success-equity.js", "text/javascript"},
 		{"/assets/affordability-resources.js", "text/javascript"},
 		{"/assets/marist-profile.js", "text/javascript"},
-		{"/assets/features.js", "text/javascript"},
 		{"/assets/collapsible.js", "text/javascript"},
 		{"/assets/tooltips.js", "text/javascript"},
 		{"/assets/year-selector.js", "text/javascript"},
@@ -35,7 +34,6 @@ func TestDashboardRoutes(t *testing.T) {
 		{"/assets/reveals.js", "text/javascript"},
 		{"/assets/trends.js", "text/javascript"},
 		{"/api/v1/health", "application/json"},
-		{"/api/v1/features", "application/json"},
 		{"/api/v1/overview/releases", "application/json"},
 		{"/api/v1/overview", "application/json"},
 		{"/api/v1/export.csv", "text/csv"},
@@ -230,6 +228,41 @@ func TestSecurityHeaders(t *testing.T) {
 	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/", nil))
 	if response.Header().Get("Content-Security-Policy") == "" {
 		t.Fatal("Content-Security-Policy header is missing")
+	}
+}
+
+func TestUnknownAPIRouteReturnsJSONNotDashboardShell(t *testing.T) {
+	router := testRouter(t)
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/api/v1/not-a-route", nil))
+	if response.Code != http.StatusNotFound {
+		t.Fatalf("status = %d, want %d", response.Code, http.StatusNotFound)
+	}
+	if !strings.Contains(response.Header().Get("Content-Type"), "application/json") {
+		t.Fatalf("content type = %q, want application/json", response.Header().Get("Content-Type"))
+	}
+}
+
+func TestDashboardShellFallback(t *testing.T) {
+	router := testRouter(t)
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/future-page", nil))
+	if response.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", response.Code, http.StatusOK)
+	}
+	if !strings.Contains(response.Header().Get("Content-Type"), "text/html") {
+		t.Fatalf("content type = %q, want text/html", response.Header().Get("Content-Type"))
+	}
+}
+
+func TestDatasetResponseHeaders(t *testing.T) {
+	router := testRouter(t)
+
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/api/v1/overview", nil))
+
+	if got := response.Header().Get("Cache-Control"); got != "public, max-age=300" {
+		t.Fatalf("Cache-Control = %q, want public, max-age=300", got)
 	}
 }
 

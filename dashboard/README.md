@@ -11,37 +11,38 @@ go run .
 ```
 
 Open `http://localhost:8080/`. Set `DASHBOARD_ADDR` to change the listening address.
-
-## Visualization feature flags
-
-Every visualization section is enabled by default. Set a backend environment variable to `false` before starting the service to hide the corresponding whole section. These switches do not alter the API data or selectively remove individual institutions or subgroup results.
-
-```sh
-DASHBOARD_FEATURE_SUCCESS_EQUITY_GAPS=false go run .
-```
-
-Available flags:
-
-- `DASHBOARD_FEATURE_OVERVIEW_HEADLINES`
-- `DASHBOARD_FEATURE_DIVERSITY_COMPOSITION`
-- `DASHBOARD_FEATURE_DIVERSITY_ACCESS`
-- `DASHBOARD_FEATURE_DIVERSITY_GAPS`
-- `DASHBOARD_FEATURE_DIVERSITY_SCATTER`
-- `DASHBOARD_FEATURE_DIVERSITY_TREND`
-- `DASHBOARD_FEATURE_SUCCESS_OUTCOMES`
-- `DASHBOARD_FEATURE_SUCCESS_EQUITY_GAPS`
-- `DASHBOARD_FEATURE_SUCCESS_TREND`
-- `DASHBOARD_FEATURE_AFFORDABILITY_HEADLINES`
-- `DASHBOARD_FEATURE_AFFORDABILITY_INCOME`
-- `DASHBOARD_FEATURE_AFFORDABILITY_SCATTER`
-- `DASHBOARD_FEATURE_AFFORDABILITY_TREND`
+Request logs use Go's `log/slog` package and include a compact timestamp,
+method, path, status, and duration. Interactive terminals color each line by
+level; redirected logs remain plain. Set `DASHBOARD_LOG_LEVEL` to `debug`,
+`info`, `warn`, or `error`.
 
 ## Verify
 
 ```sh
-go test ./...
+go test -race -cover ./...
+go vet ./...
 go build -o bin/dashboard .
 ```
+
+From the repository root, `make test-go` runs the same race-enabled Go test
+suite. Pull requests and dashboard changes run tests, vet, and a build in
+GitHub Actions.
+
+## Backend layout
+
+- `application.go` loads configuration, pages, and datasets at startup.
+- `pages.go` is the static page registry. Add a route and embedded HTML file
+  there to expose another dashboard page.
+- `resources.go` owns the reusable year-versioned JSON/CSV collection loader.
+- `api.go` registers the versioned HTTP API.
+- `middleware.go` owns request logging, recovery, and related HTTP
+  behavior.
+- `server.go` assembles the router; `main.go` owns process startup and graceful
+  shutdown.
+
+Dataset routes use one generic loader, selector, and response implementation.
+Adding another dataset requires its schema/export function, one loader
+definition in `application.go`, and one route registration in `api.go`.
 
 ## Refresh a final IPEDS collection
 
@@ -56,7 +57,6 @@ Use the collection start year. The command checks the official NCES Access relea
 ## Endpoints
 
 - `GET /api/v1/health`
-- `GET /api/v1/features`
 - `GET /api/v1/overview/releases`
 - `GET /api/v1/overview`
 - `GET /api/v1/export.csv`
