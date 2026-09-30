@@ -1,0 +1,254 @@
+:root {
+  --event-empty: #eceef1;
+  --event-low: #f4c7d0;
+  --event-mid: #e06b84;
+  --event-high: #c91235;
+}
+
+.key-event-empty { background: var(--event-empty); }
+.key-event-low { background: var(--event-low); }
+.key-event-high { background: var(--event-high); }
+
+.events-heatmap {
+  padding-top: 4px;
+  overflow: visible;
+}
+
+.events-heatmap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.events-heatmap .month-label,
+.events-heatmap .weekday-label {
+  fill: var(--gray);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.events-heatmap .day-cell {
+  cursor: pointer;
+  outline: none;
+}
+
+.events-heatmap .day-cell.is-selected,
+.events-heatmap .day-cell:focus {
+  stroke: var(--ink);
+  stroke-width: 2px;
+}
+
+.events-heatmap .day-cell.is-out-of-term {
+  cursor: default;
+  pointer-events: none;
+}
+
+.involvement-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 8px;
+}
+
+.involvement-chart-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100%;
+  padding: 18px;
+  border: 1px solid var(--soft-line);
+  background: var(--wash);
+  overflow: visible;
+}
+
+.involvement-chart-card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.involvement-chart-note {
+  margin: 4px 0 14px;
+  color: var(--gray);
+  font-size: 13px;
+}
+
+.involvement-chart {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 280px;
+  overflow: visible;
+}
+
+.involvement-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.involvement-legend {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.involvement-legend li {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  color: var(--gray);
+}
+
+.involvement-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.involvement-legend strong {
+  color: var(--ink);
+  font-weight: 700;
+  text-align: right;
+}
+
+.weekly-axis text,
+.donut-center {
+  fill: var(--gray);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.donut-center-value {
+  fill: var(--ink);
+  font-size: 26px;
+  font-weight: 750;
+}
+
+.donut-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+}
+
+.donut-layout svg {
+  width: 220px;
+  height: 220px;
+  justify-self: center;
+}
+
+.donut-layout .involvement-legend {
+  width: 100%;
+  grid-template-columns: 1fr;
+}
+
+.weekly-legend { margin-top: 12px; }
+
+@media (max-width: 560px) {
+  .donut-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .donut-layout .involvement-legend {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 900px) {
+  .involvement-charts { grid-template-columns: 1fr; }
+}
+
+.event-filters {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-chip {
+  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--gray);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  padding: 6px 10px;
+}
+
+.filter-chip.is-active {
+  border-color: var(--red);
+  background: #fdf2f4;
+  color: var(--red-dark);
+}
+
+.event-list {
+  display: grid;
+  gap: 0;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.event-item {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 9rem) minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.event-time {
+  margin: 0;
+  color: var(--gray);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.event-body { min-width: 0; }
+
+.event-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.event-title a {
+  color: var(--red-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.event-meta {
+  margin: 4px 0 0;
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .event-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

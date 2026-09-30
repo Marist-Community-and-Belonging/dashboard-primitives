@@ -12,6 +12,7 @@ import (
 var pageFiles = map[string]string{
 	"/":                        "web/index.html",
 	"/affordability-resources": "web/affordability-resources.html",
+	"/campus-involvement":      "web/campus-involvement.html",
 	"/diversity-access":        "web/diversity-access.html",
 	"/marist-profile":          "web/marist-profile.html",
 	"/success-equity":          "web/success-equity.html",

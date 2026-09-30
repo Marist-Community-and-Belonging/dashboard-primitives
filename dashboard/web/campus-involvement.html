@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Campus involvement calendar for Marist University events from CampusGroups.">
+    <meta name="color-scheme" content="light">
+    <title>Campus Involvement · Marist IPEDS Benchmark</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/dashboard.css">
+    <link rel="stylesheet" href="/assets/campus-involvement.css">
+    <script src="/assets/vendor/d3.v7.min.js" defer></script>
+    <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/collapsible.js" defer></script>
+    <script src="/assets/reveals.js" defer></script>
+    <script src="/assets/campus-involvement.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+    <header class="site-header">
+      <div class="masthead">
+        <a class="identity" href="/"><img class="university-logo" src="/assets/marist-university-logo.png" alt="Marist University"><span class="product-name">IPEDS Benchmark</span></a>
+        <a class="method-link" href="#methodology">Data and methodology</a>
+      </div>
+      <nav class="section-nav" aria-label="Dashboard sections">
+        <a href="/">Overview</a>
+        <a href="/marist-profile">Marist Profile</a>
+        <a href="/diversity-access">Diversity &amp; Access</a>
+        <a href="/success-equity">Success &amp; Equity</a>
+        <a href="/affordability-resources">Affordability</a>
+        <a href="/campus-involvement" aria-current="page">Campus Involvement</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Campus Involvement</p>
+          <h1 id="page-title">Events calendar</h1>
+          <p class="lede">Public CampusGroups events, shown as a day-by-day activity heatmap with the list for any selected date.</p>
+        </div>
+        <dl class="release-summary" aria-label="Feed summary">
+          <div><dt>Events</dt><dd id="event-count">—</dd></div>
+          <div><dt>Active days</dt><dd id="active-day-count">—</dd></div>
+          <div><dt>This week</dt><dd id="week-count">—</dd></div>
+        </dl>
+      </section>
+      <p class="data-note" id="data-status" role="status">Loading the public CampusGroups events feed…</p>
+
+      <section class="dashboard-section" data-collapsible aria-labelledby="heatmap-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="heatmap-heading">Event density calendar</h2>
+            <p>Fixed academic-year grid (late August through mid-May). Color is event count that day; filters only change color, not size.</p>
+          </div>
+        </div>
+        <div class="legend" aria-label="Heatmap legend">
+          <span><i class="key-event-empty"></i>None</span>
+          <span><i class="key-event-low"></i>Fewer</span>
+          <span><i class="key-event-high"></i>More</span>
+        </div>
+        <div id="event-filters" class="event-filters"></div>
+        <div id="events-heatmap" class="events-heatmap chart-reveal" role="img" aria-label="Campus events calendar heatmap"></div>
+        <p class="comparison-context" id="heatmap-range"></p>
+      </section>
+
+      <section class="dashboard-section" data-collapsible aria-labelledby="breakdown-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="breakdown-heading">Activity breakdown</h2>
+            <p>Category mix and weekly volume across the academic year. Same filters as the heatmap. Ready to add more seasons when richer data arrives.</p>
+          </div>
+        </div>
+        <div class="involvement-charts">
+          <article class="involvement-chart-card chart-reveal">
+            <h3>By event type</h3>
+            <p class="involvement-chart-note">Share of filtered events by CampusGroups category.</p>
+            <div id="type-donut" class="involvement-chart" role="img" aria-label="Event type donut chart"></div>
+          </article>
+          <article class="involvement-chart-card chart-reveal">
+            <h3>Weekly volume</h3>
+            <p class="involvement-chart-note">Events per week and active days per week (days with ≥1 event).</p>
+            <div id="weekly-chart" class="involvement-chart" role="img" aria-label="Weekly events and active days chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="dashboard-section" data-collapsible aria-labelledby="day-list-heading">
+        <div class="section-heading table-heading">
+          <div>
+            <h2 id="day-list-heading">Events for <span id="selected-day-label">selected day</span></h2>
+            <p>Select a day in the heatmap to list its events. Links open CampusGroups.</p>
+          </div>
+          <a class="download-link" id="source-link" href="https://marist.campusgroups.com/events" target="_blank" rel="noopener">CampusGroups calendar</a>
+        </div>
+        <div id="day-empty" class="data-note" hidden>No events on this day.</div>
+        <div id="day-event-list" class="event-list" aria-live="polite"></div>
+      </section>
+
+      <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
+        <div>
+          <p class="eyebrow">Methodology</p>
+          <h2 id="methodology-heading">Public RSS until API access lands</h2>
+        </div>
+        <div class="methodology-copy">
+          <p>Events come from the public CampusGroups RSS feed. The heatmap uses a fixed academic-year window (Monday on or before August 24 through Friday on or after May 21; summer omitted). The server refreshes the feed every few minutes. Private locations stay masked as published. Multi-day events count on every day they span.</p>
+          <a href="https://marist.campusgroups.com/rss_events">CampusGroups RSS source</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Public institutional comparison. No composite ranking. <a href="https://www.marist.edu/offices/institutional-research/peer-aspirant">Marist’s official peer and aspirant lists</a>.</p>
+      <p>U.S. Department of Education · NCES · IPEDS · CampusGroups</p>
+    </footer>
+  </body>
+</html>

@@ -23,6 +23,17 @@ func registerAPI(api *gin.RouterGroup, app application) {
 	registerDatasetRoutes(api, "/success-equity", "success-equity", app.success)
 	registerDatasetRoutes(api, "/affordability-resources", "affordability-resources", app.affordability)
 
+	campusEvents := &campusEventsCache{}
+	api.GET("/campus-involvement/events", func(c *gin.Context) {
+		payload, err := campusEvents.get()
+		if err != nil {
+			c.JSON(http.StatusBadGateway, gin.H{"error": "campus events feed unavailable"})
+			return
+		}
+		c.Header("Cache-Control", "public, max-age=60")
+		c.JSON(http.StatusOK, payload)
+	})
+
 	// Keep the original overview export URL for downstream compatibility.
 	api.GET("/overview", func(c *gin.Context) {
 		dataset, ok := app.overview.selectYear(c)
