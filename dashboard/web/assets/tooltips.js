@@ -10,21 +10,7 @@ function dataTooltip() {
   return tooltip;
 }
 
-function positionDataTooltip(clientX, clientY, centered = false) {
-  const tooltip = dataTooltip();
-  const offset = 14;
-  const edge = 10;
-  const bounds = tooltip.getBoundingClientRect();
-  let left = centered ? clientX - bounds.width / 2 : clientX + offset;
-  let top = centered ? clientY - bounds.height - offset : clientY + offset;
-
-  if (!centered && left + bounds.width > window.innerWidth - edge) left = clientX - bounds.width - offset;
-  if (!centered && top + bounds.height > window.innerHeight - edge) top = clientY - bounds.height - offset;
-  left = Math.max(edge, Math.min(left, window.innerWidth - bounds.width - edge));
-  top = Math.max(edge, Math.min(top, window.innerHeight - bounds.height - edge));
-  tooltip.style.left = `${left}px`;
-  tooltip.style.top = `${top}px`;
-}
+function positionDataTooltip() {}
 
 function showDataTooltip(label, clientX, clientY, centered = false) {
   const tooltip = dataTooltip();
@@ -40,4 +26,49 @@ function showDataTooltipForElement(element, label) {
 
 function hideDataTooltip() {
   dataTooltip().hidden = true;
+}
+
+function linkLegendHighlights(legend, chart) {
+  const items = [...legend.querySelectorAll("[data-highlight]")];
+  const marks = [...chart.querySelectorAll("[data-highlight]")];
+  const targets = [...items, ...chart.querySelectorAll(".composition-segment[data-highlight]")];
+  const reset = document.createElement("button");
+  reset.type = "button";
+  reset.className = "legend-reset";
+  reset.textContent = "Reset highlight";
+  reset.hidden = true;
+  legend.append(reset);
+
+  function highlight(key) {
+    [...items, ...marks].forEach((element) => {
+      element.classList.toggle("is-highlighted", element.dataset.highlight === key);
+      element.classList.toggle("is-muted", element.dataset.highlight !== key);
+    });
+    reset.hidden = false;
+  }
+
+  function clearHighlight() {
+    [...items, ...marks].forEach((element) => element.classList.remove("is-highlighted", "is-muted"));
+    reset.hidden = true;
+    hideDataTooltip();
+  }
+
+  function clear(target) {
+    if (document.activeElement?.dataset.highlight === target.dataset.highlight) return;
+    clearHighlight();
+  }
+
+  targets.forEach((target) => {
+    target.addEventListener("pointerenter", (event) => {
+      highlight(target.dataset.highlight);
+      if (target.dataset.tooltip) showDataTooltip(target.dataset.tooltip, event.clientX, event.clientY);
+    });
+    target.addEventListener("pointerleave", () => clear(target));
+    target.addEventListener("focus", () => {
+      highlight(target.dataset.highlight);
+      if (target.dataset.tooltip) showDataTooltipForElement(target, target.dataset.tooltip);
+    });
+    target.addEventListener("blur", () => clear(target));
+  });
+  reset.addEventListener("click", clearHighlight);
 }

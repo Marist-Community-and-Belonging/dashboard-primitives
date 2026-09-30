@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/dashboard.css">
     <script src="/assets/vendor/d3.v7.min.js" defer></script>
     <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/features.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
     <script src="/assets/year-selector.js" defer></script>
     <script src="/assets/comparison-highlights.js" defer></script>
@@ -49,22 +50,21 @@
         </dl>
       </section>
 
-      <p class="data-note" id="data-status" role="status">Loading the verified IPEDS comparison dataset…</p>
+      <div class="dashboard-toolbar">
+        <div class="toolbar-context"><strong class="sticky-page-title">Marist benchmark overview</strong><p class="data-note" id="data-status" role="status">Loading the verified IPEDS comparison dataset…</p></div>
+        <form class="year-filter" id="year-filter">
+          <label for="year-select">Collection</label>
+          <div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div>
+          <small id="year-availability" class="sr-only">Loading available years…</small>
+        </form>
+      </div>
 
-      <section class="measure-section" data-collapsible aria-labelledby="headline-heading">
+      <section class="measure-section" data-feature="overview_headlines" data-collapsible aria-labelledby="headline-heading">
         <div class="section-heading">
           <div>
             <h2 id="headline-heading">Headline measures</h2>
             <p>Marist values with peer and aspirant medians and middle ranges.</p>
           </div>
-          <form class="year-filter" id="year-filter">
-            <label for="year-select">Collection year</label>
-            <div class="year-control">
-              <select id="year-select" name="year" aria-describedby="year-availability"></select>
-              <span id="active-release" class="active-release"></span>
-            </div>
-            <small id="year-availability">Loading available years…</small>
-          </form>
         </div>
         <div class="section-heading legend-row">
           <div><p id="active-filter" class="active-filter" aria-live="polite"></p><p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p></div>

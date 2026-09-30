@@ -82,18 +82,31 @@ function renderProfileComposition(diversity) {
     const label = `${category.display_name}: ${profileValue(category.value, "percent")}.`;
     const segment = svg.append("rect")
       .attr("class", "composition-segment")
+      .attr("data-highlight", category.category_id)
       .attr("x", offset * 7)
       .attr("y", 8)
       .attr("width", Math.max(category.value * 7, 1))
       .attr("height", 34)
       .attr("fill", profileCategoryColors[category.category_id]);
     profileInteractive(segment, label);
+    svg.append("text")
+      .attr("class", "composition-value")
+      .attr("data-highlight", category.category_id)
+      .attr("x", (offset + category.value / 2) * 7)
+      .attr("y", 30)
+      .text(profileValue(category.value, "percent"));
     offset += category.value;
 
-    const key = document.createElement("span");
-    key.innerHTML = `<i style="--category-color:${profileCategoryColors[category.category_id]}"></i>${category.display_name} ${profileValue(category.value, "percent")}`;
+    const key = document.createElement("button");
+    key.type = "button";
+    key.className = "composition-key";
+    key.dataset.highlight = category.category_id;
+    key.dataset.tooltip = label;
+    key.setAttribute("aria-label", `${label} Highlight matching bar.`);
+    key.innerHTML = `<i class="category-${category.category_id}"></i>${category.display_name} ${profileValue(category.value, "percent")}`;
     legend.append(key);
   });
+  linkLegendHighlights(legend, chart);
 
   const sexValues = document.querySelector("#profile-sex-values");
   sexValues.innerHTML = `<div><span>Women</span><strong>${profileValue(group.women_share, "percent")}</strong></div><div><span>Men</span><strong>${profileValue(group.men_share, "percent")}</strong></div>`;

@@ -48,7 +48,14 @@
         </dl>
       </section>
 
-      <p class="data-note" id="data-status" role="status">Loading the verified Marist profile…</p>
+      <div class="dashboard-toolbar">
+        <div class="toolbar-context"><strong class="sticky-page-title">Marist University profile</strong><p class="data-note" id="data-status" role="status">Loading the verified Marist profile…</p></div>
+        <form class="year-filter">
+          <label for="year-select">Collection</label>
+          <div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div>
+          <small id="year-availability" class="sr-only">Loading available years…</small>
+        </form>
+      </div>
 
       <section class="dashboard-section profile-snapshot" data-collapsible aria-labelledby="profile-snapshot-heading">
         <div class="section-heading">
@@ -56,14 +63,6 @@
             <h2 id="profile-snapshot-heading">Selected-year snapshot</h2>
             <p>One institutional profile assembled from the same final sources used throughout the dashboard.</p>
           </div>
-          <form class="year-filter">
-            <label for="year-select">Collection year</label>
-            <div class="year-control">
-              <select id="year-select" name="year" aria-describedby="year-availability"></select>
-              <span id="active-release" class="active-release"></span>
-            </div>
-            <small id="year-availability">Loading available years…</small>
-          </form>
         </div>
         <div class="profile-grid">
           <article class="profile-panel profile-enrollment" aria-labelledby="profile-enrollment-heading">
