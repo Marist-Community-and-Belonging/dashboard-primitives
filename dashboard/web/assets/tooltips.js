@@ -31,7 +31,7 @@ function hideDataTooltip() {
 function linkLegendHighlights(legend, chart) {
   const items = [...legend.querySelectorAll("[data-highlight]")];
   const marks = [...chart.querySelectorAll("[data-highlight]")];
-  const targets = [...items, ...chart.querySelectorAll(".composition-segment[data-highlight]")];
+  const targets = [...items, ...chart.querySelectorAll("[data-highlight][tabindex]")];
   const reset = document.createElement("button");
   reset.type = "button";
   reset.className = "legend-reset";
