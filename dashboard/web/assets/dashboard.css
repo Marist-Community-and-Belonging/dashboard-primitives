@@ -411,10 +411,13 @@ h1 {
 }
 .bullet-chart { width: 100%; min-height: 78px; margin-top: 8px; }
 .bullet-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
-.chart-mark { cursor: default; outline: none; }
+.chart-mark { cursor: default; outline: none; transition: filter 160ms ease, opacity 160ms ease; }
 .chart-mark > * { transition: filter 120ms ease, stroke-width 120ms ease; }
 .chart-mark.is-active > * { filter: drop-shadow(0 0 3px rgb(32 33 39 / 35%)); }
 .chart-mark:focus > * { stroke: var(--ink); stroke-width: 3px; }
+.chart-mark.is-active,
+.chart-mark.is-highlighted { filter: drop-shadow(0 0 3px rgb(32 33 39 / 28%)); }
+.chart-mark.is-muted { opacity: .55; }
 .data-tooltip {
   position: fixed;
   bottom: 12px;
@@ -506,6 +509,8 @@ td:first-child { font-weight: 650; }
 .composition-key.is-highlighted { background: var(--wash); color: var(--ink); }
 .composition-key.is-muted { opacity: .68; }
 .legend-reset {
+  width: fit-content;
+  justify-self: start;
   padding: 3px 0;
   border: 0;
   border-bottom: 1px solid currentColor;

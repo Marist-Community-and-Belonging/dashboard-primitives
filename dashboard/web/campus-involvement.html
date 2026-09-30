@@ -12,6 +12,7 @@
     <script src="/assets/vendor/d3.v7.min.js" defer></script>
     <script src="/assets/tooltips.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
+    <script src="/assets/year-selector.js" defer></script>
     <script src="/assets/reveals.js" defer></script>
     <script src="/assets/campus-involvement.js" defer></script>
   </head>
@@ -45,7 +46,9 @@
           <div><dt>This week</dt><dd id="week-count">—</dd></div>
         </dl>
       </section>
-      <p class="data-note" id="data-status" role="status">Loading the public CampusGroups events feed…</p>
+      <div class="dashboard-toolbar">
+        <div class="toolbar-context"><strong class="sticky-page-title">Campus involvement</strong><p class="data-note" id="data-status" role="status">Loading the public CampusGroups events feed…</p></div>
+      </div>
 
       <section class="dashboard-section" data-collapsible aria-labelledby="heatmap-heading">
         <div class="section-heading">
@@ -60,7 +63,7 @@
           <span><i class="key-event-high"></i>More</span>
         </div>
         <div id="event-filters" class="event-filters"></div>
-        <div id="events-heatmap" class="events-heatmap chart-reveal" role="img" aria-label="Campus events calendar heatmap"></div>
+        <div id="events-heatmap" class="events-heatmap chart-reveal" role="region" aria-label="Campus events calendar heatmap"></div>
         <p class="comparison-context" id="heatmap-range"></p>
       </section>
 
@@ -68,19 +71,19 @@
         <div class="section-heading">
           <div>
             <h2 id="breakdown-heading">Activity breakdown</h2>
-            <p>Category mix and weekly volume across the academic year. Same filters as the heatmap. Ready to add more seasons when richer data arrives.</p>
+            <p>Category mix and weekly volume across the academic year, using the same filters as the heatmap.</p>
           </div>
         </div>
         <div class="involvement-charts">
           <article class="involvement-chart-card chart-reveal">
             <h3>By event type</h3>
             <p class="involvement-chart-note">Share of filtered events by CampusGroups category.</p>
-            <div id="type-donut" class="involvement-chart" role="img" aria-label="Event type donut chart"></div>
+            <div id="type-donut" class="involvement-chart" role="region" aria-label="Event type donut chart"></div>
           </article>
           <article class="involvement-chart-card chart-reveal">
             <h3>Weekly volume</h3>
             <p class="involvement-chart-note">Events per week and active days per week (days with ≥1 event).</p>
-            <div id="weekly-chart" class="involvement-chart" role="img" aria-label="Weekly events and active days chart"></div>
+            <div id="weekly-chart" class="involvement-chart" role="region" aria-label="Weekly events and active days chart"></div>
           </article>
         </div>
       </section>

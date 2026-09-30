@@ -56,3 +56,6 @@ function prepareHorizontalScroll(root = document) {
 
 prepareHorizontalScroll();
 new MutationObserver(() => prepareHorizontalScroll()).observe(document.querySelector("main"), { childList: true, subtree: true });
+
+const activeNav = document.querySelector('.section-nav [aria-current="page"]');
+if (activeNav) activeNav.parentElement.scrollLeft = activeNav.offsetLeft - (activeNav.parentElement.clientWidth - activeNav.clientWidth) / 2;

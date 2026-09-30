@@ -140,11 +140,31 @@ function renderDayList(date) {
   events.forEach((event) => {
     const item = document.createElement("article");
     item.className = "event-item";
-    const title = event.link
-      ? `<a href="${event.link}" target="_blank" rel="noopener">${event.title}</a>`
-      : event.title;
     const meta = [event.group, event.event_type, event.location].filter(Boolean).join(" · ");
-    item.innerHTML = `<p class="event-time">${eventTimeLabel(event)}</p><div class="event-body"><h3 class="event-title">${title}</h3><p class="event-meta">${meta || "—"}</p></div>`;
+    const time = document.createElement("p");
+    const body = document.createElement("div");
+    const title = document.createElement("h3");
+    const details = document.createElement("p");
+    time.className = "event-time";
+    time.textContent = eventTimeLabel(event);
+    body.className = "event-body";
+    title.className = "event-title";
+    details.className = "event-meta";
+    details.textContent = meta || "—";
+    try {
+      const url = new URL(event.link);
+      if (!['http:', 'https:'].includes(url.protocol)) throw new Error("Unsupported event link");
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = event.title;
+      title.append(link);
+    } catch {
+      title.textContent = event.title;
+    }
+    body.append(title, details);
+    item.append(time, body);
     list.append(item);
   });
   d3.selectAll(".day-cell").classed("is-selected", function () {
@@ -189,11 +209,13 @@ function renderFilters(events) {
   root.replaceChildren();
   const typeWrap = document.createElement("div");
   typeWrap.className = "filter-row";
+  typeWrap.setAttribute("role", "group");
   typeWrap.setAttribute("aria-label", "Event type filters");
 
   const allButton = document.createElement("button");
   allButton.type = "button";
   allButton.className = `filter-chip${selectedTypes.size ? "" : " is-active"}`;
+  allButton.setAttribute("aria-pressed", String(selectedTypes.size === 0));
   allButton.textContent = `All types (${events.length})`;
   allButton.addEventListener("click", () => {
     selectedTypes = new Set();
@@ -205,6 +227,7 @@ function renderFilters(events) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `filter-chip${selectedTypes.has(type) ? " is-active" : ""}`;
+    button.setAttribute("aria-pressed", String(selectedTypes.has(type)));
     button.textContent = `${type} (${count})`;
     button.addEventListener("click", () => {
       if (selectedTypes.has(type)) selectedTypes.delete(type);
@@ -217,9 +240,12 @@ function renderFilters(events) {
 
   const placeWrap = document.createElement("div");
   placeWrap.className = "filter-row";
+  placeWrap.setAttribute("role", "group");
+  placeWrap.setAttribute("aria-label", "Location filters");
   const campus = document.createElement("button");
   campus.type = "button";
   campus.className = `filter-chip${onCampusOnly ? " is-active" : ""}`;
+  campus.setAttribute("aria-pressed", String(onCampusOnly));
   campus.textContent = "On-campus only";
   campus.addEventListener("click", () => {
     onCampusOnly = !onCampusOnly;
@@ -337,6 +363,23 @@ function renderHeatmap(days, bounds) {
 
 const typeColors = ["#c91235", "#9f0f2b", "#e06b84", "#3c8cff", "#63666f", "#a71934", "#356da8", "#202127", "#b86b7a", "#7a7e87"];
 
+function involvementLegendKey(label, value, colorClass, highlight, tooltip) {
+  const button = document.createElement("button");
+  const swatch = document.createElement("i");
+  const name = document.createElement("span");
+  const stat = document.createElement("strong");
+  button.type = "button";
+  button.className = "involvement-key";
+  button.dataset.highlight = highlight;
+  button.dataset.tooltip = tooltip;
+  button.setAttribute("aria-label", `${tooltip} Highlight matching chart marks.`);
+  swatch.className = colorClass;
+  name.textContent = label;
+  stat.textContent = value;
+  button.append(swatch, name, stat);
+  return button;
+}
+
 function typeBreakdown(events) {
   const rolls = d3.rollups(events, (rows) => rows.length, (event) => event.event_type || "Other")
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
@@ -409,6 +452,7 @@ function renderTypeDonut(events) {
     .data(pie(data))
     .join("path")
     .attr("class", "chart-mark")
+    .attr("data-highlight", (d, i) => `event-type-${i}`)
     .attr("d", arc)
     .attr("fill", (d, i) => typeColors[i % typeColors.length])
     .each(function (d) {
@@ -420,14 +464,20 @@ function renderTypeDonut(events) {
   g.append("text").attr("class", "donut-center-value").attr("text-anchor", "middle").attr("dy", "-0.12em").text(total);
   g.append("text").attr("class", "donut-center").attr("text-anchor", "middle").attr("dy", "1.2em").text("events");
 
-  const legend = document.createElement("ul");
+  const legend = document.createElement("div");
   legend.className = "involvement-legend";
   data.forEach((row, index) => {
-    const item = document.createElement("li");
-    item.innerHTML = `<i style="background:${typeColors[index % typeColors.length]}"></i><span>${row.label}</span><strong>${row.value}</strong>`;
-    legend.append(item);
+    const pct = total ? Math.round((row.value / total) * 100) : 0;
+    legend.append(involvementLegendKey(
+      row.label,
+      String(row.value),
+      `event-type-${index % typeColors.length}`,
+      `event-type-${index}`,
+      `${row.label}: ${row.value} events (${pct}%)`,
+    ));
   });
   wrap.append(legend);
+  linkLegendHighlights(legend, svg.node());
 }
 
 function renderWeeklyChart(events, bounds) {
@@ -460,11 +510,18 @@ function renderWeeklyChart(events, bounds) {
     .range([height - margin.bottom, margin.top]);
 
   const monthTicks = [];
+  const monthTickLabels = new Map();
   let lastMonth = null;
   series.forEach((row) => {
     const label = monthLabel.format(row.midpoint);
     if (label !== lastMonth) {
+      const previous = monthTicks[monthTicks.length - 1];
+      if (previous && x(row.start) - x(previous) < 28) {
+        monthTicks.pop();
+        monthTickLabels.delete(previous);
+      }
       monthTicks.push(row.start);
+      monthTickLabels.set(row.start, label);
       lastMonth = label;
     }
   });
@@ -472,7 +529,7 @@ function renderWeeklyChart(events, bounds) {
   svg.append("g")
     .attr("class", "weekly-axis")
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickValues(monthTicks).tickFormat((value) => monthLabel.format(parseYmd(value))).tickSizeOuter(0));
+    .call(d3.axisBottom(x).tickValues(monthTicks).tickFormat((value) => monthTickLabels.get(value)).tickSizeOuter(0));
   svg.append("g")
     .attr("class", "weekly-axis")
     .attr("transform", `translate(${margin.left},0)`)
@@ -489,23 +546,27 @@ function renderWeeklyChart(events, bounds) {
     .x((row) => x(row.start))
     .y((row) => yActive(row.activeDays));
 
-  svg.append("path").datum(series).attr("fill", "none").attr("stroke", "#c91235").attr("stroke-width", 2.5).attr("d", eventLine);
-  svg.append("path").datum(series).attr("fill", "none").attr("stroke", "#3c8cff").attr("stroke-width", 2).attr("stroke-dasharray", "5 4").attr("d", activeLine);
+  svg.append("path").datum(series).attr("class", "chart-mark").attr("data-highlight", "weekly-events").attr("fill", "none").attr("stroke", "#c91235").attr("stroke-width", 2.5).attr("d", eventLine);
+  svg.append("path").datum(series).attr("class", "chart-mark").attr("data-highlight", "weekly-active").attr("fill", "none").attr("stroke", "#3c8cff").attr("stroke-width", 2).attr("stroke-dasharray", "5 4").attr("d", activeLine);
 
   series.forEach((row) => {
     const label = `Week of ${dayLabel.format(parseYmd(row.start))}: ${row.events} events, ${row.activeDays} active days`;
-    const eventMark = svg.append("circle").attr("class", "chart-mark").attr("cx", x(row.start)).attr("cy", yEvents(row.events)).attr("r", 3.5).attr("fill", "#c91235").attr("stroke", "white").attr("stroke-width", 1);
+    const eventMark = svg.append("circle").attr("class", "chart-mark").attr("data-highlight", "weekly-events").attr("cx", x(row.start)).attr("cy", yEvents(row.events)).attr("r", 3.5).attr("fill", "#c91235").attr("stroke", "white").attr("stroke-width", 1);
     addCellHover(eventMark, label);
-    const activeMark = svg.append("circle").attr("class", "chart-mark").attr("cx", x(row.start)).attr("cy", yActive(row.activeDays)).attr("r", 3).attr("fill", "#3c8cff").attr("stroke", "white").attr("stroke-width", 1);
+    const activeMark = svg.append("circle").attr("class", "chart-mark").attr("data-highlight", "weekly-active").attr("cx", x(row.start)).attr("cy", yActive(row.activeDays)).attr("r", 3).attr("fill", "#3c8cff").attr("stroke", "white").attr("stroke-width", 1);
     addCellHover(activeMark, label);
   });
 
-  const legend = document.createElement("ul");
+  const eventAverage = (d3.mean(series, (row) => row.events) || 0).toFixed(1);
+  const activeAverage = (d3.mean(series, (row) => row.activeDays) || 0).toFixed(1);
+  const legend = document.createElement("div");
   legend.className = "involvement-legend weekly-legend";
-  legend.innerHTML = `
-    <li><i style="background:#c91235"></i><span>Events / week</span><strong>${(d3.mean(series, (row) => row.events) || 0).toFixed(1)} avg</strong></li>
-    <li><i style="background:#3c8cff"></i><span>Active days / week</span><strong>${(d3.mean(series, (row) => row.activeDays) || 0).toFixed(1)} avg</strong></li>`;
+  legend.append(
+    involvementLegendKey("Events / week", `${eventAverage} avg`, "weekly-events", "weekly-events", `Events per week: ${eventAverage} average.`),
+    involvementLegendKey("Active days / week", `${activeAverage} avg`, "weekly-active", "weekly-active", `Active days per week: ${activeAverage} average.`),
+  );
   root.append(legend);
+  linkLegendHighlights(legend, svg.node());
 }
 
 function refreshView() {
@@ -534,7 +595,9 @@ async function loadCampusEvents() {
     });
     if (!response.ok) throw new Error(`status ${response.status}`);
     payloadCache = await response.json();
-    status.innerHTML = `Loaded <strong>${payloadCache.event_count}</strong> public CampusGroups events.`;
+    const count = document.createElement("strong");
+    count.textContent = payloadCache.event_count;
+    status.replaceChildren("Loaded ", count, " public CampusGroups events.");
   } catch (error) {
     status.textContent = "CampusGroups events feed is unavailable right now.";
     console.error(error);
