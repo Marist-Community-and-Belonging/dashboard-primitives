@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:cg="https://www.campusgroups.com/rss_calendar">
+	<channel>
+		<title>marist Events</title>
+		<link>https://marist.campusgroups.com/events</link>
+		<description>Events calendar for marist</description>
+		<pubDate>Wed, 30 Sep 2026 12:55:00 +0000</pubDate>
+		<generator>https://www.campusgroups.com</generator>
+		<language>en</language>
+		<item>
+			<eventId>377183</eventId>
+			<eventUid>d5b9a918a3bc0e87886b18176338a91c</eventUid>
+			<groupId>35588</groupId>
+			<group>Spiritual Life and Service</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Department</groupType>
+			<groupAcronym>sls</groupAcronym>
+			<eventDate>9/28/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>8:00am</eventTime>
+			<eventEndTime>9:00pm</eventEndTime>
+			<locale></locale>
+			<title>Busy Person&apos;s Retreat</title>
+			<description>Are you feeling like you need a jump-start to your prayer life? Maybe to reconnect a little with Scripture? This is the perfect way to see how easy it can be to add a little God time to your day. No matter your faith, religious, or spiritual background, this retreat can meet you where you are, and invites you to intentionally connect. </description>
+			<fullDescription>Are you feeling like you need a jump-start to your prayer life? Maybe to reconnect a little with Scripture? This is the perfect way to see how easy it can be to add a little God time to your day. No matter your faith, religious, or spiritual background, this retreat can meet you where you are, and invites you to intentionally connect. </fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_604815_Busy_Persons_5_20eb51b8-f810-48a6-a2e5-a46f99ac35f7_922104334.png</eventPhoto>
+			<eventPhotoAltText>Hand on Bible, as if turning a page. &quot;Busy Person&apos;s Retreat&quot; in a yellow-gold hombre. September 28-30</eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_604815_Busy_Persons_5_20eb51b8-f810-48a6-a2e5-a46f99ac35f7_922104334.png</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=d5b9a918a3bc0e87886b18176338a91c</iCalLink>
+			<eventLink>https://marist.campusgroups.com/sls/rsvp?id=377183</eventLink>
+			<eventExternalRegistrationLink>https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nq-hFIyyJ0uyQyXDPbb_-lup2dDByjdHtZm3QJuJVL1UMDBYWFJBSjFCNUZLME4yRDBRNTdFWkdZWC4u</eventExternalRegistrationLink>
+			<eventType>Spiritual</eventType>
+			<eventTypeId>16704</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds>6551642,6553169</eventTopicIds>
+			<eventTopics>Open to All Students,Open to Faculty/Staff</eventTopics>
+			<eventTopicsSeparated>
+				<eventTopic>Open to All Students</eventTopic>
+				<eventTopic>Open to Faculty/Staff</eventTopic>
+			</eventTopicsSeparated>
+			<privacyLevel>0</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-28T08:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T21:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/sls/rsvp?id=377183</link>
+			<category>Spiritual</category>
+			<guid>https://marist.campusgroups.com/sls/rsvp?id=377183</guid>
+			<start>Mon, 28 Sep 2026 12:00:00 GMT</start>
+			<end>Thu, 01 Oct 2026 01:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_604815_Busy_Persons_5_20eb51b8-f810-48a6-a2e5-a46f99ac35f7_922104334.png</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink>https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nq-hFIyyJ0uyQyXDPbb_-lup2dDByjdHtZm3QJuJVL1UMDBYWFJBSjFCNUZLME4yRDBRNTdFWkdZWC4u</externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>0</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>377196</eventId>
+			<eventUid>202081e20d3cb5eac7bc8e7d34fc3342</eventUid>
+			<groupId>35480</groupId>
+			<group>Ethical Fashion Initiative (EFI)</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Student Organization (SGA Chartered)</groupType>
+			<groupAcronym>EthicalFashionInitiative</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>9:00am</eventTime>
+			<eventEndTime>3:00pm</eventEndTime>
+			<locale></locale>
+			<title>First Vendor Event </title>
+			<description>Vintage market event </description>
+			<fullDescription>Vintage market event </fullDescription>
+			<eventPhoto>/upload/marist/2025/e3_image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventPhoto>
+			<eventPhotoAltText></eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2025/e3_image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=202081e20d3cb5eac7bc8e7d34fc3342</iCalLink>
+			<eventLink>https://marist.campusgroups.com/EthicalFashionInitiative/rsvp?id=377196</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Market</eventType>
+			<eventTypeId>86712</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Dining Tent , 3399 North Rd, Poughkeepsie, NY 12601, United States</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds></eventTopicIds>
+			<eventTopics></eventTopics>
+			<eventTopicsSeparated>
+			</eventTopicsSeparated>
+			<privacyLevel>0</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T09:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T15:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/EthicalFashionInitiative/rsvp?id=377196</link>
+			<category>Market</category>
+			<guid>https://marist.campusgroups.com/EthicalFashionInitiative/rsvp?id=377196</guid>
+			<start>Wed, 30 Sep 2026 13:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 19:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2025/image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>1</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>375131</eventId>
+			<eventUid>f3dc3e3bd2c0edc919f84e280d8d21c0</eventUid>
+			<groupId>35551</groupId>
+			<group>Student Government Association (SGA)</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Student Organization (SGA Chartered)</groupType>
+			<groupAcronym>SGA</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>2:00pm</eventEndTime>
+			<locale></locale>
+			<title>Weekly SGA Meeting</title>
+			<description>Weekly Meeting for all SGA members and students</description>
+			<fullDescription>Weekly Meeting for all SGA members and students</fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_603750_SGA_BANNER_7444eac2-8334-4254-bf92-e9713f1d55dd_98135157.png</eventPhoto>
+			<eventPhotoAltText></eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_603750_SGA_BANNER_7444eac2-8334-4254-bf92-e9713f1d55dd_98135157.png</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=f3dc3e3bd2c0edc919f84e280d8d21c0</iCalLink>
+			<eventLink>https://marist.campusgroups.com/SGA/rsvp?id=375131</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Workshop</eventType>
+			<eventTypeId>16709</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds></eventTopicIds>
+			<eventTopics></eventTopics>
+			<eventTopicsSeparated>
+			</eventTopicsSeparated>
+			<privacyLevel>0</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T14:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/SGA/rsvp?id=375131</link>
+			<category>Workshop</category>
+			<guid>https://marist.campusgroups.com/SGA/rsvp?id=375131</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 18:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_603750_SGA_BANNER_7444eac2-8334-4254-bf92-e9713f1d55dd_98135157.png</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>1</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>376045</eventId>
+			<eventUid>e746e1bf23e3572fa9440877750a748d</eventUid>
+			<groupId>35634</groupId>
+			<group>Campus Safety</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Department</groupType>
+			<groupAcronym>Safety</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>1:00pm</eventEndTime>
+			<locale></locale>
+			<title>Safety Month Wellness Fair</title>
+			<description>September is Campus Fire Safety Month, and this is a great time to review best practices on how to stay safe!&#xD;&#xA;&#xD;&#xA;The Fairview Fire District and Campus Safety are working together to help raise awareness about the dangers of fires.  Each Wednesday, during activity hour (11 a.m. – 1 p.m.), representatives from the Fairview FD and Campus Safety will be stationed throughout the campus to share fire...</description>
+			<fullDescription>September is Campus Fire Safety Month, and this is a great time to review best practices on how to stay safe!&#xD;&#xA;&#xD;&#xA;The Fairview Fire District and Campus Safety are working together to help raise awareness about the dangers of fires.  Each Wednesday, during activity hour (11 a.m. – 1 p.m.), representatives from the Fairview FD and Campus Safety will be stationed throughout the campus to share fire safety tips. We invite you to stop by and join the conversation.  There will be giveaways and a chance to win many cool prizes. All winners will be announced at the end of each day by way of Instagram/Facebook.</fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_602507_DSC_1679jpg_b718355b-66f3-4d86-ab61-15527ed66099_93144414.jpeg</eventPhoto>
+			<eventPhotoAltText>Campus Safety Wellness Fair 9/2/26</eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_602507_DSC_1679jpg_b718355b-66f3-4d86-ab61-15527ed66099_93144414.jpeg</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=e746e1bf23e3572fa9440877750a748d</iCalLink>
+			<eventLink>https://marist.campusgroups.com/Safety/rsvp?id=376045</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Wellness</eventType>
+			<eventTypeId>86713</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds>6551642,6553169</eventTopicIds>
+			<eventTopics>Open to All Students,Open to Faculty/Staff</eventTopics>
+			<eventTopicsSeparated>
+				<eventTopic>Open to All Students</eventTopic>
+				<eventTopic>Open to Faculty/Staff</eventTopic>
+			</eventTopicsSeparated>
+			<privacyLevel>0</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T13:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/Safety/rsvp?id=376045</link>
+			<category>Wellness</category>
+			<guid>https://marist.campusgroups.com/Safety/rsvp?id=376045</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 17:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_602507_DSC_1679jpg_b718355b-66f3-4d86-ab61-15527ed66099_93144414.jpeg</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>0</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>376714</eventId>
+			<eventUid>24f563f3433bbd6ba2a48f22cc22fea6</eventUid>
+			<groupId>35592</groupId>
+			<group>Center for Civic Engagement and Leadership</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Department</groupType>
+			<groupAcronym>ccel</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>1:00pm</eventEndTime>
+			<locale></locale>
+			<title>MaristVOTES: Voting Questions? Stop by!</title>
+			<description>Stop by our table to learn more about Marist Votes and the Center for Civic Engagement and Leadership! Ask us any questions you have about voter registration, voting, absentee ballots, upcoming elections, or ways to get involved on campus.</description>
+			<fullDescription>Stop by our table to learn more about Marist Votes and the Center for Civic Engagement and Leadership! Ask us any questions you have about voter registration, voting, absentee ballots, upcoming elections, or ways to get involved on campus.</fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_603996_Marist_Votes_Logo_34a5f789-0a96-4b57-817f-bf8561f70a15_910113834.png</eventPhoto>
+			<eventPhotoAltText>Marist Votes logo</eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_603996_Marist_Votes_Logo_34a5f789-0a96-4b57-817f-bf8561f70a15_910113834.png</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=24f563f3433bbd6ba2a48f22cc22fea6</iCalLink>
+			<eventLink>https://marist.campusgroups.com/ccel/rsvp?id=376714</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Tabling</eventType>
+			<eventTypeId>86662</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds>6551642,6553169</eventTopicIds>
+			<eventTopics>Open to All Students,Open to Faculty/Staff</eventTopics>
+			<eventTopicsSeparated>
+				<eventTopic>Open to All Students</eventTopic>
+				<eventTopic>Open to Faculty/Staff</eventTopic>
+			</eventTopicsSeparated>
+			<privacyLevel>13</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T13:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/ccel/rsvp?id=376714</link>
+			<category>Tabling</category>
+			<guid>https://marist.campusgroups.com/ccel/rsvp?id=376714</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 17:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_603996_Marist_Votes_Logo_34a5f789-0a96-4b57-817f-bf8561f70a15_910113834.png</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>1</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>376764</eventId>
+			<eventUid>61fe4346fa8ebfb2e5ed0daafb0b5be0</eventUid>
+			<groupId>35551</groupId>
+			<group>Student Government Association (SGA)</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Student Organization (SGA Chartered)</groupType>
+			<groupAcronym>SGA</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>1:00pm</eventEndTime>
+			<locale></locale>
+			<title>SGA - Meet the Candidates</title>
+			<description>Come meet the candidates running to represent YOU in SGA! Stop by right outside the Champ Breezeway to meet this semester&apos;s candidates, hear what they are running for, learn more about their campaigns, and ask any questions you have. Whether you know exactly who you&apos;re voting for or you&apos;re still deciding, come say hi and get to know the people on the ballot! We&apos;ll see you there!</description>
+			<fullDescription>Come meet the candidates running to represent YOU in SGA! Stop by right outside the Champ Breezeway to meet this semester&apos;s candidates, hear what they are running for, learn more about their campaigns, and ask any questions you have. Whether you know exactly who you&apos;re voting for or you&apos;re still deciding, come say hi and get to know the people on the ballot! We&apos;ll see you there!</fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_600643_Logo_0f833f2e-5db4-45d1-87b6-2bf8666be571_91112119.jpeg</eventPhoto>
+			<eventPhotoAltText>Student Government Association Logo</eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_600643_Logo_0f833f2e-5db4-45d1-87b6-2bf8666be571_91112119.jpeg</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=61fe4346fa8ebfb2e5ed0daafb0b5be0</iCalLink>
+			<eventLink>https://marist.campusgroups.com/SGA/rsvp?id=376764</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Tabling</eventType>
+			<eventTypeId>86662</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds></eventTopicIds>
+			<eventTopics></eventTopics>
+			<eventTopicsSeparated>
+			</eventTopicsSeparated>
+			<privacyLevel>0</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T13:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/SGA/rsvp?id=376764</link>
+			<category>Tabling</category>
+			<guid>https://marist.campusgroups.com/SGA/rsvp?id=376764</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 17:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_600643_Logo_0f833f2e-5db4-45d1-87b6-2bf8666be571_91112119.jpeg</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>0</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>376826</eventId>
+			<eventUid>2f3fe1505e5f27df35d43103bfd35e19</eventUid>
+			<groupId>35549</groupId>
+			<group>St. Jude&apos;s Up Til Dawn</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Student Organization (SGA Chartered)</groupType>
+			<groupAcronym>StJudesUpTilDawn</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>1:00pm</eventEndTime>
+			<locale></locale>
+			<title>Card Making for St. Jude Children&apos;s Research Hospital</title>
+			<description>To culminate the end of Childhood Cancer Awareness month, we are doing a tabling event to provide more information about St Jude hospital. At this table, we will be providing materials to make cards for the patients of the hospital as well as resources to get involved in our fundraising. The event will be at a drop-in basis, so feel free to stop by the table to learn more and brighten a patient...</description>
+			<fullDescription>To culminate the end of Childhood Cancer Awareness month, we are doing a tabling event to provide more information about St Jude hospital. At this table, we will be providing materials to make cards for the patients of the hospital as well as resources to get involved in our fundraising. The event will be at a drop-in basis, so feel free to stop by the table to learn more and brighten a patients day by making a card!</fullDescription>
+			<eventPhoto>/upload/marist/2025/e3_image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventPhoto>
+			<eventPhotoAltText></eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2025/e3_image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventPhotoFullUrl>
+			<eventFlyerFullUrl></eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=2f3fe1505e5f27df35d43103bfd35e19</iCalLink>
+			<eventLink>https://marist.campusgroups.com/StJudesUpTilDawn/rsvp?id=376826</eventLink>
+			<eventExternalRegistrationLink></eventExternalRegistrationLink>
+			<eventType>Educational/Awareness</eventType>
+			<eventTypeId>16691</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>DY Tabling Space 2 - O&apos;Shea Side, 3399 North Rd, Poughkeepsie, NY 12601, United States</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds>6551642,6553169</eventTopicIds>
+			<eventTopics>Open to All Students,Open to Faculty/Staff</eventTopics>
+			<eventTopicsSeparated>
+				<eventTopic>Open to All Students</eventTopic>
+				<eventTopic>Open to Faculty/Staff</eventTopic>
+			</eventTopicsSeparated>
+			<privacyLevel>1</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T13:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/StJudesUpTilDawn/rsvp?id=376826</link>
+			<category>Educational/Awareness</category>
+			<guid>https://marist.campusgroups.com/StJudesUpTilDawn/rsvp?id=376826</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 17:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2025/image_upload_34747_d3a6cb7bf116a4ef07a89b38833d50d6b799133a_6417611.jpeg</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl></eventOriginalFlyerFullUrl>
+			<externalRegistrationLink></externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>1</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+<item>
+			<eventId>376943</eventId>
+			<eventUid>21a162f43d02a1500463465fdfa33be4</eventUid>
+			<groupId>35638</groupId>
+			<group>Health Services</group>
+			<coHostedGroupIds deprecated="deprecated"></coHostedGroupIds>
+			<groupType>Department</groupType>
+			<groupAcronym>healthservices</groupAcronym>
+			<eventDate>9/30/2026</eventDate>
+			<eventEndDate>9/30/2026</eventEndDate>
+			<eventTime>11:00am</eventTime>
+			<eventEndTime>2:00pm</eventEndTime>
+			<locale></locale>
+			<title>Vaccine Clinics</title>
+			<description>Health Services is pleased to announce the Fall 2026 Vaccine Clinics.  We are partnering with Acme Pharmacy again this year,  to provide convenient, on-site vaccination services to help you protect your health.  A wide variety of vaccines are available at the vaccine clinics, including this year’s Influenza and COVID-19 vaccines. &#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;The Vaccine Clinics will be held in the Student Center o...</description>
+			<fullDescription>Health Services is pleased to announce the Fall 2026 Vaccine Clinics.  We are partnering with Acme Pharmacy again this year,  to provide convenient, on-site vaccination services to help you protect your health.  A wide variety of vaccines are available at the vaccine clinics, including this year’s Influenza and COVID-19 vaccines. &#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;The Vaccine Clinics will be held in the Student Center on the 3rd floor (Student Lounge), on Wednesdays from 11 am to 2 pm on the following dates:&#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;September 16 and 30&#xD;&#xA;&#xD;&#xA;October 14 and 28&#xD;&#xA;&#xD;&#xA;November 4 and 18&#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;Please register at least 24 hours before the date you plan to visit the vaccine clinic by scanning the QR code on the flyer or by visiting:&#xD;&#xA;&#xD;&#xA;https://www.acmemarkets.com/vaccinations/group-clinic/Marist-2026&#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;You must bring your insurance card and a method of payment for any applicable copays to your visit.&#xD;&#xA;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;Hope to see you all at the Vaccine Clinics this Fall!</fullDescription>
+			<eventPhoto>/upload/marist/2026/e3_image_upload_599692_Vaccine_Clinic_2026_Final_2660e485-aea7-4803-bcf5-d75093dfe0ee_91593511.png</eventPhoto>
+			<eventPhotoAltText>vaccine clinic flyer</eventPhotoAltText>
+			<eventPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_599692_Vaccine_Clinic_2026_Final_2660e485-aea7-4803-bcf5-d75093dfe0ee_91593511.png</eventPhotoFullUrl>
+			<eventFlyerFullUrl>https://marist.campusgroups.com/upload/marist/2026/e3_image_upload_599692_Vaccine_Clinic_2026_Final_4e66382d-c4ca-4dea-8a64-d02a86d5b343_9159345.png</eventFlyerFullUrl>
+			<iCalLink>https://marist.campusgroups.com/vcal?source=rss_feed&amp;type=ical&amp;school=marist&amp;uid=21a162f43d02a1500463465fdfa33be4</iCalLink>
+			<eventLink>https://marist.campusgroups.com/healthservices/rsvp?id=376943</eventLink>
+			<eventExternalRegistrationLink>https://www.acmemarkets.com/vaccinations/group-clinic/Marist-2026</eventExternalRegistrationLink>
+			<eventType>Clinic</eventType>
+			<eventTypeId>86714</eventTypeId>
+			<timeZone>-4</timeZone>
+			<timeZoneId>Eastern Standard Time</timeZoneId>
+			<publishLcd>0</publishLcd>
+			<publishCalendar>0</publishCalendar>
+			<publishSchoolWebsite>0</publishSchoolWebsite>
+			<eventLocation>Private Location (sign in to display)</eventLocation>
+			<locationType>On-Campus</locationType>
+			<allDayEvent>0</allDayEvent>
+			<approvalStatus>1</approvalStatus>
+			<approvalStatus2>2</approvalStatus2>
+			<eventDelete>0</eventDelete>
+			<eventTopicIds>6551642,6553169,6551643</eventTopicIds>
+			<eventTopics>Open to All Students,Open to Faculty/Staff,Registration Required (See Event Details)</eventTopics>
+			<eventTopicsSeparated>
+				<eventTopic>Open to All Students</eventTopic>
+				<eventTopic>Open to Faculty/Staff</eventTopic>
+				<eventTopic>Registration Required (See Event Details)</eventTopic>
+			</eventTopicsSeparated>
+			<privacyLevel>1</privacyLevel>
+			<privacyDisplayedTo>0</privacyDisplayedTo>
+			<publishOnHome>1</publishOnHome>
+			<eventStartDateTime>2026-09-30T11:00:00.0000000-04:00</eventStartDateTime>
+			<eventEndDateTime>2026-09-30T14:00:00.0000000-04:00</eventEndDateTime>
+			<eventPromoteTo></eventPromoteTo>
+			<cohostingGroupIds></cohostingGroupIds>
+			<cohostingGroupNames></cohostingGroupNames>
+			<link>https://marist.campusgroups.com/healthservices/rsvp?id=376943</link>
+			<category>Clinic</category>
+			<guid>https://marist.campusgroups.com/healthservices/rsvp?id=376943</guid>
+			<start>Wed, 30 Sep 2026 15:00:00 GMT</start>
+			<end>Wed, 30 Sep 2026 18:00:00 GMT</end>
+			<eventOriginalPhotoFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_599692_Vaccine_Clinic_2026_Final_2660e485-aea7-4803-bcf5-d75093dfe0ee_91593511.png</eventOriginalPhotoFullUrl>
+			<eventOriginalFlyerFullUrl>https://marist.campusgroups.com/upload/marist/2026/image_upload_599692_Vaccine_Clinic_2026_Final_4e66382d-c4ca-4dea-8a64-d02a86d5b343_9159345.png</eventOriginalFlyerFullUrl>
+			<externalRegistrationLink>https://www.acmemarkets.com/vaccinations/group-clinic/Marist-2026</externalRegistrationLink>
+			<foodProvided>0</foodProvided>
+			<attendeesRating></attendeesRating>
+			<feedbackRequested>0</feedbackRequested>
+			<attendanceEstimate></attendanceEstimate>
+		</item>
+	</channel>
+</rss>
