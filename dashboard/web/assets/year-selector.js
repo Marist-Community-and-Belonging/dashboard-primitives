@@ -4,6 +4,9 @@ function updateCollectionLinks(year) {
     url.searchParams.set("year", year);
     link.href = `${url.pathname}${url.search}`;
   });
+  const nav = document.querySelector(".section-nav");
+  const active = nav?.querySelector('[aria-current="page"]');
+  if (active) nav.scrollLeft = active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
 }
 
 function updateCollectionURL(year, replace = false) {
@@ -11,6 +14,17 @@ function updateCollectionURL(year, replace = false) {
   url.searchParams.set("year", year);
   window.history[replace ? "replaceState" : "pushState"]({}, "", url);
   updateCollectionLinks(year);
+}
+
+function setYearChanging(changing) {
+  document.documentElement.classList.toggle("is-year-changing", changing);
+  document.querySelector("main")?.setAttribute("aria-busy", String(changing));
+}
+
+const toolbar = document.querySelector(".dashboard-toolbar");
+const pageHeading = document.querySelector(".page-heading");
+if (toolbar && pageHeading) {
+  new IntersectionObserver(([entry]) => toolbar.classList.toggle("is-stuck", !entry.isIntersecting)).observe(pageHeading);
 }
 
 async function setupCollectionYearSelector(onChange) {
@@ -26,7 +40,7 @@ async function setupCollectionYearSelector(onChange) {
   catalog.releases.forEach((release) => {
     const option = document.createElement("option");
     option.value = release.collection_year;
-    option.textContent = `${release.collection_year} · ${release.release_type.replace(/^./, (letter) => letter.toUpperCase())}`;
+    option.textContent = release.collection_year;
     select.append(option);
   });
   select.value = selectedYear;
@@ -37,7 +51,7 @@ async function setupCollectionYearSelector(onChange) {
   select.addEventListener("change", async () => {
     const previousYear = new URLSearchParams(window.location.search).get("year") || selectedYear;
     const nextYear = select.value;
-    document.documentElement.classList.add("is-year-changing");
+    setYearChanging(true);
     select.disabled = true;
     try {
       await onChange(nextYear);
@@ -46,7 +60,7 @@ async function setupCollectionYearSelector(onChange) {
       select.value = previousYear;
     } finally {
       window.setTimeout(() => {
-        document.documentElement.classList.remove("is-year-changing");
+        setYearChanging(false);
         select.disabled = catalog.releases.length < 2;
       }, 80);
     }
@@ -56,7 +70,7 @@ async function setupCollectionYearSelector(onChange) {
     if (!catalog.releases.some((release) => release.collection_year === historyYear) || historyYear === select.value) return;
     const previousYear = select.value;
     select.value = historyYear;
-    document.documentElement.classList.add("is-year-changing");
+    setYearChanging(true);
     select.disabled = true;
     try {
       await onChange(historyYear);
@@ -65,7 +79,7 @@ async function setupCollectionYearSelector(onChange) {
       select.value = previousYear;
     } finally {
       window.setTimeout(() => {
-        document.documentElement.classList.remove("is-year-changing");
+        setYearChanging(false);
         select.disabled = catalog.releases.length < 2;
       }, 80);
     }

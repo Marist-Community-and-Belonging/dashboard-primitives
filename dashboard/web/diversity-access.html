@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/dashboard.css">
     <script src="/assets/vendor/d3.v7.min.js" defer></script>
     <script src="/assets/tooltips.js" defer></script>
+    <script src="/assets/features.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
     <script src="/assets/year-selector.js" defer></script>
     <script src="/assets/reveals.js" defer></script>
@@ -49,15 +50,16 @@
         </dl>
       </section>
 
-      <p class="data-note" id="data-status" role="status">Loading the verified IPEDS diversity and access dataset…</p>
+      <div class="dashboard-toolbar">
+        <div class="toolbar-context"><strong class="sticky-page-title">Enrollment diversity and access</strong><p class="data-note" id="data-status" role="status">Loading the verified IPEDS diversity and access dataset…</p></div><form class="year-filter"><label for="year-select">Collection</label><div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div><small id="year-availability" class="sr-only">Loading available years…</small></form>
+      </div>
 
-      <section class="dashboard-section" data-collapsible aria-labelledby="composition-heading">
+      <section class="dashboard-section" data-feature="diversity_composition" data-collapsible aria-labelledby="composition-heading">
         <div class="section-heading">
           <div>
             <h2 id="composition-heading">Undergraduate composition</h2>
             <p>Marist compared with enrollment-weighted peer and aspirant aggregates.</p>
           </div>
-          <form class="year-filter"><label for="year-select">Collection year</label><div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div><small id="year-availability">Loading available years…</small></form>
         </div>
         <p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p>
         <p class="section-callout" id="diversity-callout"></p>
@@ -73,12 +75,12 @@
         <p class="chart-note" id="composition-note"></p>
       </section>
 
-      <section class="dashboard-section" data-collapsible aria-labelledby="diversity-trend-heading">
+      <section class="dashboard-section" data-feature="diversity_trend" data-collapsible aria-labelledby="diversity-trend-heading">
         <div class="section-heading"><div><h2 id="diversity-trend-heading">Five-year diversity trend</h2><p>Undergraduate diversity index for Marist and the median comparison institutions.</p></div></div>
         <div id="diversity-trend" class="trend-grid"></div>
       </section>
 
-      <section class="dashboard-section access-section" data-collapsible aria-labelledby="access-heading">
+      <section class="dashboard-section access-section" data-feature="diversity_access" data-collapsible aria-labelledby="access-heading">
         <div class="section-heading">
           <div>
             <h2 id="access-heading">Access indicators</h2>
@@ -88,12 +90,18 @@
         <div id="access-grid" class="access-grid"></div>
       </section>
 
-      <section class="dashboard-section" data-collapsible aria-labelledby="gap-heading">
+      <section class="dashboard-section" data-feature="diversity_gaps" data-collapsible aria-labelledby="gap-heading">
         <div class="section-heading">
           <div>
             <h2 id="gap-heading">Representation gaps</h2>
             <p>Marist’s reported share minus the median institution in each comparison group.</p>
           </div>
+        </div>
+        <div class="gap-legend" aria-label="Representation gap color key">
+          <span><i class="gap-key-below"></i>Below median</span>
+          <span><i class="gap-key-even"></i>No difference</span>
+          <span><i class="gap-key-above"></i>Above median</span>
+          <small>Darker color means a larger gap.</small>
         </div>
         <div id="gap-heatmap" class="gap-heatmap"></div>
         <details class="detail-disclosure"><summary>View exact gap values</summary><div class="table-scroll compact-table">
@@ -105,7 +113,7 @@
         </div></details>
       </section>
 
-      <section class="dashboard-section" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">
+      <section class="dashboard-section" data-feature="diversity_scatter" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">
         <div class="section-heading table-heading">
           <div>
             <h2 id="scatter-heading">Diversity and graduation</h2>

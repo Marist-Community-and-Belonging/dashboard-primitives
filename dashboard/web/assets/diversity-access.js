@@ -30,8 +30,14 @@ function renderComposition(dataset) {
   const legend = document.querySelector("#composition-legend");
   legend.replaceChildren();
   dataset.categories.forEach((category, index) => {
-    const item = document.createElement("span");
-    item.innerHTML = `<i style="--category-color:${categoryColors[index]}"></i>${category.display_name}`;
+    const item = document.createElement("button");
+    const summary = dataset.groups.map((group) => `${group.display_name} ${formatPercent(group.reported_shares[category.category_id])}`).join("; ");
+    item.type = "button";
+    item.className = "composition-key";
+    item.dataset.highlight = category.category_id;
+    item.dataset.tooltip = `${category.display_name}: ${summary}.`;
+    item.setAttribute("aria-label", `${item.dataset.tooltip} Highlight matching bars.`);
+    item.innerHTML = `<i class="category-key-${index}"></i>${category.display_name}`;
     legend.append(item);
   });
 
@@ -52,6 +58,7 @@ function renderComposition(dataset) {
       const label = `${group.display_name}, ${category.display_name}: ${formatPercent(reported)}.`;
       svg.append("rect")
         .attr("class", "composition-segment")
+        .attr("data-highlight", category.category_id)
         .attr("x", x * 9)
         .attr("y", 9)
         .attr("width", Math.max(width * 9, 1))
@@ -78,11 +85,18 @@ function renderComposition(dataset) {
           d3.select(this).classed("is-active", false);
           hideDataTooltip();
         });
+      svg.append("text")
+        .attr("class", "composition-value")
+        .attr("data-highlight", category.category_id)
+        .attr("x", (x + width / 2) * 9)
+        .attr("y", 29)
+        .text(formatPercent(reported));
       x += width;
     });
     row.append(visual);
     chart.append(row);
   });
+  linkLegendHighlights(legend, chart);
 
   const head = document.querySelector("#composition-table-head");
   head.innerHTML = `<tr><th scope="col">Comparison</th>${dataset.categories.map((category) => `<th scope="col">${category.display_name}</th>`).join("")}</tr>`;
@@ -130,7 +144,6 @@ function renderGaps(dataset) {
   const heatmap = document.querySelector("#gap-heatmap");
   heatmap.replaceChildren();
   const maxGap = d3.max(dataset.gaps.flatMap((gap) => [Math.abs(gap.peer_gap ?? 0), Math.abs(gap.aspirant_gap ?? 0)])) || 1;
-  const color = d3.scaleLinear().domain([-maxGap, 0, maxGap]).range(["#356da8", "#f3f4f5", "#a71934"]);
   const header = document.createElement("div");
   header.className = "gap-row gap-header";
   header.innerHTML = "<span>Population</span><span>vs. peer median</span><span>vs. aspirant median</span>";
@@ -143,11 +156,32 @@ function renderGaps(dataset) {
     row.append(label);
     [["peer", gap.peer_gap], ["aspirant", gap.aspirant_gap]].forEach(([comparison, value]) => {
       const cell = document.createElement("span");
+      const median = gap[`${comparison}_median`];
+      const detail = `${gap.display_name}: Marist ${formatPercent(gap.marist)}; ${comparison} median ${formatPercent(median)}; difference ${formatPoints(value)}.`;
       cell.className = "gap-cell";
-      cell.style.background = Number.isFinite(value) ? color(value) : "#f3f4f5";
+      if (!Number.isFinite(value)) cell.classList.add("gap-unavailable");
+      else if (value === 0) cell.classList.add("gap-neutral");
+      else cell.classList.add(value < 0 ? "gap-negative" : "gap-positive", `gap-level-${Math.max(1, Math.ceil(Math.abs(value) / maxGap * 4))}`);
       cell.textContent = formatPoints(value);
       cell.tabIndex = 0;
-      cell.setAttribute("aria-label", `${gap.display_name}: Marist is ${formatPoints(value)} versus the ${comparison} median.`);
+      cell.setAttribute("aria-label", detail);
+      cell.addEventListener("pointerenter", (event) => {
+        cell.classList.add("is-active");
+        showDataTooltip(detail, event.clientX, event.clientY);
+      });
+      cell.addEventListener("pointerleave", () => {
+        if (document.activeElement === cell) return;
+        cell.classList.remove("is-active");
+        hideDataTooltip();
+      });
+      cell.addEventListener("focus", () => {
+        cell.classList.add("is-active");
+        showDataTooltipForElement(cell, detail);
+      });
+      cell.addEventListener("blur", () => {
+        cell.classList.remove("is-active");
+        hideDataTooltip();
+      });
       row.append(cell);
     });
     heatmap.append(row);

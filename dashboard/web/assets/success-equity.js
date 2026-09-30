@@ -96,7 +96,7 @@ function renderEquity(dataset) {
       svg.append("text").attr("class", "equity-row-label").attr("x", margin.left - 16).attr("y", y + 4).attr("text-anchor", "end").text(item.display_name);
       svg.append("line").attr("x1", x.range()[0]).attr("x2", x.range()[1]).attr("y1", y).attr("y2", y).attr("stroke", "#eceef1");
       if (Number.isFinite(item.gap)) {
-        svg.append("line").attr("class", "equity-gap-bar").attr("x1", x(0)).attr("x2", x(item.gap)).attr("y1", y).attr("y2", y).attr("stroke", item.gap < 0 ? "#8e2038" : "#3f7771").attr("stroke-width", 3).style("--equity-origin-x", `${x(0)}px`).style("--equity-origin-y", `${y}px`);
+        svg.append("line").attr("class", `equity-gap-bar${item.gap < 0 ? " is-negative" : ""}`).attr("x1", x(0)).attr("x2", x(item.gap)).attr("y1", y).attr("y2", y).attr("stroke", item.gap < 0 ? "#8e2038" : "#3f7771").attr("stroke-width", 3);
         const mark = svg.append("circle").attr("class", "equity-dot").attr("cx", x(item.gap)).attr("cy", y).attr("r", 7).attr("fill", item.gap < 0 ? "#c91235" : "#3f7771").attr("stroke", "white").attr("stroke-width", 2);
         addHover(mark, `${item.display_name}: ${percent(item.value)}; ${points(item.gap)} from Marist overall. Peer median ${percent(item.peer.median)}; aspirant median ${percent(item.aspirant.median)}.`);
         svg.append("text").attr("class", "equity-value-label").attr("x", width - 8).attr("y", y + 4).attr("text-anchor", "end").text(`${percent(item.value)} · ${points(item.gap)}`);
