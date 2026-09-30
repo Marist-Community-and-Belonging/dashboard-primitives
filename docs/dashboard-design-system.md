@@ -659,27 +659,7 @@ Test at minimum: 320, 375, 768, 1024, 1280, and 1440 CSS pixels.
 - Do not put essential content only in collapsed sections, tooltips, or downloadable files.
 - Test at 200 percent browser zoom without loss of content or function.
 
-## 20. Section feature flags
-
-Whole analytical sections may be controlled by backend configuration when different publishing contexts require different scope.
-
-```text
-DASHBOARD_FEATURE_OVERVIEW_HEADLINES=true
-DASHBOARD_FEATURE_ACCESS_COMPOSITION=true
-DASHBOARD_FEATURE_SUCCESS_EQUITY_GAPS=true
-DASHBOARD_FEATURE_AFFORDABILITY_TRENDS=true
-```
-
-Feature-flag rules:
-
-- flags control complete sections, not individual institutions or selected unfavorable subgroups;
-- data APIs and source records remain intact;
-- hidden sections are omitted from navigation and page flow cleanly;
-- the default state is documented;
-- a missing or malformed flag fails to the declared default;
-- editorial decisions remain separate from data transformation.
-
-## 21. Recommended implementation architecture
+## 20. Recommended implementation architecture
 
 ```text
 project/
@@ -722,10 +702,10 @@ project/
 - D3 or another visualization library owns scales, axes, geometry, and marks.
 - Shared JavaScript owns year state, navigation preservation, tooltips, animation observers, formatting, and accessibility helpers.
 - Page modules own only page-specific data mapping and chart composition.
-- The backend owns release validation, feature flags, versioned APIs, and exports.
+- The backend owns release validation, versioned APIs, and exports.
 - Build scripts own all source-specific extraction and transformation.
 
-## 22. Performance and reliability
+## 21. Performance and reliability
 
 - Bundle stable third-party chart libraries with the application when offline reliability matters.
 - Cache immutable static assets with fingerprinted names when deployed.
@@ -739,7 +719,7 @@ project/
 - Add security headers and a restrictive content security policy.
 - Ensure a compiled or deployed artifact includes the same data files verified by tests.
 
-## 23. Anti-patterns
+## 22. Anti-patterns
 
 Do not:
 
@@ -763,7 +743,7 @@ Do not:
 - imply causation from a scatterplot;
 - claim statistical significance without an appropriate analysis.
 
-## 24. Quality assurance checklist
+## 23. Quality assurance checklist
 
 ### Data
 
@@ -821,11 +801,10 @@ Do not:
 - [ ] Data builders and API tests pass.
 - [ ] The production build succeeds from a clean checkout.
 - [ ] Generated outputs are not hand edited.
-- [ ] Feature flags hide whole sections only.
 - [ ] New final releases can be added by one documented command.
 - [ ] The deployed artifact contains the validated release catalog.
 
-## 25. Copy-ready LLM implementation brief
+## 24. Copy-ready LLM implementation brief
 
 Use the following block as the starting prompt for another LLM. Replace bracketed values with project-specific inputs.
 
@@ -870,9 +849,7 @@ Product requirements:
     use final releases consistently, and retain full source provenance.
 11. Use semantic HTML, keyboard-accessible SVG marks, visible focus, aria-live
     loading states, accessible collapse controls, and WCAG AA contrast.
-12. Use backend feature flags for whole sections only. Never selectively hide
-    institutions or subgroup values from a visible section.
-13. Build a deterministic refresh script so a new validated final release can
+12. Build a deterministic refresh script so a new validated final release can
     be downloaded, checked, transformed, tested, and exposed automatically.
 
 Visual direction:
@@ -889,7 +866,7 @@ Before completion, test data accuracy, mobile layouts, keyboard operation,
 empty and missing values, long labels, and chart-table agreement.
 ```
 
-## 26. Reference implementation map
+## 25. Reference implementation map
 
 This repository demonstrates the playbook in these locations:
 

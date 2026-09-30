@@ -3,15 +3,16 @@
 
 from __future__ import annotations
 
-import argparse
 import json
 import statistics
 from pathlib import Path
 
 try:
+    from .build_common import run, write_dataset
     from .build_overview import collection_start, load_institutions, number, percentile
     from .source import IpedsSource
 except ImportError:
+    from build_common import run, write_dataset
     from build_overview import collection_start, load_institutions, number, percentile
     from source import IpedsSource
 
@@ -127,21 +128,8 @@ def build(collection_year: str) -> dict[str, object]:
 
 
 def write(collection_year: str) -> None:
-    slug = str(collection_start(collection_year))
-    output = ROOT / "data" / "processed" / f"success-equity-{slug}.json"
-    public_output = ROOT / "dashboard" / "web" / "data" / f"success-equity-{slug}.json"
-    payload = json.dumps(build(collection_year), indent=2) + "\n"
-    output.parent.mkdir(parents=True, exist_ok=True)
-    public_output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(payload, encoding="utf-8")
-    public_output.write_text(payload, encoding="utf-8")
-    print(output.relative_to(ROOT))
+    write_dataset("success-equity", collection_year, build)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--year", choices=[item["collection_year"] for item in SOURCE.list_releases()])
-    arguments = parser.parse_args()
-    years = [arguments.year] if arguments.year else [item["collection_year"] for item in SOURCE.list_releases()]
-    for selected_year in years:
-        write(selected_year)
+    run(write, SOURCE.list_releases())
