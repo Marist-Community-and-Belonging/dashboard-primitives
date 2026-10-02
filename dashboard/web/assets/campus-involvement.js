@@ -44,17 +44,11 @@ function fridayOnOrAfter(date) {
   return copy;
 }
 
-/** Academic year block: Mon on/before Aug 24 → Fri on/after May 21. Skips summer. */
+/** Academic year: Mon on/before Aug 24 through Fri on/after May 21. Summer uses next fall. */
 function academicYearBounds(ref = new Date()) {
   const [year, month, day] = easternYmd.format(ref).split("-").map(Number);
   const today = Date.UTC(year, month - 1, day);
-  const may21 = Date.UTC(year, 4, 21);
-  const aug24 = Date.UTC(year, 7, 24);
-  let startYear = year;
-  if (today < may21) startYear = year - 1;
-  else if (today >= may21 && today < aug24) startYear = year;
-  else startYear = year;
-
+  const startYear = today < Date.UTC(year, 4, 21) ? year - 1 : year;
   const termStart = mondayOnOrBefore(new Date(Date.UTC(startYear, 7, 24)));
   const termEnd = fridayOnOrAfter(new Date(Date.UTC(startYear + 1, 4, 21)));
   const gridStart = startOfUtcWeek(termStart);
@@ -381,7 +375,7 @@ function involvementLegendKey(label, value, colorClass, highlight, tooltip) {
   button.className = "involvement-key";
   button.dataset.highlight = highlight;
   button.dataset.tooltip = tooltip;
-  button.setAttribute("aria-label", `${tooltip} Highlight matching chart marks.`);
+  button.setAttribute("aria-label", tooltip);
   swatch.className = colorClass;
   name.textContent = label;
   stat.textContent = value;
@@ -606,9 +600,9 @@ async function loadCampusEvents() {
     payloadCache = await response.json();
     const count = document.createElement("strong");
     count.textContent = payloadCache.event_count;
-    status.replaceChildren("Loaded ", count, " public CampusGroups events.");
+    status.replaceChildren("Loaded ", count, " CampusGroups events.");
   } catch (error) {
-    status.textContent = "CampusGroups events feed is unavailable right now.";
+    status.textContent = "CampusGroups events unavailable.";
     console.error(error);
     return;
   }
@@ -616,7 +610,7 @@ async function loadCampusEvents() {
     selectedDate = defaultSelectedDate(payloadCache.days, academicYearBounds());
     refreshView();
   } catch (error) {
-    status.textContent = "Events loaded, but the calendar failed to render.";
+    status.textContent = "Events loaded; calendar failed to render.";
     console.error(error);
   }
 }
@@ -625,14 +619,6 @@ loadCampusEvents();
 window.addEventListener("resize", () => {
   window.clearTimeout(resizeTimer);
   resizeTimer = window.setTimeout(() => {
-    if (payloadCache) {
-      const bounds = academicYearBounds();
-      const events = filteredEvents();
-      const days = dayCountsFromEvents(events);
-      renderHeatmap(days, bounds);
-      renderTypeDonut(events);
-      renderWeeklyChart(events, bounds);
-      if (selectedDate) renderDayList(selectedDate);
-    }
+    if (payloadCache) refreshView();
   }, 120);
 });

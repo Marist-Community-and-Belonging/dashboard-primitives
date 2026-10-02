@@ -12,7 +12,6 @@
     <script src="/assets/vendor/d3.v7.min.js" defer></script>
     <script src="/assets/tooltips.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
-    <script src="/assets/year-selector.js" defer></script>
     <script src="/assets/reveals.js" defer></script>
     <script src="/assets/campus-involvement.js" defer></script>
   </head>
@@ -38,7 +37,7 @@
         <div>
           <p class="eyebrow">Campus Involvement</p>
           <h1 id="page-title">Events calendar</h1>
-          <p class="lede">Public CampusGroups events, shown as a day-by-day activity heatmap with the list for any selected date.</p>
+          <p class="lede">CampusGroups public events as an academic-year heatmap. Click a day for its list.</p>
         </div>
         <dl class="release-summary" aria-label="Feed summary">
           <div><dt>Events</dt><dd id="event-count">—</dd></div>
@@ -47,14 +46,14 @@
         </dl>
       </section>
       <div class="dashboard-toolbar">
-        <div class="toolbar-context"><strong class="sticky-page-title">Campus involvement</strong><p class="data-note" id="data-status" role="status">Loading the public CampusGroups events feed…</p></div>
+        <div class="toolbar-context"><strong class="sticky-page-title">Events calendar</strong><p class="data-note" id="data-status" role="status">Loading CampusGroups events…</p></div>
       </div>
 
       <section class="dashboard-section" data-collapsible aria-labelledby="heatmap-heading">
         <div class="section-heading">
           <div>
-            <h2 id="heatmap-heading">Event density calendar</h2>
-            <p>Fixed academic-year grid (late August through mid-May). Color is event count that day; filters only change color, not size.</p>
+            <h2 id="heatmap-heading">Event density</h2>
+            <p>Academic year (late August–mid-May). Darker = more events that day.</p>
           </div>
         </div>
         <div class="legend" aria-label="Heatmap legend">
@@ -71,18 +70,18 @@
         <div class="section-heading">
           <div>
             <h2 id="breakdown-heading">Activity breakdown</h2>
-            <p>Category mix and weekly volume across the academic year, using the same filters as the heatmap.</p>
+            <p>Same filters as the heatmap.</p>
           </div>
         </div>
         <div class="involvement-charts">
           <article class="involvement-chart-card chart-reveal">
             <h3>By event type</h3>
-            <p class="involvement-chart-note">Share of filtered events by CampusGroups category.</p>
+            <p class="involvement-chart-note">CampusGroups categories among filtered events.</p>
             <div id="type-donut" class="involvement-chart" role="region" aria-label="Event type donut chart"></div>
           </article>
           <article class="involvement-chart-card chart-reveal">
             <h3>Weekly volume</h3>
-            <p class="involvement-chart-note">Events per week and active days per week (days with ≥1 event).</p>
+            <p class="involvement-chart-note">Events and active days (days with ≥1 event) per week.</p>
             <div id="weekly-chart" class="involvement-chart" role="region" aria-label="Weekly events and active days chart"></div>
           </article>
         </div>
@@ -92,7 +91,7 @@
         <div class="section-heading table-heading">
           <div>
             <h2 id="day-list-heading">Events for <span id="selected-day-label">selected day</span></h2>
-            <p>Select a day in the heatmap to list its events. Links open CampusGroups.</p>
+            <p>Titles link to CampusGroups.</p>
           </div>
           <a class="download-link" id="source-link" href="https://marist.campusgroups.com/events" target="_blank" rel="noopener">CampusGroups calendar</a>
         </div>
@@ -103,10 +102,10 @@
       <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
         <div>
           <p class="eyebrow">Methodology</p>
-          <h2 id="methodology-heading">Public RSS until API access lands</h2>
+          <h2 id="methodology-heading">CampusGroups public RSS</h2>
         </div>
         <div class="methodology-copy">
-          <p>Events come from the public CampusGroups RSS feed. The heatmap uses a fixed academic-year window (Monday on or before August 24 through Friday on or after May 21; summer omitted). The server refreshes the feed every few minutes. Private locations stay masked as published. Multi-day events count on every day they span.</p>
+          <p>Feed is polled every few minutes. Heatmap covers Monday on or before August 24 through Friday on or after May 21 (summer omitted). Private locations stay masked as published. Multi-day events count on every day they span.</p>
           <a href="https://marist.campusgroups.com/rss_events">CampusGroups RSS source</a>
         </div>
       </section>
