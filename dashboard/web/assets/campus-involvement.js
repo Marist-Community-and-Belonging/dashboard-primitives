@@ -270,7 +270,7 @@ function moveMonth(key, amount) {
   return monthKey(date);
 }
 
-function renderMonthCalendar(days, bounds) {
+function renderMonthCalendar(days, bounds, events) {
   const root = document.querySelector("#month-calendar");
   root.replaceChildren();
   const counts = new Map(days.map((day) => [day.date, day.count]));
@@ -284,12 +284,20 @@ function renderMonthCalendar(days, bounds) {
   const gridStart = startOfUtcWeek(monthStart);
   const gridEnd = startOfUtcWeek(monthEnd);
   gridEnd.setUTCDate(gridEnd.getUTCDate() + 6);
+  const monthCounts = days.filter((day) => day.date.startsWith(visibleMonth)).map((day) => day.count);
+  const maxCount = Math.max(...monthCounts, 1);
+  const monthTotal = events.filter((event) => eventYmd(event.start) <= ymd(monthEnd) && eventYmd(event.end) >= `${visibleMonth}-01`).length;
 
   const toolbar = document.createElement("div");
   toolbar.className = "month-toolbar";
+  const controls = document.createElement("div");
+  controls.className = "month-controls";
   const previous = document.createElement("button");
   const next = document.createElement("button");
   const heading = document.createElement("h3");
+  const summary = document.createElement("div");
+  const total = document.createElement("div");
+  const densityKey = document.createElement("div");
   previous.type = next.type = "button";
   previous.textContent = "← Previous";
   next.textContent = "Next →";
@@ -298,16 +306,24 @@ function renderMonthCalendar(days, bounds) {
   previous.disabled = visibleMonth === firstMonth;
   next.disabled = visibleMonth === lastMonth;
   heading.textContent = monthHeading.format(monthStart);
+  summary.className = "month-summary";
+  total.className = "month-total";
+  total.innerHTML = `<strong>${monthTotal}</strong>${monthTotal === 1 ? "event" : "events"} this month`;
+  densityKey.className = "event-density-key";
+  densityKey.setAttribute("aria-label", "Event density: lighter red means fewer events; darker red means more events");
+  densityKey.innerHTML = "<span>Fewer</span><i aria-hidden=\"true\"></i><span>More</span>";
   const changeMonth = (amount) => {
     visibleMonth = moveMonth(visibleMonth, amount);
     selectedDate = days.find((day) => day.date.startsWith(visibleMonth))?.date
       || [bounds.termStart, `${visibleMonth}-01`].sort().at(-1);
-    renderMonthCalendar(days, bounds);
+    renderMonthCalendar(days, bounds, events);
     renderDayList(selectedDate);
   };
   previous.addEventListener("click", () => changeMonth(-1));
   next.addEventListener("click", () => changeMonth(1));
-  toolbar.append(previous, heading, next);
+  controls.append(previous, heading, next);
+  summary.append(total, densityKey);
+  toolbar.append(controls, summary);
 
   const weekdays = document.createElement("div");
   weekdays.className = "month-weekdays";
@@ -327,6 +343,15 @@ function renderMonthCalendar(days, bounds) {
     const number = document.createElement("span");
     button.type = "button";
     button.className = `month-day${date.slice(0, 7) === visibleMonth ? "" : " is-outside-month"}${count ? " has-events" : ""}${date === selectedDate ? " is-selected" : ""}`;
+    if (count && date.startsWith(visibleMonth)) {
+      const fill = d3.rgb(d3.interpolateRgb("#fff1f3", "#8f0c27")(Math.sqrt(count / maxCount)));
+      const luminance = [fill.r, fill.g, fill.b]
+        .map((value) => value / 255)
+        .map((value) => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+        .reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+      button.style.backgroundColor = fill.formatHex();
+      if (luminance < .18) button.classList.add("is-dark");
+    }
     button.dataset.date = date;
     button.disabled = !inTerm;
     button.setAttribute("aria-label", `${dayLabel.format(cursor)}: ${count} ${count === 1 ? "event" : "events"}`);
@@ -343,7 +368,7 @@ function renderMonthCalendar(days, bounds) {
     button.addEventListener("click", () => {
       if (date.slice(0, 7) !== visibleMonth) {
         visibleMonth = date.slice(0, 7);
-        renderMonthCalendar(days, bounds);
+        renderMonthCalendar(days, bounds, events);
       }
       renderDayList(date);
     });
@@ -569,7 +594,7 @@ function refreshView() {
   const termDays = days.filter((day) => isInTerm(day.date, bounds));
   renderFilters(payloadCache.events);
   updateSummary(events, termDays);
-  renderMonthCalendar(days, bounds);
+  renderMonthCalendar(days, bounds, events);
   renderDayList(selectedDate && isInTerm(selectedDate, bounds)
     ? selectedDate
     : defaultSelectedDate(days, bounds));
