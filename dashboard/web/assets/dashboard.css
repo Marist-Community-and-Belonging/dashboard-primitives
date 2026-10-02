@@ -697,6 +697,7 @@ td:first-child { font-weight: 650; }
 .trend-gridlines .domain { display: none; }
 .trend-gridlines line { stroke: var(--soft-line); }
 .trend-line { vector-effect: non-scaling-stroke; }
+.trend-end-label { dominant-baseline: middle; font: 650 11px Inter, ui-sans-serif, system-ui, sans-serif; paint-order: stroke; stroke: white; stroke-width: 3px; stroke-linejoin: round; }
 .trend-point { outline: none; transition: filter 120ms ease, stroke-width 120ms ease; }
 .trend-point.is-active,
 .trend-point:focus { filter: drop-shadow(0 0 3px rgb(32 33 39 / 40%)); stroke: var(--ink); stroke-width: 3px; }

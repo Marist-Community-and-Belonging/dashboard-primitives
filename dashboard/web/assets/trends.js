@@ -30,7 +30,7 @@ function renderTrendChart(container, options) {
 
   const width = 760;
   const height = 300;
-  const margin = { top: 30, right: 28, bottom: 52, left: options.unit === "usd" ? 78 : 58 };
+  const margin = { top: 30, right: 120, bottom: 52, left: options.unit === "usd" ? 78 : 58 };
   const groups = [
     { key: "marist", label: "Marist", color: "#c91235", dash: null },
     { key: "peer", label: "Peer median", color: "#63666f", dash: "6 4" },
@@ -73,6 +73,23 @@ function renderTrendChart(container, options) {
         });
     });
   });
+
+  const endLabels = groups
+    .map((group) => ({ group, value: options.points.at(-1)[group.key] }))
+    .map(({ group, value }) => ({ group, y: Number.isFinite(value) ? y(value) : NaN }))
+    .filter((label) => Number.isFinite(label.y))
+    .sort((left, right) => left.y - right.y);
+  if (endLabels.length) {
+    endLabels[0].labelY = Math.max(margin.top + 6, endLabels[0].y);
+    for (let index = 1; index < endLabels.length; index += 1) endLabels[index].labelY = Math.max(endLabels[index].y, endLabels[index - 1].labelY + 16);
+    const overflow = endLabels.at(-1).labelY - (height - margin.bottom - 6);
+    if (overflow > 0) endLabels.forEach((label) => { label.labelY -= overflow; });
+    endLabels.forEach(({ group, y: lineY, labelY }) => {
+      const x = width - margin.right;
+      svg.append("line").attr("x1", x + 3).attr("x2", x + 10).attr("y1", lineY).attr("y2", labelY).attr("stroke", group.color);
+      svg.append("text").attr("class", "trend-end-label").attr("x", x + 14).attr("y", labelY).attr("fill", group.color).text(group.label);
+    });
+  }
 
   const details = document.createElement("details");
   details.className = "detail-disclosure trend-values";
