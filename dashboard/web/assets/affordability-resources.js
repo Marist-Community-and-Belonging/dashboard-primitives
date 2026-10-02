@@ -59,8 +59,7 @@ function renderAffordabilityHeadlines(dataset) {
   dataset.headlines.forEach((metric) => {
     const article = document.createElement("article");
     article.className = "metric";
-    const favorable = applyFavorableHighlight(article, metric);
-    article.innerHTML = `<div class="metric-header"><div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.description}</p></div></div><div class="metric-result"><p class="metric-value">${affordabilityValue(metric.value, metric.unit)}</p><p class="metric-year">${metric.data_year}</p></div><div class="metric-callout-slot">${favorable ? `<p class="metric-callout">${affordabilityDifference(favorable.difference, metric.unit)} ${favorable.position} peer median</p>` : ""}</div><div class="bullet-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${affordabilityValue(metric.peer.median, metric.unit)}</dd></div><div><dt>Aspirant median</dt><dd>${affordabilityValue(metric.aspirant.median, metric.unit)}</dd></div></dl>`;
+    article.innerHTML = `<div class="metric-header"><div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.description}</p></div></div><div class="metric-result"><p class="metric-value">${affordabilityValue(metric.value, metric.unit)}</p><p class="metric-year">${metric.data_year}</p></div><div class="bullet-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${affordabilityValue(metric.peer.median, metric.unit)}</dd></div><div><dt>Aspirant median</dt><dd>${affordabilityValue(metric.aspirant.median, metric.unit)}</dd></div></dl>`;
     grid.append(article);
     renderAffordabilityBand(article.querySelector(".bullet-chart"), metric);
   });
@@ -104,41 +103,7 @@ function renderIncomeChart(dataset) {
   });
 
   const lowestIncome = dataset.income_bands.find((band) => band.band_id === "income_0_30");
-  const difference = lowestIncome.marist - lowestIncome.peer.median;
-  document.querySelector("#income-callout").innerHTML = `<strong>Lowest income band:</strong> Marist is ${affordabilityCurrency.format(Math.abs(difference))} ${difference <= 0 ? "below" : "above"} the peer median for families earning $30,000 or less.`;
-}
-
-function renderAffordabilityScatter(dataset) {
-  document.querySelector("#affordability-scatter").replaceChildren();
-  const records = dataset.institutions.filter((record) => Number.isFinite(record.average_net_price) && Number.isFinite(record.graduation_rate));
-  const width = 960;
-  const height = 440;
-  const margin = { top: 70, right: 32, bottom: 58, left: 68 };
-  const x = d3.scaleLinear().domain(d3.extent(records, (record) => record.average_net_price)).nice().range([margin.left, width - margin.right]);
-  const y = d3.scaleLinear().domain(d3.extent(records, (record) => record.graduation_rate)).nice().range([height - margin.bottom, margin.top]);
-  const svg = d3.select("#affordability-scatter").append("svg").attr("class", "chart-reveal").attr("viewBox", `0 0 ${width} ${height}`).attr("role", "group").attr("aria-label", "Average net price and six-year graduation scatterplot");
-  svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`).call(d3.axisBottom(x).ticks(6).tickFormat((value) => `$${d3.format("~s")(value)}`));
-  svg.append("g").attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(6).tickFormat((value) => `${value}%`));
-  svg.append("text").attr("class", "axis-label").attr("x", (margin.left + width - margin.right) / 2).attr("y", height - 10).attr("text-anchor", "middle").text("Average net price");
-  svg.append("text").attr("class", "axis-label").attr("transform", "rotate(-90)").attr("x", -(margin.top + height - margin.bottom) / 2).attr("y", 17).attr("text-anchor", "middle").text("Six-year graduation rate");
-  const legend = svg.append("g").attr("transform", `translate(${margin.left},24)`);
-  Object.entries(affordabilityGroups).forEach(([group, style], index) => {
-    legend.append("path").attr("d", d3.symbol().type(style.symbol).size(65)()).attr("transform", `translate(${index * 120},0)`).attr("fill", style.color);
-    legend.append("text").attr("class", "scatter-legend-label").attr("x", index * 120 + 11).attr("y", 4).text(style.label);
-  });
-  records.forEach((record) => {
-    const style = affordabilityGroups[record.group];
-    const label = `${record.institution_name}, ${style.label}: average net price ${affordabilityCurrency.format(record.average_net_price)}, six-year graduation ${affordabilityValue(record.graduation_rate, "percent")}, Pell share ${affordabilityValue(record.pell_share, "percent")}.`;
-    const mark = svg.append("path").attr("class", "scatter-mark").attr("d", d3.symbol().type(style.symbol).size(record.group === "marist" ? 125 : 85)()).attr("transform", `translate(${x(record.average_net_price)},${y(record.graduation_rate)})`).attr("fill", style.color).attr("fill-opacity", record.group === "marist" ? 1 : .72).attr("stroke", record.group === "marist" ? "#202127" : "white").attr("stroke-width", record.group === "marist" ? 2.5 : 1.5);
-    affordabilityHover(mark, label);
-  });
-  const body = document.querySelector("#affordability-table-body");
-  body.replaceChildren();
-  records.forEach((record) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<th scope="row">${record.institution_name}</th><td>${affordabilityGroups[record.group].label}</td><td>${affordabilityCurrency.format(record.average_net_price)}</td><td>${affordabilityValue(record.graduation_rate, "percent")}</td><td>${affordabilityValue(record.pell_share, "percent")}</td>`;
-    body.append(row);
-  });
+  document.querySelector("#income-callout").innerHTML = `<strong>Lowest income band:</strong> ${affordabilityCurrency.format(lowestIncome.marist)} average net price for families earning $30,000 or less.`;
 }
 
 function renderAffordabilityPage(dataset) {
@@ -153,7 +118,6 @@ function renderAffordabilityPage(dataset) {
   document.querySelector(".download-link").href = `/api/v1/affordability-resources/export.csv?${query}`;
   renderAffordabilityHeadlines(dataset);
   renderIncomeChart(dataset);
-  renderAffordabilityScatter(dataset);
   prepareScrollReveals(document.querySelector("main"));
 }
 

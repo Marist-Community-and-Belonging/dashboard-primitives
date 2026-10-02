@@ -3,13 +3,15 @@ dataTooltip();
 const dayLabel = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const shortTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
 const monthLabel = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
+const monthHeading = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+const eventDateLabel = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
 const easternYmd = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" });
 
 let selectedDate = null;
+let visibleMonth = null;
 let payloadCache = null;
 let selectedTypes = new Set();
 let onCampusOnly = false;
-let resizeTimer = 0;
 const uncategorizedFilter = "__uncategorized__";
 
 function ymd(date) {
@@ -134,47 +136,47 @@ function updateSummary(events, days) {
   document.querySelector("#week-count").textContent = String(thisWeekCount(events));
 }
 
+function eventItem(event, includeDate = false) {
+  const item = document.createElement("article");
+  item.className = "event-item";
+  const meta = [event.group, event.event_type, event.location].filter(Boolean).join(" · ");
+  const time = document.createElement("p");
+  const body = document.createElement("div");
+  const title = document.createElement(includeDate ? "h3" : "h4");
+  const details = document.createElement("p");
+  time.className = "event-time";
+  time.textContent = includeDate
+    ? `${eventDateLabel.format(parseYmd(eventYmd(event.start)))} · ${eventTimeLabel(event)}`
+    : eventTimeLabel(event);
+  body.className = "event-body";
+  title.className = "event-title";
+  details.className = "event-meta";
+  details.textContent = meta || "—";
+  try {
+    const url = new URL(event.link);
+    if (!["http:", "https:"].includes(url.protocol)) throw new Error("Unsupported event link");
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = event.title;
+    title.append(link);
+  } catch {
+    title.textContent = event.title;
+  }
+  body.append(title, details);
+  item.append(time, body);
+  return item;
+}
+
 function renderDayList(date) {
   selectedDate = date;
   document.querySelector("#selected-day-label").textContent = dayLabel.format(parseYmd(date));
   const list = document.querySelector("#day-event-list");
-  const empty = document.querySelector("#day-empty");
-  list.replaceChildren();
   const events = eventsForDate(date);
-  empty.hidden = events.length > 0;
-  events.forEach((event) => {
-    const item = document.createElement("article");
-    item.className = "event-item";
-    const meta = [event.group, event.event_type, event.location].filter(Boolean).join(" · ");
-    const time = document.createElement("p");
-    const body = document.createElement("div");
-    const title = document.createElement("h3");
-    const details = document.createElement("p");
-    time.className = "event-time";
-    time.textContent = eventTimeLabel(event);
-    body.className = "event-body";
-    title.className = "event-title";
-    details.className = "event-meta";
-    details.textContent = meta || "—";
-    try {
-      const url = new URL(event.link);
-      if (!['http:', 'https:'].includes(url.protocol)) throw new Error("Unsupported event link");
-      const link = document.createElement("a");
-      link.href = url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.textContent = event.title;
-      title.append(link);
-    } catch {
-      title.textContent = event.title;
-    }
-    body.append(title, details);
-    item.append(time, body);
-    list.append(item);
-  });
-  d3.selectAll(".day-cell").classed("is-selected", function () {
-    return this.dataset.date === date;
-  });
+  list.replaceChildren(...events.map((event) => eventItem(event)));
+  document.querySelector("#day-empty").hidden = events.length > 0;
+  d3.selectAll(".month-day").classed("is-selected", function () { return this.dataset.date === date; });
 }
 
 function addCellHover(selection, label) {
@@ -258,110 +260,122 @@ function renderFilters(events) {
   root.append(placeWrap);
 }
 
-function renderHeatmap(days, bounds) {
-  const root = document.querySelector("#events-heatmap");
+function monthKey(date) {
+  return ymd(date).slice(0, 7);
+}
+
+function moveMonth(key, amount) {
+  const date = parseYmd(`${key}-01`);
+  date.setUTCMonth(date.getUTCMonth() + amount);
+  return monthKey(date);
+}
+
+function renderMonthCalendar(days, bounds, events) {
+  const root = document.querySelector("#month-calendar");
   root.replaceChildren();
   const counts = new Map(days.map((day) => [day.date, day.count]));
+  const firstMonth = bounds.termStart.slice(0, 7);
+  const lastMonth = bounds.termEnd.slice(0, 7);
+  visibleMonth ||= selectedDate.slice(0, 7);
+  visibleMonth = visibleMonth < firstMonth ? firstMonth : visibleMonth > lastMonth ? lastMonth : visibleMonth;
 
-  const calendarDays = [];
-  for (let cursor = new Date(bounds.gridStart); cursor <= bounds.gridEnd; cursor.setUTCDate(cursor.getUTCDate() + 1)) {
+  const monthStart = parseYmd(`${visibleMonth}-01`);
+  const monthEnd = new Date(Date.UTC(monthStart.getUTCFullYear(), monthStart.getUTCMonth() + 1, 0));
+  const gridStart = startOfUtcWeek(monthStart);
+  const gridEnd = startOfUtcWeek(monthEnd);
+  gridEnd.setUTCDate(gridEnd.getUTCDate() + 6);
+  const monthCounts = days.filter((day) => day.date.startsWith(visibleMonth)).map((day) => day.count);
+  const maxCount = Math.max(...monthCounts, 1);
+  const monthTotal = events.filter((event) => eventYmd(event.start) <= ymd(monthEnd) && eventYmd(event.end) >= `${visibleMonth}-01`).length;
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "month-toolbar";
+  const controls = document.createElement("div");
+  controls.className = "month-controls";
+  const previous = document.createElement("button");
+  const next = document.createElement("button");
+  const heading = document.createElement("h3");
+  const summary = document.createElement("div");
+  const total = document.createElement("div");
+  const densityKey = document.createElement("div");
+  previous.type = next.type = "button";
+  previous.textContent = "← Previous";
+  next.textContent = "Next →";
+  previous.setAttribute("aria-label", "Previous month");
+  next.setAttribute("aria-label", "Next month");
+  previous.disabled = visibleMonth === firstMonth;
+  next.disabled = visibleMonth === lastMonth;
+  heading.textContent = monthHeading.format(monthStart);
+  summary.className = "month-summary";
+  total.className = "month-total";
+  total.innerHTML = `<strong>${monthTotal}</strong>${monthTotal === 1 ? "event" : "events"} this month`;
+  densityKey.className = "event-density-key";
+  densityKey.setAttribute("aria-label", "Event density: lighter red means fewer events; darker red means more events");
+  densityKey.innerHTML = "<span>Fewer</span><i aria-hidden=\"true\"></i><span>More</span>";
+  const changeMonth = (amount) => {
+    visibleMonth = moveMonth(visibleMonth, amount);
+    selectedDate = days.find((day) => day.date.startsWith(visibleMonth))?.date
+      || [bounds.termStart, `${visibleMonth}-01`].sort().at(-1);
+    renderMonthCalendar(days, bounds, events);
+    renderDayList(selectedDate);
+  };
+  previous.addEventListener("click", () => changeMonth(-1));
+  next.addEventListener("click", () => changeMonth(1));
+  controls.append(previous, heading, next);
+  summary.append(total, densityKey);
+  toolbar.append(controls, summary);
+
+  const weekdays = document.createElement("div");
+  weekdays.className = "month-weekdays";
+  ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach((label) => {
+    const day = document.createElement("span");
+    day.textContent = label;
+    weekdays.append(day);
+  });
+
+  const grid = document.createElement("div");
+  grid.className = "month-grid";
+  for (let cursor = new Date(gridStart); cursor <= gridEnd; cursor.setUTCDate(cursor.getUTCDate() + 1)) {
     const date = ymd(cursor);
-    calendarDays.push({
-      date,
-      count: counts.get(date) || 0,
-      time: new Date(cursor),
-      inTerm: isInTerm(date, bounds),
-    });
-  }
-
-  const weeks = d3.groups(calendarDays, (day) => startOfUtcWeek(day.time).getTime());
-  const termCounts = calendarDays.filter((day) => day.inTerm).map((day) => day.count);
-  const maxCount = d3.max(termCounts) || 1;
-  const color = d3.scaleThreshold()
-    .domain([1, Math.max(2, Math.ceil(maxCount * 0.4)), Math.max(3, Math.ceil(maxCount * 0.7))])
-    .range(["#eceef1", "#f4c7d0", "#e06b84", "#c91235"]);
-
-  const left = 36;
-  const top = 22;
-  const right = 18;
-  const gap = 3;
-  const available = Math.max(root.clientWidth || 640, 280) - left - right;
-  const step = Math.max(10, Math.min(16, available / weeks.length));
-  const cell = Math.max(8, step - gap);
-  const width = left + weeks.length * step + right;
-  const height = top + 7 * step + 8;
-  const svg = d3.select(root).append("svg")
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("width", "100%")
-    .attr("role", "group")
-    .attr("aria-label", "Campus events academic year heatmap");
-
-  ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach((label, index) => {
-    if (index % 2 === 1) {
-      svg.append("text")
-        .attr("class", "weekday-label")
-        .attr("x", 0)
-        .attr("y", top + index * step + cell - 2)
-        .text(label);
+    const count = counts.get(date) || 0;
+    const inTerm = isInTerm(date, bounds);
+    const button = document.createElement("button");
+    const number = document.createElement("span");
+    button.type = "button";
+    button.className = `month-day${date.slice(0, 7) === visibleMonth ? "" : " is-outside-month"}${count ? " has-events" : ""}${date === selectedDate ? " is-selected" : ""}`;
+    if (count && date.startsWith(visibleMonth)) {
+      const fill = d3.rgb(d3.interpolateRgb("#fff1f3", "#8f0c27")(Math.sqrt(count / maxCount)));
+      const luminance = [fill.r, fill.g, fill.b]
+        .map((value) => value / 255)
+        .map((value) => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+        .reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+      button.style.backgroundColor = fill.formatHex();
+      if (luminance < .18) button.classList.add("is-dark");
     }
-  });
-
-  const monthSpans = new Map();
-  weeks.forEach(([, weekDays], weekIndex) => {
-    const termDays = weekDays.filter((day) => day.inTerm);
-    const anchor = (termDays.find((day) => day.time.getUTCDay() === 3) || termDays[0]
-      || weekDays.find((day) => day.time.getUTCDay() === 3) || weekDays[0]);
-    const key = `${anchor.time.getUTCFullYear()}-${anchor.time.getUTCMonth()}`;
-    if (!monthSpans.has(key)) {
-      monthSpans.set(key, { label: monthLabel.format(anchor.time), start: weekIndex, end: weekIndex });
-    } else {
-      monthSpans.get(key).end = weekIndex;
+    button.dataset.date = date;
+    button.disabled = !inTerm;
+    button.setAttribute("aria-label", `${dayLabel.format(cursor)}: ${count} ${count === 1 ? "event" : "events"}`);
+    number.className = "month-day-number";
+    number.textContent = String(cursor.getUTCDate());
+    button.append(number);
+    if (count) {
+      const badge = document.createElement("span");
+      badge.className = "month-day-count";
+      badge.dataset.count = String(count);
+      badge.textContent = `${count} ${count === 1 ? "event" : "events"}`;
+      button.append(badge);
     }
-  });
-
-  monthSpans.forEach((span) => {
-    const mid = (span.start + span.end) / 2;
-    const x = Math.min(width - 4, Math.max(left, left + mid * step + cell / 2));
-    svg.append("text")
-      .attr("class", "month-label")
-      .attr("text-anchor", "middle")
-      .attr("x", x)
-      .attr("y", 12)
-      .text(span.label);
-  });
-
-  weeks.forEach(([, weekDays], weekIndex) => {
-    weekDays.forEach((day) => {
-      const label = day.inTerm
-        ? `${dayLabel.format(day.time)}: ${day.count} ${day.count === 1 ? "event" : "events"}`
-        : `${dayLabel.format(day.time)}: outside academic term`;
-      const cellNode = svg.append("rect")
-        .attr("class", `day-cell chart-mark${day.inTerm ? "" : " is-out-of-term"}`)
-        .attr("data-date", day.date)
-        .attr("x", left + weekIndex * step)
-        .attr("y", top + day.time.getUTCDay() * step)
-        .attr("width", cell)
-        .attr("height", cell)
-        .attr("rx", 2)
-        .attr("fill", day.inTerm ? color(day.count) : "#f3f4f5")
-        .attr("opacity", day.inTerm ? 1 : 0.35);
-      addCellHover(cellNode, label);
-      if (day.inTerm) {
-        cellNode.on("click", () => renderDayList(day.date));
-        cellNode.on("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            renderDayList(day.date);
-          }
-        });
-      } else {
-        cellNode.attr("tabindex", null).attr("role", null);
+    button.addEventListener("click", () => {
+      if (date.slice(0, 7) !== visibleMonth) {
+        visibleMonth = date.slice(0, 7);
+        renderMonthCalendar(days, bounds, events);
       }
+      renderDayList(date);
     });
-  });
-
-  document.querySelector("#heatmap-range").textContent =
-    `Academic year ${bounds.startYear}–${String(bounds.startYear + 1).slice(2)} · ${bounds.termStart} through ${bounds.termEnd} · max ${maxCount} events in a day`;
+    grid.append(button);
+  }
+  root.append(toolbar, weekdays, grid);
+  document.querySelector("#calendar-range").textContent = `Academic year ${bounds.startYear}–${String(bounds.startYear + 1).slice(2)} · ${bounds.termStart} through ${bounds.termEnd}`;
 }
 
 const typeColors = ["#c91235", "#9f0f2b", "#e06b84", "#3c8cff", "#63666f", "#a71934", "#356da8", "#202127", "#b86b7a", "#7a7e87"];
@@ -580,12 +594,12 @@ function refreshView() {
   const termDays = days.filter((day) => isInTerm(day.date, bounds));
   renderFilters(payloadCache.events);
   updateSummary(events, termDays);
-  renderHeatmap(days, bounds);
-  renderTypeDonut(events);
-  renderWeeklyChart(events, bounds);
+  renderMonthCalendar(days, bounds, events);
   renderDayList(selectedDate && isInTerm(selectedDate, bounds)
     ? selectedDate
     : defaultSelectedDate(days, bounds));
+  renderTypeDonut(events);
+  renderWeeklyChart(events, bounds);
   prepareScrollReveals();
 }
 
@@ -607,7 +621,7 @@ async function loadCampusEvents() {
     return;
   }
   try {
-    selectedDate = defaultSelectedDate(payloadCache.days, academicYearBounds());
+    selectedDate ||= defaultSelectedDate(payloadCache.days, academicYearBounds());
     refreshView();
   } catch (error) {
     status.textContent = "Events loaded; calendar failed to render.";
@@ -616,9 +630,4 @@ async function loadCampusEvents() {
 }
 
 loadCampusEvents();
-window.addEventListener("resize", () => {
-  window.clearTimeout(resizeTimer);
-  resizeTimer = window.setTimeout(() => {
-    if (payloadCache) refreshView();
-  }, 120);
-});
+window.setInterval(loadCampusEvents, 5 * 60 * 1000);

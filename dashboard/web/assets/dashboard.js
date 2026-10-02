@@ -4,7 +4,7 @@ const formatters = {
   usd: new Intl.NumberFormat("en-US", { maximumFractionDigits: 0, style: "currency", currency: "USD" }),
 };
 
-const dashboardState = { request: 0 };
+const dashboardState = { request: 0, history: [] };
 dataTooltip();
 
 function formatValue(value, unit) {
@@ -21,34 +21,116 @@ function titleCase(value) {
   return value.replace(/^./, (letter) => letter.toUpperCase());
 }
 
-function successPointLabel(value) {
-  return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 }).format(value)} ${value === 1 ? "point" : "points"}`;
+function snapshotCard({ title, question, values, note, href, linkLabel }) {
+  const article = document.createElement("article");
+  article.className = "overview-summary";
+  article.innerHTML = `<header><p>${question}</p><h3>${title}</h3></header><dl>${values.map(({ label, value }) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join("")}</dl><p class="overview-summary-note">${note}</p><a href="${href}">${linkLabel}</a>`;
+  return article;
 }
 
-function formatComparisonDifference(value, unit) {
-  return unit === "percent" ? successPointLabel(value) : formatValue(value, unit);
+function renderDashboardSnapshot(dataset, related) {
+  const snapshot = document.querySelector("#overview-snapshot");
+  const metric = (id) => dataset.metrics.find((candidate) => candidate.metric_id === id);
+  const enrollment = metric("undergraduate_enrollment");
+  const acceptance = metric("acceptance_rate");
+  const retention = metric("retention_rate");
+  const graduation = metric("six_year_graduation_rate");
+  const pell = metric("pell_share");
+  const netPrice = metric("average_net_price");
+  const maristComposition = related.diversity?.groups.find((group) => group.group === "marist");
+  const underrepresentedShare = maristComposition
+    ? ["black", "hispanic", "american_indian", "pacific_islander", "multiracial"].reduce((total, category) => total + (maristComposition.reported_shares[category] || 0), 0)
+    : null;
+  const pellGraduation = related.success?.outcomes.find((outcome) => outcome.metric_id === "pell_six_year_graduation");
+  const lowestIncome = related.affordability?.income_bands[0];
+  const campusAvailable = Number.isFinite(related.campus?.event_count);
+  const year = encodeURIComponent(dataset.release.collection_year);
+  snapshot.replaceChildren(
+    snapshotCard({
+      title: "Marist profile",
+      question: "How large and selective is Marist?",
+      values: [{ label: "Undergraduates", value: formatValue(enrollment.value, enrollment.unit) }, { label: "Acceptance rate", value: formatValue(acceptance.value, acceptance.unit) }],
+      note: `${enrollment.data_year}. Enrollment and admissions are reported directly to IPEDS.`,
+      href: `/marist-profile?year=${year}`,
+      linkLabel: "Explore Marist profile",
+    }),
+    snapshotCard({
+      title: "Diversity and access",
+      question: "Who enrolls at Marist?",
+      values: [{ label: "Pell recipients", value: formatValue(pell.value, pell.unit) }, { label: "Underrepresented minority", value: Number.isFinite(underrepresentedShare) ? formatValue(underrepresentedShare, "percent") : "Unavailable" }],
+      note: maristComposition ? `${related.diversity.data_year}. Underrepresented minority combines Black, Hispanic or Latino, American Indian or Alaska Native, Native Hawaiian or Pacific Islander, and multiracial IPEDS categories.` : "Composition data unavailable for this collection.",
+      href: `/diversity-access?year=${year}`,
+      linkLabel: "Explore diversity and access",
+    }),
+    snapshotCard({
+      title: "Success and equity",
+      question: "How do students progress and complete?",
+      values: [{ label: "First-year retention", value: formatValue(retention.value, retention.unit) }, { label: "Six-year graduation", value: formatValue(graduation.value, graduation.unit) }, { label: "Pell-recipient graduation", value: pellGraduation ? formatValue(pellGraduation.value, "percent") : "Unavailable" }],
+      note: `${graduation.cohort_year}. Graduation rates follow the entering cohort; subgroup rates are descriptive.`,
+      href: `/success-equity?year=${year}`,
+      linkLabel: "Explore success and equity",
+    }),
+    snapshotCard({
+      title: "Affordability",
+      question: "What remains after grants and scholarships?",
+      values: [{ label: "Average net price", value: formatValue(netPrice.value, netPrice.unit) }, { label: lowestIncome?.display_name || "Lowest income band", value: lowestIncome ? formatValue(lowestIncome.marist, "usd") : "Unavailable" }],
+      note: `${netPrice.data_year}. Income-band values cover Title IV aid recipients.`,
+      href: `/affordability-resources?year=${year}`,
+      linkLabel: "Explore affordability",
+    }),
+    snapshotCard({
+      title: "Campus involvement",
+      question: "What is happening on campus?",
+      values: [{ label: "Listed events", value: campusAvailable ? formatters.students.format(related.campus.event_count) : "Unavailable" }, { label: "Active dates", value: campusAvailable ? formatters.students.format(related.campus.days.length) : "Unavailable" }],
+      note: campusAvailable ? "Current public CampusGroups feed. Event data are separate from IPEDS and may change throughout the day." : "Current event feed unavailable. Missing events are not shown as zero.",
+      href: "/campus-involvement",
+      linkLabel: "Explore campus involvement",
+    }),
+  );
+}
+
+function renderOverviewTrends() {
+  const container = document.querySelector("#overview-trends");
+  if (!dashboardState.history.length) return;
+  container.replaceChildren();
+  [
+    { id: "retention_rate", title: "First-year retention", description: "Share of full-time, first-time students returning the following fall." },
+    { id: "average_net_price", title: "Average net price", description: "Nominal annual cost after grants and scholarships for aided full-time, first-time students." },
+  ].forEach((config) => {
+    const metrics = dashboardState.history.map((dataset) => dataset.metrics.find((metric) => metric.metric_id === config.id));
+    if (metrics.some((metric) => !metric)) return;
+    renderTrendChart(container, {
+      title: config.title,
+      description: config.description,
+      unit: metrics[0].unit,
+      points: dashboardState.history.map((dataset, index) => ({
+        year: dataset.release.collection_year,
+        marist: metrics[index].value,
+        peer: metrics[index].peer.median,
+        aspirant: metrics[index].aspirant.median,
+      })),
+    });
+  });
 }
 
 function metricCard(metric) {
   const article = document.createElement("article");
   article.className = "metric";
   if (!Number.isFinite(metric.value)) article.classList.add("metric-unavailable");
-  const favorable = applyFavorableHighlight(article, metric);
-
   article.innerHTML = `
     <header class="metric-header">
-      <div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.interpretation}</p></div>
+      <div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.description}</p></div>
     </header>
     <div class="metric-result">
       <p class="metric-value">${formatValue(metric.value, metric.unit)}</p>
       <p class="metric-year">${metric.data_year}${metric.cohort_year ? `<br>${metric.cohort_year}` : ""}</p>
     </div>
-    <div class="metric-callout-slot">${favorable ? `<p class="metric-callout">${formatComparisonDifference(favorable.difference, metric.unit)} ${favorable.position} peer median</p>` : ""}</div>
     <div class="bullet-chart"></div>
     <dl class="comparison-values">
-      <div><dt>Peer median</dt><dd>${formatValue(metric.peer.median, metric.unit)}</dd></div>
-      <div><dt>Aspirant median</dt><dd>${formatValue(metric.aspirant.median, metric.unit)}</dd></div>
-    </dl>`;
+      <div><dt>Peer median · ${metric.peer.count} institutions</dt><dd>${formatValue(metric.peer.median, metric.unit)}</dd></div>
+      <div><dt>Aspirant median · ${metric.aspirant.count} institutions</dt><dd>${formatValue(metric.aspirant.median, metric.unit)}</dd></div>
+    </dl>
+    <details class="metric-details"><summary>Definition and source</summary><p>${metric.interpretation} Status: ${Number.isFinite(metric.value) ? "reported" : titleCase(metric.status_flag || "unavailable")}. Source: ${metric.source_component}, variable ${metric.source_variable}.</p></details>`;
   return article;
 }
 
@@ -63,7 +145,7 @@ function renderBullet(container, metric) {
   const domain = metric.unit === "percent" ? [0, 100] : d3.extent(values);
   if (domain[0] === domain[1]) domain[1] = domain[0] + 1;
   const width = 560;
-  const height = 88;
+  const height = 108;
   const scale = d3.scaleLinear().domain(domain).nice().range([8, width - 8]);
   const svg = d3.select(container)
     .append("svg")
@@ -72,6 +154,8 @@ function renderBullet(container, metric) {
     .attr("aria-label", `${metric.display_name} comparison chart`);
 
   svg.append("line").attr("x1", 8).attr("x2", width - 8).attr("y1", 44).attr("y2", 44).attr("stroke", "#d8dade");
+  svg.append("text").attr("class", "bullet-scale-label").attr("x", 8).attr("y", 102).text(formatValue(domain[0], metric.unit));
+  svg.append("text").attr("class", "bullet-scale-label").attr("x", width - 8).attr("y", 102).attr("text-anchor", "end").text(formatValue(domain[1], metric.unit));
   function interactiveMark(selection, label) {
     selection
       .attr("class", "chart-mark")
@@ -126,34 +210,28 @@ function renderBullet(container, metric) {
   }
 }
 
-function tableRow(metric) {
-  const row = document.createElement("tr");
-  row.innerHTML = `<td>${metric.display_name}</td><td>${formatValue(metric.value, metric.unit)}</td><td>${formatValue(metric.peer.median, metric.unit)}</td><td>${formatRange(metric.peer, metric.unit)}</td><td>${formatValue(metric.aspirant.median, metric.unit)}</td><td>${formatRange(metric.aspirant, metric.unit)}</td><td>${metric.data_year}</td>`;
-  return row;
-}
-
-function renderDataset(dataset) {
+function renderDataset(dataset, related) {
   document.querySelector("#collection-year").textContent = dataset.release.collection_year;
   document.querySelector("#institution-count").textContent = dataset.institution_count;
   document.querySelector("#release-type").textContent = titleCase(dataset.release.release_type);
   document.querySelector("#active-release").textContent = titleCase(dataset.release.release_type);
   document.querySelector("#active-filter").textContent = `Showing ${dataset.release.collection_year} ${dataset.release.release_type} data`;
   document.querySelector("#data-status").innerHTML = `<strong>Verified final IPEDS data.</strong> Retrieved ${dataset.release.retrieved_at}.`;
+  document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer medians use ${dataset.metrics[0].peer.count} institutions; aspirant medians use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups.`;
+  renderDashboardSnapshot(dataset, related);
 
   const grid = document.querySelector("#metric-grid");
-  const tableBody = document.querySelector("#comparison-table-body");
   grid.replaceChildren();
-  tableBody.replaceChildren();
   dataset.metrics.forEach((metric) => {
     const card = metricCard(metric);
     grid.append(card);
     renderBullet(card.querySelector(".bullet-chart"), metric);
-    tableBody.append(tableRow(metric));
   });
 
   const query = new URLSearchParams({ year: dataset.release.collection_year });
   document.querySelector(".download-link").href = `/api/v1/export.csv?${query}`;
   prepareScrollReveals(grid);
+  renderOverviewTrends();
 }
 
 async function loadYear(year) {
@@ -165,7 +243,21 @@ async function loadYear(year) {
     const response = await fetch(`/api/v1/overview?${query}`, { headers: { Accept: "application/json" } });
     if (!response.ok) throw new Error(`Request failed with ${response.status}`);
     const dataset = await response.json();
-    if (request === dashboardState.request) renderDataset(dataset);
+    const optionalDataset = async (endpoint) => {
+      try {
+        const optionalResponse = await fetch(`${endpoint}?${query}`, { headers: { Accept: "application/json" } });
+        return optionalResponse.ok ? optionalResponse.json() : null;
+      } catch (_) {
+        return null;
+      }
+    };
+    const [diversity, success, affordability, campus] = await Promise.all([
+      optionalDataset("/api/v1/diversity-access"),
+      optionalDataset("/api/v1/success-equity"),
+      optionalDataset("/api/v1/affordability-resources"),
+      optionalDataset("/api/v1/campus-involvement/events"),
+    ]);
+    if (request === dashboardState.request) renderDataset(dataset, { diversity, success, affordability, campus });
   } catch (error) {
     if (request !== dashboardState.request) return;
     status.textContent = "The comparison dataset is temporarily unavailable. Please try again later.";
@@ -179,6 +271,7 @@ async function loadDashboard() {
   const status = document.querySelector("#data-status");
   try {
     const catalog = await setupCollectionYearSelector(loadYear);
+    dashboardState.history = await fetchDatasetHistory("/api/v1/overview", catalog.releases);
     await loadYear(catalog.selectedYear);
   } catch (error) {
     status.textContent = "The comparison dataset is temporarily unavailable. Please try again later.";
