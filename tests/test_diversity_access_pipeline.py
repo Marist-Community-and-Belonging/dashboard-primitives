@@ -6,7 +6,8 @@ from scripts.ipeds import build_diversity_access as PIPELINE
 class DiversityAccessPipelineTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.result = PIPELINE.build()
+        cls.collection_year = PIPELINE.SOURCE.list_releases()[-1]["collection_year"]
+        cls.result = PIPELINE.build(cls.collection_year)
 
     def test_extract_contains_all_institutions_and_categories(self):
         self.assertEqual(self.result["institution_count"], 19)
@@ -44,9 +45,12 @@ class DiversityAccessPipelineTests(unittest.TestCase):
         shares = [value / 100 for value in marist["normalized_shares"].values()]
         self.assertAlmostEqual(marist["diversity_index"], 1 - sum(value**2 for value in shares))
 
-    def test_historical_trend_is_explicitly_unavailable(self):
-        self.assertFalse(self.result["trend"]["available"])
-        self.assertIn("earlier final releases", self.result["trend"]["message"])
+    def test_every_release_includes_multiracial_students(self):
+        for release in PIPELINE.SOURCE.list_releases():
+            result = PIPELINE.build(release["collection_year"])
+            self.assertIn("multiracial", {category["category_id"] for category in result["categories"]})
+            for group in result["groups"]:
+                self.assertIsNotNone(group["reported_shares"]["multiracial"])
 
 
 if __name__ == "__main__":

@@ -9,10 +9,9 @@ class IpedsSourceTests(unittest.TestCase):
         cls.source = SOURCE.IpedsSource()
 
     def test_manifest_lists_final_release(self):
-        self.assertEqual(
-            self.source.list_releases(),
-            [{"collection_year": "2023–24", "release_type": "final", "retrieved_at": "2026-09-25"}],
-        )
+        releases = self.source.list_releases()
+        self.assertEqual([release["collection_year"] for release in releases], ["2019–20", "2020–21", "2021–22", "2022–23", "2023–24"])
+        self.assertTrue(all(release["release_type"] == "final" for release in releases))
 
     def test_components_and_dictionaries_are_validated(self):
         component = self.source.fetch_component("2023–24", "ADM_DERIVED")

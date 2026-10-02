@@ -236,6 +236,7 @@ function renderDataset(dataset, related) {
 
 async function loadYear(year) {
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   const request = ++dashboardState.request;
   status.textContent = `Loading ${year} IPEDS comparison data…`;
   try {

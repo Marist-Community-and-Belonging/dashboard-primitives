@@ -238,6 +238,7 @@ async function fetchProfileDataset(endpoint, year) {
 async function loadProfileYear(year) {
   const request = ++profileState.request;
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   status.textContent = `Loading ${year} Marist profile…`;
   try {
     const [overview, diversity, success, affordability] = await Promise.all([

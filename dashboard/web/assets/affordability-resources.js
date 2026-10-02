@@ -139,6 +139,7 @@ function renderAffordabilityTrends(history) {
 
 async function loadAffordabilityYear(year) {
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} affordability data…`;
     const response = await fetch(`/api/v1/affordability-resources?${new URLSearchParams({ year })}`, { cache: "no-cache", headers: { Accept: "application/json" } });

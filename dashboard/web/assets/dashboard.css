@@ -625,6 +625,12 @@ td:first-child { font-weight: 650; }
   transition: opacity 120ms ease;
 }
 .composition-value.is-highlighted { opacity: 1; }
+.composition-value[data-highlight="white"],
+.composition-value[data-highlight="american_indian"],
+.composition-value[data-highlight="nonresident"] {
+  fill: #000;
+  stroke: rgb(255 255 255 / 72%);
+}
 
 .access-grid {
   display: grid;
@@ -871,6 +877,9 @@ footer a { color: var(--red-dark); font-weight: 700; text-underline-offset: 3px;
   .product-name { display: none; }
   .method-link { max-width: 100px; text-align: right; }
   .dashboard-toolbar { grid-template-columns: minmax(0, 1fr) 138px; gap: 12px; }
+  .dashboard-toolbar:not(.is-stuck) { grid-template-columns: 1fr; }
+  .dashboard-toolbar:not(.is-stuck) .data-note { text-overflow: initial; white-space: normal; }
+  .dashboard-toolbar:not(.is-stuck) .year-filter { width: 100%; }
   .dashboard-toolbar .year-filter label {
     position: absolute;
     width: 1px;
