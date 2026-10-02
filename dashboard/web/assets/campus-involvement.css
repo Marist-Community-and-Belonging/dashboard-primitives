@@ -115,9 +115,10 @@
   border-bottom: 2px solid var(--ink);
 }
 .day-agenda-heading .eyebrow { margin-bottom: 3px; }
-.day-agenda-heading h3 { margin: 0; font-size: 20px; }
+.day-agenda-heading > div { min-width: 0; }
+.day-agenda-heading h3 { min-height: 2.5em; margin: 0; font-size: 18px; line-height: 1.25; }
 .day-agenda-heading a { color: var(--red-dark); font-size: 12px; font-weight: 700; }
-.day-agenda .event-list { height: 540px; overflow-y: auto; }
+.day-agenda .event-list { height: 526px; overflow-y: auto; }
 
 .involvement-charts {
   display: grid;
