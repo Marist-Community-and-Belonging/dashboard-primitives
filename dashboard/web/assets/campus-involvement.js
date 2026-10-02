@@ -57,6 +57,47 @@ function finishLoadingState() {
   window.dashboardLoading?.finish();
 }
 
+function skeleton(className = "") {
+  const node = document.createElement("span");
+  node.className = `skeleton ${className}`;
+  node.setAttribute("aria-hidden", "true");
+  return node;
+}
+
+function showLoadingState() {
+  document.querySelectorAll(".release-summary dd").forEach((value) => {
+    value.textContent = "";
+    value.classList.add("skeleton", "loading-value");
+  });
+
+  const filters = document.createElement("div");
+  filters.className = "loading-filter-row";
+  filters.append(...Array.from({ length: 7 }, () => skeleton("loading-filter")));
+  document.querySelector("#event-filters").replaceChildren(filters);
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "loading-month-toolbar";
+  toolbar.append(skeleton("loading-month-title"), skeleton("loading-month-total"));
+  const grid = document.createElement("div");
+  grid.className = "loading-calendar-grid";
+  grid.append(...Array.from({ length: 35 }, () => skeleton()));
+  document.querySelector("#month-calendar").replaceChildren(toolbar, grid);
+
+  document.querySelector("#selected-day-label").textContent = "Loading events…";
+  document.querySelector("#day-event-list").replaceChildren(...Array.from({ length: 4 }, () => {
+    const event = document.createElement("div");
+    event.className = "loading-event";
+    event.append(skeleton(), skeleton());
+    return event;
+  }));
+  document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.setAttribute("aria-busy", "true"));
+}
+
+function finishLoadingState() {
+  document.querySelectorAll(".release-summary dd").forEach((value) => value.classList.remove("skeleton", "loading-value"));
+  document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.removeAttribute("aria-busy"));
+}
+
 function ymd(date) {
   return date.toISOString().slice(0, 10);
 }
