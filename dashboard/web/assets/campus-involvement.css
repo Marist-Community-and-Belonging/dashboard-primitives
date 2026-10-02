@@ -140,8 +140,12 @@
 .event-type-7 { background: #202127; }
 .event-type-8 { background: #b86b7a; }
 .event-type-9 { background: #7a7e87; }
+.weekly-legend .involvement-key { grid-template-columns: 24px minmax(0, 1fr) auto; }
+.weekly-legend i { width: 24px; height: 0; border-radius: 0; border-top: 3px solid; }
 .weekly-events { background: #c91235; }
 .weekly-active { background: #3c8cff; }
+.weekly-legend .weekly-events { background: none; border-color: #c91235; }
+.weekly-legend .weekly-active { background: none; border-color: #3c8cff; border-top-style: dashed; }
 
 .weekly-axis text,
 .donut-center {

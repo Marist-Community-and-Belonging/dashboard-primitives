@@ -10,6 +10,7 @@ let payloadCache = null;
 let selectedTypes = new Set();
 let onCampusOnly = false;
 let resizeTimer = 0;
+const uncategorizedFilter = "__uncategorized__";
 
 function ymd(date) {
   return date.toISOString().slice(0, 10);
@@ -77,10 +78,20 @@ function eventTimeLabel(event) {
   return `${shortTime.format(new Date(event.start))}–${shortTime.format(new Date(event.end))}`;
 }
 
+function topEventTypes(events) {
+  return d3.rollups(events, (rows) => rows.length, (event) => event.event_type || "Other")
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 8);
+}
+
 function filteredEvents() {
   if (!payloadCache) return [];
+  const categorizedTypes = new Set(topEventTypes(payloadCache.events).map(([type]) => type));
   return payloadCache.events.filter((event) => {
-    if (selectedTypes.size && !selectedTypes.has(event.event_type || "Other")) return false;
+    const type = event.event_type || "Other";
+    if (selectedTypes.size
+      && !selectedTypes.has(type)
+      && !(selectedTypes.has(uncategorizedFilter) && !categorizedTypes.has(type))) return false;
     if (onCampusOnly && event.location_type !== "On-Campus") return false;
     return true;
   });
@@ -200,11 +211,9 @@ function addCellHover(selection, label) {
 
 function renderFilters(events) {
   const root = document.querySelector("#event-filters");
-  const types = d3.rollups(
-    events,
-    (rows) => rows.length,
-    (event) => event.event_type || "Other",
-  ).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const visibleTypes = topEventTypes(events);
+  const categorizedTypes = new Set(visibleTypes.map(([type]) => type));
+  visibleTypes.push([uncategorizedFilter, events.filter((event) => !categorizedTypes.has(event.event_type || "Other")).length]);
 
   root.replaceChildren();
   const typeWrap = document.createElement("div");
@@ -223,12 +232,12 @@ function renderFilters(events) {
   });
   typeWrap.append(allButton);
 
-  types.slice(0, 8).forEach(([type, count]) => {
+  visibleTypes.forEach(([type, count]) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `filter-chip${selectedTypes.has(type) ? " is-active" : ""}`;
     button.setAttribute("aria-pressed", String(selectedTypes.has(type)));
-    button.textContent = `${type} (${count})`;
+    button.textContent = `${type === uncategorizedFilter ? "Uncategorized" : type} (${count})`;
     button.addEventListener("click", () => {
       if (selectedTypes.has(type)) selectedTypes.delete(type);
       else selectedTypes.add(type);
@@ -563,7 +572,7 @@ function renderWeeklyChart(events, bounds) {
   legend.className = "involvement-legend weekly-legend";
   legend.append(
     involvementLegendKey("Events / week", `${eventAverage} avg`, "weekly-events", "weekly-events", `Events per week: ${eventAverage} average.`),
-    involvementLegendKey("Active days / week", `${activeAverage} avg`, "weekly-active", "weekly-active", `Active days per week: ${activeAverage} average.`),
+    involvementLegendKey("Active days / week (0–7)", `${activeAverage} avg`, "weekly-active", "weekly-active", `Active days per week: ${activeAverage} average.`),
   );
   root.append(legend);
   linkLegendHighlights(legend, svg.node());
