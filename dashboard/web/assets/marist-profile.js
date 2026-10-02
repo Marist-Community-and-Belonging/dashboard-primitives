@@ -272,6 +272,8 @@ async function loadMaristProfile() {
     status.textContent = "The Marist profile is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");
     console.error(error);
+  } finally {
+    window.dashboardLoading?.finish();
   }
 }
 

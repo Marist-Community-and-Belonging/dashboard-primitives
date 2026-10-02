@@ -159,6 +159,8 @@ async function loadAffordabilityPage() {
     renderAffordabilityTrends(await fetchDatasetHistory("/api/v1/affordability-resources", catalog.releases));
   } catch (error) {
     console.error(error);
+  } finally {
+    window.dashboardLoading?.finish();
   }
 }
 

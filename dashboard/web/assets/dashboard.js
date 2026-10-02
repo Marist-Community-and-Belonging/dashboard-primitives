@@ -277,6 +277,8 @@ async function loadDashboard() {
     status.textContent = "The comparison dataset is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");
     console.error(error);
+  } finally {
+    window.dashboardLoading?.finish();
   }
 }
 
