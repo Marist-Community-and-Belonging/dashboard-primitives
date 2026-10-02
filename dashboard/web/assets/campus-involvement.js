@@ -353,29 +353,6 @@ function renderMonthCalendar(days, bounds) {
   document.querySelector("#calendar-range").textContent = `Academic year ${bounds.startYear}–${String(bounds.startYear + 1).slice(2)} · ${bounds.termStart} through ${bounds.termEnd}`;
 }
 
-function renderAllEvents(events, bounds) {
-  const root = document.querySelector("#all-event-groups");
-  const inTerm = events
-    .filter((event) => eventYmd(event.start) <= bounds.termEnd && eventYmd(event.end) >= bounds.termStart)
-    .sort((a, b) => a.start.localeCompare(b.start));
-  root.replaceChildren();
-  d3.groups(inTerm, (event) => eventYmd(event.start).slice(0, 7)).forEach(([month, rows]) => {
-    const group = document.createElement("details");
-    const summary = document.createElement("summary");
-    const label = document.createElement("span");
-    const count = document.createElement("strong");
-    const list = document.createElement("div");
-    group.className = "event-month-group";
-    label.textContent = monthHeading.format(parseYmd(`${month}-01`));
-    count.textContent = `${rows.length} ${rows.length === 1 ? "event" : "events"}`;
-    summary.append(label, count);
-    list.className = "event-list";
-    list.append(...rows.map((event) => eventItem(event, true)));
-    group.append(summary, list);
-    root.append(group);
-  });
-}
-
 const typeColors = ["#c91235", "#9f0f2b", "#e06b84", "#3c8cff", "#63666f", "#a71934", "#356da8", "#202127", "#b86b7a", "#7a7e87"];
 
 function involvementLegendKey(label, value, colorClass, highlight, tooltip) {
@@ -596,7 +573,6 @@ function refreshView() {
   renderDayList(selectedDate && isInTerm(selectedDate, bounds)
     ? selectedDate
     : defaultSelectedDate(days, bounds));
-  renderAllEvents(events, bounds);
   renderTypeDonut(events);
   renderWeeklyChart(events, bounds);
   prepareScrollReveals();

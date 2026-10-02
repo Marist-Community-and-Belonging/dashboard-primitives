@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .month-calendar-panel,
@@ -94,21 +94,6 @@
 .day-agenda-heading h3 { margin: 0; font-size: 20px; }
 .day-agenda-heading a { color: var(--red-dark); font-size: 12px; font-weight: 700; }
 .day-agenda .event-list { max-height: 540px; overflow-y: auto; }
-
-.all-event-groups { display: grid; gap: 10px; }
-.event-month-group { border: 1px solid var(--line); background: var(--paper); }
-.event-month-group > summary {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 16px;
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 750;
-}
-.event-month-group > summary strong { color: var(--gray); font-size: 12px; }
-.event-month-group .event-list { margin: 0 16px 12px; }
 
 .involvement-charts {
   display: grid;
