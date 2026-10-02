@@ -44,7 +44,7 @@ function updateHorizontalScroll(element) {
 const horizontalScrollObserver = new ResizeObserver((entries) => entries.forEach(({ target }) => updateHorizontalScroll(target)));
 
 function prepareHorizontalScroll(root = document) {
-  root.querySelectorAll(".table-scroll, .gap-heatmap").forEach((element) => {
+  root.querySelectorAll(".table-scroll").forEach((element) => {
     if (!element.dataset.scrollPrepared) {
       element.dataset.scrollPrepared = "true";
       element.addEventListener("scroll", () => element.classList.toggle("is-scrolled", element.scrollLeft > 8), { passive: true });

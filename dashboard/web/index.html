@@ -13,8 +13,8 @@
     <script src="/assets/features.js" defer></script>
     <script src="/assets/collapsible.js" defer></script>
     <script src="/assets/year-selector.js" defer></script>
-    <script src="/assets/comparison-highlights.js" defer></script>
     <script src="/assets/reveals.js" defer></script>
+    <script src="/assets/trends.js" defer></script>
     <script src="/assets/dashboard.js" defer></script>
   </head>
   <body>
@@ -42,7 +42,7 @@
         <div>
           <p class="eyebrow">Institutional position</p>
           <h1 id="page-title">Marist benchmark overview</h1>
-          <p class="lede">Final federal data for Marist University and its official peer and aspirant institutions.</p>
+          <p class="lede">See how Marist compares with official peer and aspirant institutions on enrollment, access, outcomes, and affordability using final federal data.</p>
         </div>
         <dl class="release-summary" aria-label="Dataset summary">
           <div><dt>Collection</dt><dd id="collection-year">2023–24</dd></div>
@@ -60,12 +60,23 @@
         </form>
       </div>
 
-      <section class="measure-section" data-feature="overview_headlines" data-collapsible aria-labelledby="headline-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="snapshot-heading">
         <div class="section-heading">
           <div>
-            <h2 id="headline-heading">Headline measures</h2>
-            <p>Marist values with peer and aspirant medians and middle ranges.</p>
+            <h2 id="snapshot-heading">Dashboard at a glance</h2>
+            <p>One useful view from each section, with links to explore definitions, comparisons, and detail.</p>
           </div>
+        </div>
+        <div id="overview-snapshot" class="overview-snapshot" aria-live="polite"></div>
+      </section>
+
+      <section class="measure-section" data-feature="overview_headlines" data-collapsible data-collapsed data-collapse-open="Explore all measures" data-collapse-close="Hide measures" aria-labelledby="headline-heading">
+        <div class="section-heading table-heading">
+          <div>
+            <h2 id="headline-heading">How Marist compares now</h2>
+            <p>Marist values, comparison-group medians, and each group’s middle 50%.</p>
+          </div>
+          <a class="download-link" href="/api/v1/export.csv" download>Download CSV</a>
         </div>
         <div class="section-heading legend-row">
           <div><p id="active-filter" class="active-filter" aria-live="polite"></p><p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p></div>
@@ -78,21 +89,14 @@
         <div id="metric-grid" class="metric-grid" aria-live="polite"></div>
       </section>
 
-      <section class="table-section" data-collapsible aria-labelledby="comparison-table-heading">
-        <div class="section-heading table-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="overview-trends-heading">
+        <div class="section-heading">
           <div>
-            <h2 id="comparison-table-heading">Comparison table</h2>
+            <h2 id="overview-trends-heading">How key measures changed</h2>
+            <p>Five final collections show direction over time; annual changes remain descriptive.</p>
           </div>
-          <a class="download-link" href="/api/v1/export.csv" download>Download CSV</a>
         </div>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr><th scope="col">Measure</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Peer middle 50%</th><th scope="col">Aspirant median</th><th scope="col">Aspirant middle 50%</th><th scope="col">Data year</th></tr>
-            </thead>
-            <tbody id="comparison-table-body"></tbody>
-          </table>
-        </div>
+        <div id="overview-trends" class="trend-grid trend-grid-two"></div>
       </section>
 
       <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
@@ -101,7 +105,8 @@
           <h2 id="methodology-heading">Final IPEDS data, clearly separated by year and cohort</h2>
         </div>
         <div class="methodology-copy">
-          <p>Final NCES data. Medians describe the typical comparison institution, and ranges show the middle half of each group. Marist is excluded from both groups.</p>
+          <p id="data-provenance">Final NCES data. Medians describe the typical comparison institution, and ranges show the middle half of each group. Marist is excluded from both groups.</p>
+          <p>Collection year labels the IPEDS release. Measurement years and graduation cohorts may differ and appear with each measure. Missing or suppressed values remain unavailable, never zero.</p>
           <a href="https://nces.ed.gov/ipeds/use-the-data">Official IPEDS data source</a>
         </div>
       </section>

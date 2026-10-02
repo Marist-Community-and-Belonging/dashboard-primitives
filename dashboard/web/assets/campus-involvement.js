@@ -607,7 +607,7 @@ async function loadCampusEvents() {
     return;
   }
   try {
-    selectedDate = defaultSelectedDate(payloadCache.days, academicYearBounds());
+    selectedDate ||= defaultSelectedDate(payloadCache.days, academicYearBounds());
     refreshView();
   } catch (error) {
     status.textContent = "Events loaded; calendar failed to render.";
@@ -616,6 +616,7 @@ async function loadCampusEvents() {
 }
 
 loadCampusEvents();
+window.setInterval(loadCampusEvents, 5 * 60 * 1000);
 window.addEventListener("resize", () => {
   window.clearTimeout(resizeTimer);
   resizeTimer = window.setTimeout(() => {

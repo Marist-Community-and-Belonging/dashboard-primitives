@@ -1,7 +1,6 @@
 const percentFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1, style: "percent" });
 const numberFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const indexFormat = new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-const pointFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
 
 const categoryColors = ["#8e2038", "#3e5968", "#b35d38", "#596b3d", "#705780", "#9a7a28", "#3f7771", "#777982", "#3c8cff"];
 const groupStyles = {
@@ -14,12 +13,6 @@ dataTooltip();
 function formatPercent(value) {
   if (!Number.isFinite(value)) return "Unavailable";
   return percentFormat.format(value / 100);
-}
-
-function formatPoints(value) {
-  if (!Number.isFinite(value)) return "Unavailable";
-  if (value === 0) return "0 pts";
-  return `${value > 0 ? "+" : "−"}${pointFormat.format(Math.abs(value))} pts`;
 }
 
 function titleCase(value) {
@@ -140,62 +133,6 @@ function renderAccess(dataset) {
   });
 }
 
-function renderGaps(dataset) {
-  const heatmap = document.querySelector("#gap-heatmap");
-  heatmap.replaceChildren();
-  const maxGap = d3.max(dataset.gaps.flatMap((gap) => [Math.abs(gap.peer_gap ?? 0), Math.abs(gap.aspirant_gap ?? 0)])) || 1;
-  const header = document.createElement("div");
-  header.className = "gap-row gap-header";
-  header.innerHTML = "<span>Population</span><span>vs. peer median</span><span>vs. aspirant median</span>";
-  heatmap.append(header);
-  dataset.gaps.forEach((gap) => {
-    const row = document.createElement("div");
-    row.className = "gap-row";
-    const label = document.createElement("strong");
-    label.textContent = gap.display_name;
-    row.append(label);
-    [["peer", gap.peer_gap], ["aspirant", gap.aspirant_gap]].forEach(([comparison, value]) => {
-      const cell = document.createElement("span");
-      const median = gap[`${comparison}_median`];
-      const detail = `${gap.display_name}: Marist ${formatPercent(gap.marist)}; ${comparison} median ${formatPercent(median)}; difference ${formatPoints(value)}.`;
-      cell.className = "gap-cell";
-      if (!Number.isFinite(value)) cell.classList.add("gap-unavailable");
-      else if (value === 0) cell.classList.add("gap-neutral");
-      else cell.classList.add(value < 0 ? "gap-negative" : "gap-positive", `gap-level-${Math.max(1, Math.ceil(Math.abs(value) / maxGap * 4))}`);
-      cell.textContent = formatPoints(value);
-      cell.tabIndex = 0;
-      cell.setAttribute("aria-label", detail);
-      cell.addEventListener("pointerenter", (event) => {
-        cell.classList.add("is-active");
-        showDataTooltip(detail, event.clientX, event.clientY);
-      });
-      cell.addEventListener("pointerleave", () => {
-        if (document.activeElement === cell) return;
-        cell.classList.remove("is-active");
-        hideDataTooltip();
-      });
-      cell.addEventListener("focus", () => {
-        cell.classList.add("is-active");
-        showDataTooltipForElement(cell, detail);
-      });
-      cell.addEventListener("blur", () => {
-        cell.classList.remove("is-active");
-        hideDataTooltip();
-      });
-      row.append(cell);
-    });
-    heatmap.append(row);
-  });
-
-  const body = document.querySelector("#gap-table-body");
-  body.replaceChildren();
-  dataset.gaps.forEach((gap) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<th scope="row">${gap.display_name}</th><td>${formatPercent(gap.marist)}</td><td>${formatPercent(gap.peer_median)}</td><td>${formatPoints(gap.peer_gap)}</td><td>${formatPercent(gap.aspirant_median)}</td><td>${formatPoints(gap.aspirant_gap)}</td>`;
-    body.append(row);
-  });
-}
-
 function renderScatter(dataset) {
   document.querySelector("#scatterplot").replaceChildren();
   const records = dataset.institutions.filter((record) => Number.isFinite(record.diversity_index) && Number.isFinite(record.graduation_rate) && Number.isFinite(record.enrollment));
@@ -262,13 +199,11 @@ function renderPage(dataset) {
   document.querySelector("#composition-method").textContent = dataset.methodology.composition;
   document.querySelector("#diversity-method").textContent = dataset.methodology.diversity_index;
   const marist = dataset.institutions.find((institution) => institution.group === "marist");
-  const peerMedian = d3.median(dataset.institutions.filter((institution) => institution.group === "peer"), (institution) => institution.diversity_index);
-  document.querySelector("#diversity-callout").innerHTML = `<strong>Diversity index:</strong> Marist is ${indexFormat.format(marist.diversity_index)}, above the peer median of ${indexFormat.format(peerMedian)}.`;
+  document.querySelector("#diversity-callout").innerHTML = `<strong>Diversity index:</strong> Marist is ${indexFormat.format(marist.diversity_index)}.`;
   const query = new URLSearchParams({ year: dataset.release.collection_year });
   document.querySelector(".download-link").href = `/api/v1/diversity-access/export.csv?${query}`;
   renderComposition(dataset);
   renderAccess(dataset);
-  renderGaps(dataset);
   renderScatter(dataset);
   prepareScrollReveals(document.querySelector("main"));
 }

@@ -1,7 +1,6 @@
 window.dashboardFeaturesReady = fetch("/api/v1/features", { headers: { Accept: "application/json" } })
   .then((response) => {
-    if (!response.ok) throw new Error(`Feature request failed with ${response.status}`);
-    return response.json();
+    return response.ok ? response.json() : { features: {} };
   })
   .then(({ features }) => {
     document.querySelectorAll("[data-feature]").forEach((section) => {
@@ -9,7 +8,4 @@ window.dashboardFeaturesReady = fetch("/api/v1/features", { headers: { Accept: "
     });
     return features;
   })
-  .catch((error) => {
-    console.error(error);
-    return {};
-  });
+  .catch(() => ({}));

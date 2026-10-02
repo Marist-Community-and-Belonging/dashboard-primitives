@@ -76,11 +76,6 @@
         <p class="chart-note" id="composition-note"></p>
       </section>
 
-      <section class="dashboard-section" data-feature="diversity_trend" data-collapsible aria-labelledby="diversity-trend-heading">
-        <div class="section-heading"><div><h2 id="diversity-trend-heading">Five-year diversity trend</h2><p>Undergraduate diversity index for Marist and the median comparison institutions.</p></div></div>
-        <div id="diversity-trend" class="trend-grid"></div>
-      </section>
-
       <section class="dashboard-section access-section" data-feature="diversity_access" data-collapsible aria-labelledby="access-heading">
         <div class="section-heading">
           <div>
@@ -91,27 +86,9 @@
         <div id="access-grid" class="access-grid"></div>
       </section>
 
-      <section class="dashboard-section" data-feature="diversity_gaps" data-collapsible aria-labelledby="gap-heading">
-        <div class="section-heading">
-          <div>
-            <h2 id="gap-heading">Representation gaps</h2>
-            <p>Marist’s reported share minus the median institution in each comparison group.</p>
-          </div>
-        </div>
-        <div class="gap-legend" aria-label="Representation gap color key">
-          <span><i class="gap-key-below"></i>Below median</span>
-          <span><i class="gap-key-even"></i>No difference</span>
-          <span><i class="gap-key-above"></i>Above median</span>
-          <small>Darker color means a larger gap.</small>
-        </div>
-        <div id="gap-heatmap" class="gap-heatmap"></div>
-        <details class="detail-disclosure"><summary>View exact gap values</summary><div class="table-scroll compact-table">
-          <table>
-            <caption class="sr-only">Marist representation gaps in percentage points</caption>
-            <thead><tr><th scope="col">Population</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Gap</th><th scope="col">Aspirant median</th><th scope="col">Gap</th></tr></thead>
-            <tbody id="gap-table-body"></tbody>
-          </table>
-        </div></details>
+      <section class="dashboard-section" data-feature="diversity_trend" data-collapsible data-collapsed data-collapse-open="Explore trend" data-collapse-close="Hide trend" aria-labelledby="diversity-trend-heading">
+        <div class="section-heading"><div><h2 id="diversity-trend-heading">Five-year diversity trend</h2><p>Undergraduate diversity index for Marist and the median comparison institutions.</p></div></div>
+        <div id="diversity-trend" class="trend-grid"></div>
       </section>
 
       <section class="dashboard-section" data-feature="diversity_scatter" data-collapsible data-collapsed data-collapse-open="Explore relationship" data-collapse-close="Hide relationship" aria-labelledby="scatter-heading">

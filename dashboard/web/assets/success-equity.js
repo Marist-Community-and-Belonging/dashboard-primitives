@@ -33,9 +33,8 @@ function addHover(selection, label) {
 function renderOutcomeCard(outcome) {
   const article = document.createElement("article");
   article.className = "metric outcome-card";
-  const favorable = applyFavorableHighlight(article, outcome);
   const year = outcome.cohort_year || outcome.data_year;
-  article.innerHTML = `<div class="metric-header"><div><h3>${outcome.display_name}</h3><p class="metric-interpretation">${outcome.description}</p></div></div><div class="metric-result"><p class="metric-value">${percent(outcome.value)}</p><p class="metric-year">${outcome.data_year}<br>${year === outcome.data_year ? "" : year}</p></div><div class="metric-callout-slot">${favorable ? `<p class="metric-callout">${successPoint.format(favorable.difference)} ${favorable.difference === 1 ? "point" : "points"} ${favorable.position} peer median</p>` : ""}</div><div class="bullet-chart outcome-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${percent(outcome.peer.median)}</dd></div><div><dt>Aspirant median</dt><dd>${percent(outcome.aspirant.median)}</dd></div></dl>`;
+  article.innerHTML = `<div class="metric-header"><div><h3>${outcome.display_name}</h3><p class="metric-interpretation">${outcome.description}</p></div></div><div class="metric-result"><p class="metric-value">${percent(outcome.value)}</p><p class="metric-year">${outcome.data_year}<br>${year === outcome.data_year ? "" : year}</p></div><div class="bullet-chart outcome-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${percent(outcome.peer.median)}</dd></div><div><dt>Aspirant median</dt><dd>${percent(outcome.aspirant.median)}</dd></div></dl>`;
   document.querySelector("#outcome-grid").append(article);
 
   const width = 560;

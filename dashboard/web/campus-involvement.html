@@ -66,7 +66,19 @@
         <p class="comparison-context" id="heatmap-range"></p>
       </section>
 
-      <section class="dashboard-section" data-collapsible aria-labelledby="breakdown-heading">
+      <section class="dashboard-section" data-collapsible aria-labelledby="day-list-heading">
+        <div class="section-heading table-heading">
+          <div>
+            <h2 id="day-list-heading">Events for <span id="selected-day-label">selected day</span></h2>
+            <p>Titles link to CampusGroups.</p>
+          </div>
+          <a class="download-link" id="source-link" href="https://marist.campusgroups.com/events" target="_blank" rel="noopener">CampusGroups calendar</a>
+        </div>
+        <div id="day-empty" class="data-note" hidden>No events on this day.</div>
+        <div id="day-event-list" class="event-list" aria-live="polite"></div>
+      </section>
+
+      <section class="dashboard-section" data-collapsible data-collapsed data-collapse-open="Explore activity breakdown" data-collapse-close="Hide activity breakdown" aria-labelledby="breakdown-heading">
         <div class="section-heading">
           <div>
             <h2 id="breakdown-heading">Activity breakdown</h2>
@@ -85,18 +97,6 @@
             <div id="weekly-chart" class="involvement-chart" role="region" aria-label="Weekly events and active days chart"></div>
           </article>
         </div>
-      </section>
-
-      <section class="dashboard-section" data-collapsible aria-labelledby="day-list-heading">
-        <div class="section-heading table-heading">
-          <div>
-            <h2 id="day-list-heading">Events for <span id="selected-day-label">selected day</span></h2>
-            <p>Titles link to CampusGroups.</p>
-          </div>
-          <a class="download-link" id="source-link" href="https://marist.campusgroups.com/events" target="_blank" rel="noopener">CampusGroups calendar</a>
-        </div>
-        <div id="day-empty" class="data-note" hidden>No events on this day.</div>
-        <div id="day-event-list" class="event-list" aria-live="polite"></div>
       </section>
 
       <section id="methodology" class="methodology" aria-labelledby="methodology-heading">
