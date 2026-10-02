@@ -12,7 +12,9 @@
   background: var(--paper);
 }
 
-.month-calendar-panel { padding: 18px; }
+.month-calendar-panel { display: flex; flex-direction: column; padding: 18px; }
+.month-calendar { display: flex; flex: 1; flex-direction: column; }
+.month-grid { flex: 1; grid-auto-rows: minmax(82px, 1fr); }
 .day-agenda { position: sticky; top: 108px; padding: 18px; }
 
 .month-toolbar {
@@ -254,6 +256,9 @@
 @media (max-width: 900px) {
   .calendar-workspace,
   .involvement-charts { grid-template-columns: 1fr; }
+  .month-calendar,
+  .month-grid { flex: none; }
+  .month-grid { grid-auto-rows: auto; }
   .day-agenda { position: static; }
   .day-agenda .event-list { max-height: none; overflow-y: visible; }
 }
