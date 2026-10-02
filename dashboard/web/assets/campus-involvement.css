@@ -300,6 +300,16 @@
   font-size: 12px;
   font-weight: 650;
   padding: 6px 10px;
+  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible {
+  border-color: var(--red);
+  background: #fdf2f4;
+  color: var(--red-dark);
+  box-shadow: 0 3px 10px rgb(32 33 39 / 10%);
+  transform: translateY(-1px);
 }
 
 .filter-chip.is-active {
@@ -307,6 +317,8 @@
   background: #fdf2f4;
   color: var(--red-dark);
 }
+.filter-chip.is-active:hover,
+.filter-chip.is-active:focus-visible { background: #f8dce2; }
 
 .event-list {
   display: grid;

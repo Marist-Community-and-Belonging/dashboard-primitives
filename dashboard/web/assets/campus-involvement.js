@@ -13,6 +13,7 @@ let payloadCache = null;
 let selectedTypes = new Set();
 let onCampusOnly = false;
 const uncategorizedFilter = "__uncategorized__";
+const dayEmpty = document.querySelector("#day-empty");
 
 function skeleton(className = "") {
   const node = document.createElement("span");
@@ -216,8 +217,8 @@ function renderDayList(date) {
   document.querySelector("#selected-day-label").textContent = dayLabel.format(parseYmd(date));
   const list = document.querySelector("#day-event-list");
   const events = eventsForDate(date);
-  list.replaceChildren(...events.map((event) => eventItem(event)));
-  document.querySelector("#day-empty").hidden = events.length > 0;
+  dayEmpty.hidden = events.length > 0;
+  list.replaceChildren(...(events.length ? events.map((event) => eventItem(event)) : [dayEmpty]));
   d3.selectAll(".month-day").classed("is-selected", function () { return this.dataset.date === date; });
 }
 
