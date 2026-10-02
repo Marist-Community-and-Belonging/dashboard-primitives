@@ -39,6 +39,9 @@
   border: 1px solid var(--line);
   background: var(--paper);
 }
+.month-toolbar button:hover:not(:disabled),
+.month-toolbar button:focus-visible { border-color: var(--red); background: #fdf2f4; }
+.month-toolbar button:disabled { color: var(--gray); cursor: default; opacity: .45; }
 
 .month-calendar-panel { display: flex; flex-direction: column; padding: 18px; }
 .month-calendar { display: flex; flex: 1; flex-direction: column; }
