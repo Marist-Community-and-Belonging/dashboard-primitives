@@ -53,6 +53,7 @@ function showLoadingState() {
 function finishLoadingState() {
   document.querySelectorAll(".release-summary dd").forEach((value) => value.classList.remove("skeleton", "loading-value"));
   document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.removeAttribute("aria-busy"));
+  window.dashboardLoading?.finish();
 }
 
 function ymd(date) {

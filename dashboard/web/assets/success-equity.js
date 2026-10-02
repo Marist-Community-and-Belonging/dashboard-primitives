@@ -168,6 +168,8 @@ async function loadPage() {
     renderSuccessTrends(await fetchDatasetHistory("/api/v1/success-equity", catalog.releases));
   } catch (error) {
     console.error(error);
+  } finally {
+    window.dashboardLoading?.finish();
   }
 }
 

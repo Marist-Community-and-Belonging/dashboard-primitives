@@ -354,6 +354,32 @@ h1 {
   color: var(--gray);
   font-size: 12px;
 }
+
+@keyframes skeleton-shimmer {
+  to { background-position-x: -200%; }
+}
+
+.skeleton,
+.dashboard-loading-target:empty::before {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eceef1 25%, #f8f9fa 50%, #eceef1 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.loading-value { width: 42px; height: 22px; color: transparent; }
+.dashboard-loading-target:empty::before {
+  content: "";
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 220px;
+}
+.overview-snapshot.dashboard-loading-target:empty::before,
+.metric-grid.dashboard-loading-target:empty::before,
+.outcome-grid.dashboard-loading-target:empty::before,
+.access-grid.dashboard-loading-target:empty::before,
+.profile-trend-grid.dashboard-loading-target:empty::before { min-height: 320px; }
 .key-marist { width: 8px !important; height: 8px !important; border-radius: 50%; background: var(--red); }
 .key-peer { background: #858890; }
 .key-aspirant { border: 1px solid var(--blue); background: #dbe9ff; }

@@ -5,19 +5,6 @@
   align-items: stretch;
 }
 
-@keyframes skeleton-shimmer {
-  to { background-position-x: -200%; }
-}
-
-.skeleton {
-  display: block;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #eceef1 25%, #f8f9fa 50%, #eceef1 75%);
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
-}
-
-.loading-value { width: 42px; height: 22px; }
 .loading-filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .loading-filter { width: 92px; height: 31px; border-radius: 999px; }
 .loading-month-toolbar { display: flex; justify-content: space-between; margin-bottom: 16px; }
@@ -28,10 +15,6 @@
 .loading-event { display: grid; grid-template-columns: 30% 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--soft-line); }
 .loading-event .skeleton:first-child { height: 14px; }
 .loading-event .skeleton:last-child { height: 52px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .skeleton { animation: none; }
-}
 
 .month-calendar-panel,
 .day-agenda {

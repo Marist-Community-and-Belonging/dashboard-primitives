@@ -249,6 +249,8 @@ async function loadPage() {
     renderDiversityTrend(await fetchDatasetHistory("/api/v1/diversity-access", catalog.releases));
   } catch (error) {
     console.error(error);
+  } finally {
+    window.dashboardLoading?.finish();
   }
 }
 
