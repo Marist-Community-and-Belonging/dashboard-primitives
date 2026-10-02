@@ -10,7 +10,39 @@ function dataTooltip() {
   return tooltip;
 }
 
-function positionDataTooltip() {}
+let tooltipRule;
+
+function dataTooltipRule() {
+  if (tooltipRule) return tooltipRule;
+  for (const sheet of document.styleSheets) {
+    try {
+      tooltipRule = [...sheet.cssRules].find((rule) => rule.selectorText === ".data-tooltip");
+      if (tooltipRule) return tooltipRule;
+    } catch (_) {
+      // Ignore stylesheets the browser does not allow scripts to inspect.
+    }
+  }
+}
+
+function positionDataTooltip(clientX, clientY, centered = false) {
+  const tooltip = dataTooltip();
+  const rule = dataTooltipRule();
+  if (!rule) return;
+
+  const gap = 14;
+  const edge = 10;
+  const bounds = tooltip.getBoundingClientRect();
+  let left = centered ? clientX - bounds.width / 2 : clientX + gap;
+  let top = centered ? clientY - bounds.height - gap : clientY + gap;
+
+  if (!centered && left + bounds.width > innerWidth - edge) left = clientX - bounds.width - gap;
+  if (top < edge || top + bounds.height > innerHeight - edge) top = clientY - bounds.height - gap;
+
+  left = Math.max(edge, Math.min(left, innerWidth - bounds.width - edge));
+  top = Math.max(edge, Math.min(top, innerHeight - bounds.height - edge));
+  rule.style.left = `${Math.round(left)}px`;
+  rule.style.top = `${Math.round(top)}px`;
+}
 
 function showDataTooltip(label, clientX, clientY, centered = false) {
   const tooltip = dataTooltip();
@@ -32,24 +64,16 @@ function linkLegendHighlights(legend, chart) {
   const items = [...legend.querySelectorAll("[data-highlight]")];
   const marks = [...chart.querySelectorAll("[data-highlight]")];
   const targets = [...items, ...chart.querySelectorAll("[data-highlight][tabindex]")];
-  const reset = document.createElement("button");
-  reset.type = "button";
-  reset.className = "legend-reset";
-  reset.textContent = "Reset highlight";
-  reset.hidden = true;
-  legend.append(reset);
 
   function highlight(key) {
     [...items, ...marks].forEach((element) => {
       element.classList.toggle("is-highlighted", element.dataset.highlight === key);
       element.classList.toggle("is-muted", element.dataset.highlight !== key);
     });
-    reset.hidden = false;
   }
 
   function clearHighlight() {
     [...items, ...marks].forEach((element) => element.classList.remove("is-highlighted", "is-muted"));
-    reset.hidden = true;
     hideDataTooltip();
   }
 
@@ -70,5 +94,4 @@ function linkLegendHighlights(legend, chart) {
     });
     target.addEventListener("blur", () => clear(target));
   });
-  reset.addEventListener("click", clearHighlight);
 }
