@@ -229,6 +229,7 @@ function renderDiversityTrend(history) {
 
 async function loadDiversityYear(year) {
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} diversity and access data…`;
     const response = await fetch(`/api/v1/diversity-access?${new URLSearchParams({ year })}`, { headers: { Accept: "application/json" } });

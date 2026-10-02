@@ -148,6 +148,7 @@ function renderSuccessTrends(history) {
 
 async function loadSuccessYear(year) {
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} success and equity data…`;
     const response = await fetch(`/api/v1/success-equity?${new URLSearchParams({ year })}`, { cache: "no-cache", headers: { Accept: "application/json" } });

@@ -5,6 +5,7 @@ const shortTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2
 const monthLabel = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
 const monthHeading = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 const eventDateLabel = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
+const rangeDateLabel = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const easternYmd = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" });
 
 let selectedDate = null;
@@ -55,47 +56,6 @@ function finishLoadingState() {
   document.querySelectorAll(".release-summary dd").forEach((value) => value.classList.remove("skeleton", "loading-value"));
   document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.removeAttribute("aria-busy"));
   window.dashboardLoading?.finish();
-}
-
-function skeleton(className = "") {
-  const node = document.createElement("span");
-  node.className = `skeleton ${className}`;
-  node.setAttribute("aria-hidden", "true");
-  return node;
-}
-
-function showLoadingState() {
-  document.querySelectorAll(".release-summary dd").forEach((value) => {
-    value.textContent = "";
-    value.classList.add("skeleton", "loading-value");
-  });
-
-  const filters = document.createElement("div");
-  filters.className = "loading-filter-row";
-  filters.append(...Array.from({ length: 7 }, () => skeleton("loading-filter")));
-  document.querySelector("#event-filters").replaceChildren(filters);
-
-  const toolbar = document.createElement("div");
-  toolbar.className = "loading-month-toolbar";
-  toolbar.append(skeleton("loading-month-title"), skeleton("loading-month-total"));
-  const grid = document.createElement("div");
-  grid.className = "loading-calendar-grid";
-  grid.append(...Array.from({ length: 35 }, () => skeleton()));
-  document.querySelector("#month-calendar").replaceChildren(toolbar, grid);
-
-  document.querySelector("#selected-day-label").textContent = "Loading events…";
-  document.querySelector("#day-event-list").replaceChildren(...Array.from({ length: 4 }, () => {
-    const event = document.createElement("div");
-    event.className = "loading-event";
-    event.append(skeleton(), skeleton());
-    return event;
-  }));
-  document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.setAttribute("aria-busy", "true"));
-}
-
-function finishLoadingState() {
-  document.querySelectorAll(".release-summary dd").forEach((value) => value.classList.remove("skeleton", "loading-value"));
-  document.querySelectorAll("#event-filters, #month-calendar, #day-event-list").forEach((root) => root.removeAttribute("aria-busy"));
 }
 
 function ymd(date) {
@@ -260,7 +220,9 @@ function renderDayList(date) {
   const events = eventsForDate(date);
   dayEmpty.hidden = events.length > 0;
   list.replaceChildren(...(events.length ? events.map((event) => eventItem(event)) : [dayEmpty]));
-  d3.selectAll(".month-day").classed("is-selected", function () { return this.dataset.date === date; });
+  d3.selectAll(".month-day")
+    .classed("is-selected", function () { return this.dataset.date === date; })
+    .attr("aria-pressed", function () { return String(this.dataset.date === date); });
 }
 
 function addCellHover(selection, label) {
@@ -438,6 +400,7 @@ function renderMonthCalendar(days, bounds, events) {
     }
     button.dataset.date = date;
     button.disabled = !inTerm;
+    button.setAttribute("aria-pressed", String(date === selectedDate));
     button.setAttribute("aria-label", `${dayLabel.format(cursor)}: ${count} ${count === 1 ? "event" : "events"}`);
     number.className = "month-day-number";
     number.textContent = String(cursor.getUTCDate());
@@ -459,7 +422,7 @@ function renderMonthCalendar(days, bounds, events) {
     grid.append(button);
   }
   root.append(toolbar, weekdays, grid);
-  document.querySelector("#calendar-range").textContent = `Academic year ${bounds.startYear}–${String(bounds.startYear + 1).slice(2)} · ${bounds.termStart} through ${bounds.termEnd}`;
+  document.querySelector("#calendar-range").textContent = `Academic year ${bounds.startYear}–${String(bounds.startYear + 1).slice(2)} · ${rangeDateLabel.format(parseYmd(bounds.termStart))}–${rangeDateLabel.format(parseYmd(bounds.termEnd))}`;
 }
 
 const typeColors = ["#c91235", "#9f0f2b", "#e06b84", "#3c8cff", "#63666f", "#a71934", "#356da8", "#202127", "#b86b7a", "#7a7e87"];
@@ -690,6 +653,7 @@ function refreshView() {
 
 async function loadCampusEvents() {
   const status = document.querySelector("#data-status");
+  status.setAttribute("role", "status");
   try {
     const response = await fetch("/api/v1/campus-involvement/events", {
       cache: "no-cache",

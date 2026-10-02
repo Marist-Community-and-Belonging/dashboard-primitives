@@ -625,6 +625,12 @@ td:first-child { font-weight: 650; }
   transition: opacity 120ms ease;
 }
 .composition-value.is-highlighted { opacity: 1; }
+.composition-value[data-highlight="white"],
+.composition-value[data-highlight="american_indian"],
+.composition-value[data-highlight="nonresident"] {
+  fill: #000;
+  stroke: rgb(255 255 255 / 72%);
+}
 
 .access-grid {
   display: grid;
@@ -691,6 +697,7 @@ td:first-child { font-weight: 650; }
 .trend-gridlines .domain { display: none; }
 .trend-gridlines line { stroke: var(--soft-line); }
 .trend-line { vector-effect: non-scaling-stroke; }
+.trend-end-label { dominant-baseline: middle; font: 650 11px Inter, ui-sans-serif, system-ui, sans-serif; paint-order: stroke; stroke: white; stroke-width: 3px; stroke-linejoin: round; }
 .trend-point { outline: none; transition: filter 120ms ease, stroke-width 120ms ease; }
 .trend-point.is-active,
 .trend-point:focus { filter: drop-shadow(0 0 3px rgb(32 33 39 / 40%)); stroke: var(--ink); stroke-width: 3px; }
@@ -871,6 +878,9 @@ footer a { color: var(--red-dark); font-weight: 700; text-underline-offset: 3px;
   .product-name { display: none; }
   .method-link { max-width: 100px; text-align: right; }
   .dashboard-toolbar { grid-template-columns: minmax(0, 1fr) 138px; gap: 12px; }
+  .dashboard-toolbar:not(.is-stuck) { grid-template-columns: 1fr; }
+  .dashboard-toolbar:not(.is-stuck) .data-note { text-overflow: initial; white-space: normal; }
+  .dashboard-toolbar:not(.is-stuck) .year-filter { width: 100%; }
   .dashboard-toolbar .year-filter label {
     position: absolute;
     width: 1px;
