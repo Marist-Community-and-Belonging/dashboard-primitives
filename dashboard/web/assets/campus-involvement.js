@@ -10,6 +10,7 @@ let payloadCache = null;
 let selectedTypes = new Set();
 let onCampusOnly = false;
 let resizeTimer = 0;
+const uncategorizedFilter = "__uncategorized__";
 
 function ymd(date) {
   return date.toISOString().slice(0, 10);
@@ -43,17 +44,11 @@ function fridayOnOrAfter(date) {
   return copy;
 }
 
-/** Academic year block: Mon on/before Aug 24 → Fri on/after May 21. Skips summer. */
+/** Academic year: Mon on/before Aug 24 through Fri on/after May 21. Summer uses next fall. */
 function academicYearBounds(ref = new Date()) {
   const [year, month, day] = easternYmd.format(ref).split("-").map(Number);
   const today = Date.UTC(year, month - 1, day);
-  const may21 = Date.UTC(year, 4, 21);
-  const aug24 = Date.UTC(year, 7, 24);
-  let startYear = year;
-  if (today < may21) startYear = year - 1;
-  else if (today >= may21 && today < aug24) startYear = year;
-  else startYear = year;
-
+  const startYear = today < Date.UTC(year, 4, 21) ? year - 1 : year;
   const termStart = mondayOnOrBefore(new Date(Date.UTC(startYear, 7, 24)));
   const termEnd = fridayOnOrAfter(new Date(Date.UTC(startYear + 1, 4, 21)));
   const gridStart = startOfUtcWeek(termStart);
@@ -77,10 +72,20 @@ function eventTimeLabel(event) {
   return `${shortTime.format(new Date(event.start))}–${shortTime.format(new Date(event.end))}`;
 }
 
+function topEventTypes(events) {
+  return d3.rollups(events, (rows) => rows.length, (event) => event.event_type || "Other")
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 8);
+}
+
 function filteredEvents() {
   if (!payloadCache) return [];
+  const categorizedTypes = new Set(topEventTypes(payloadCache.events).map(([type]) => type));
   return payloadCache.events.filter((event) => {
-    if (selectedTypes.size && !selectedTypes.has(event.event_type || "Other")) return false;
+    const type = event.event_type || "Other";
+    if (selectedTypes.size
+      && !selectedTypes.has(type)
+      && !(selectedTypes.has(uncategorizedFilter) && !categorizedTypes.has(type))) return false;
     if (onCampusOnly && event.location_type !== "On-Campus") return false;
     return true;
   });
@@ -200,11 +205,9 @@ function addCellHover(selection, label) {
 
 function renderFilters(events) {
   const root = document.querySelector("#event-filters");
-  const types = d3.rollups(
-    events,
-    (rows) => rows.length,
-    (event) => event.event_type || "Other",
-  ).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const visibleTypes = topEventTypes(events);
+  const categorizedTypes = new Set(visibleTypes.map(([type]) => type));
+  visibleTypes.push([uncategorizedFilter, events.filter((event) => !categorizedTypes.has(event.event_type || "Other")).length]);
 
   root.replaceChildren();
   const typeWrap = document.createElement("div");
@@ -223,12 +226,12 @@ function renderFilters(events) {
   });
   typeWrap.append(allButton);
 
-  types.slice(0, 8).forEach(([type, count]) => {
+  visibleTypes.forEach(([type, count]) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `filter-chip${selectedTypes.has(type) ? " is-active" : ""}`;
     button.setAttribute("aria-pressed", String(selectedTypes.has(type)));
-    button.textContent = `${type} (${count})`;
+    button.textContent = `${type === uncategorizedFilter ? "Uncategorized" : type} (${count})`;
     button.addEventListener("click", () => {
       if (selectedTypes.has(type)) selectedTypes.delete(type);
       else selectedTypes.add(type);
@@ -372,7 +375,7 @@ function involvementLegendKey(label, value, colorClass, highlight, tooltip) {
   button.className = "involvement-key";
   button.dataset.highlight = highlight;
   button.dataset.tooltip = tooltip;
-  button.setAttribute("aria-label", `${tooltip} Highlight matching chart marks.`);
+  button.setAttribute("aria-label", tooltip);
   swatch.className = colorClass;
   name.textContent = label;
   stat.textContent = value;
@@ -563,7 +566,7 @@ function renderWeeklyChart(events, bounds) {
   legend.className = "involvement-legend weekly-legend";
   legend.append(
     involvementLegendKey("Events / week", `${eventAverage} avg`, "weekly-events", "weekly-events", `Events per week: ${eventAverage} average.`),
-    involvementLegendKey("Active days / week", `${activeAverage} avg`, "weekly-active", "weekly-active", `Active days per week: ${activeAverage} average.`),
+    involvementLegendKey("Active days / week (0–7)", `${activeAverage} avg`, "weekly-active", "weekly-active", `Active days per week: ${activeAverage} average.`),
   );
   root.append(legend);
   linkLegendHighlights(legend, svg.node());
@@ -597,9 +600,9 @@ async function loadCampusEvents() {
     payloadCache = await response.json();
     const count = document.createElement("strong");
     count.textContent = payloadCache.event_count;
-    status.replaceChildren("Loaded ", count, " public CampusGroups events.");
+    status.replaceChildren("Loaded ", count, " CampusGroups events.");
   } catch (error) {
-    status.textContent = "CampusGroups events feed is unavailable right now.";
+    status.textContent = "CampusGroups events unavailable.";
     console.error(error);
     return;
   }
@@ -607,7 +610,7 @@ async function loadCampusEvents() {
     selectedDate = defaultSelectedDate(payloadCache.days, academicYearBounds());
     refreshView();
   } catch (error) {
-    status.textContent = "Events loaded, but the calendar failed to render.";
+    status.textContent = "Events loaded; calendar failed to render.";
     console.error(error);
   }
 }
@@ -616,14 +619,6 @@ loadCampusEvents();
 window.addEventListener("resize", () => {
   window.clearTimeout(resizeTimer);
   resizeTimer = window.setTimeout(() => {
-    if (payloadCache) {
-      const bounds = academicYearBounds();
-      const events = filteredEvents();
-      const days = dayCountsFromEvents(events);
-      renderHeatmap(days, bounds);
-      renderTypeDonut(events);
-      renderWeeklyChart(events, bounds);
-      if (selectedDate) renderDayList(selectedDate);
-    }
+    if (payloadCache) refreshView();
   }, 120);
 });
