@@ -19,6 +19,9 @@ func requestLogger(logger *slog.Logger) gin.HandlerFunc {
 			"status", status,
 			"duration", time.Since(started).Round(time.Microsecond),
 		}
+		if len(c.Errors) > 0 {
+			fields = append(fields, "error", c.Errors.Last().Err)
+		}
 		message := c.Request.Method + " " + c.Request.URL.Path
 		switch {
 		case status >= http.StatusInternalServerError:

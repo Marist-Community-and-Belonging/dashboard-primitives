@@ -93,6 +93,28 @@ footer {
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
 }
+.report-download {
+  display: inline-flex;
+  padding: 9px 13px;
+  background: var(--red-dark);
+  color: white;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+}
+.report-download:hover { background: var(--red); }
+.report-export {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 48px;
+  padding: 24px;
+  background: var(--wash);
+  border-top: 2px solid var(--ink);
+}
+.report-export h2 { margin: 3px 0 6px; font: 700 25px/1.2 Georgia, "Times New Roman", serif; }
+.report-export p:last-child { margin: 0; color: var(--gray); }
 .section-nav {
   display: flex;
   gap: 32px;
@@ -813,6 +835,7 @@ footer a { color: var(--red-dark); font-weight: 700; text-underline-offset: 3px;
   .release-summary { border-left: 0; border-top: 1px solid var(--line); padding-top: 16px; }
   .release-summary div:first-child { padding-left: 0; }
   .section-heading { align-items: start; flex-direction: column; }
+  .report-export { align-items: start; flex-direction: column; }
   .dashboard-toolbar { gap: 14px; padding: 10px 0; }
   .dashboard-toolbar .year-filter { width: auto; }
   .sticky-page-title { font-size: 16px; }

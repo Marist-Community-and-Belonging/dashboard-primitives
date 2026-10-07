@@ -3,6 +3,7 @@ package main
 import "io/fs"
 
 type application struct {
+	content       fs.FS
 	pages         map[string][]byte
 	overview      datasetCollection[overviewDataset]
 	diversity     datasetCollection[diversityDataset]
@@ -54,6 +55,7 @@ func loadApplication(content fs.FS) (application, error) {
 	}
 
 	return application{
+		content:       content,
 		pages:         pages,
 		overview:      overview,
 		diversity:     diversity,
