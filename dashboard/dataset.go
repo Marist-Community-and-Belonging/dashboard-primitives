@@ -15,6 +15,7 @@ type releaseMetadata struct {
 
 type groupSummary struct {
 	Count  int      `json:"count"`
+	Mean   *float64 `json:"mean"`
 	Median *float64 `json:"median"`
 	Q1     *float64 `json:"q1"`
 	Q3     *float64 `json:"q3"`
@@ -44,7 +45,7 @@ type overviewDataset struct {
 }
 
 var exportHeader = []string{
-	"metric_id", "metric", "interpretation", "marist", "peer_median", "aspirant_median", "unit",
+	"metric_id", "metric", "interpretation", "marist", "peer_median", "peer_mean", "aspirant_median", "aspirant_mean", "unit",
 	"data_year", "cohort_year", "collection_year", "release_type", "source_component", "source_variable",
 }
 
@@ -62,7 +63,9 @@ func buildCSV(dataset overviewDataset) ([]byte, error) {
 			metric.Interpretation,
 			formatCSVNumber(metric.Value),
 			formatCSVNumber(metric.Peer.Median),
+			formatCSVNumber(metric.Peer.Mean),
 			formatCSVNumber(metric.Aspirant.Median),
+			formatCSVNumber(metric.Aspirant.Mean),
 			metric.Unit,
 			metric.DataYear,
 			stringValue(metric.CohortYear),

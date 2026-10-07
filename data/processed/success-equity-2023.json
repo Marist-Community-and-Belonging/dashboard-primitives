@@ -20,12 +20,14 @@
       "value": 89.0,
       "peer": {
         "count": 10,
+        "mean": 86.9,
         "median": 86.5,
         "q1": 85.0,
         "q3": 89.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 93.75,
         "median": 94.0,
         "q1": 92.75,
         "q3": 95.25
@@ -43,12 +45,14 @@
       "value": 72.0,
       "peer": {
         "count": 10,
+        "mean": 73.1,
         "median": 74.0,
         "q1": 69.0,
         "q3": 77.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 73.125,
         "median": 81.5,
         "q1": 79.0,
         "q3": 88.0
@@ -66,12 +70,14 @@
       "value": 80.0,
       "peer": {
         "count": 10,
+        "mean": 78.0,
         "median": 78.5,
         "q1": 74.5,
         "q3": 82.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 88.25,
         "median": 89.5,
         "q1": 87.5,
         "q3": 90.25
@@ -89,12 +95,14 @@
       "value": 77.0,
       "peer": {
         "count": 10,
+        "mean": 71.4,
         "median": 70.0,
         "q1": 66.25,
         "q3": 78.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 84.625,
         "median": 87.5,
         "q1": 82.0,
         "q3": 89.0
@@ -113,12 +121,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 74.9,
         "median": 75.5,
         "q1": 69.5,
         "q3": 78.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 86.875,
         "median": 87.5,
         "q1": 86.0,
         "q3": 88.25
@@ -135,12 +145,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 80.3,
         "median": 80.5,
         "q1": 77.25,
         "q3": 84.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 90.0,
         "median": 92.0,
         "q1": 88.5,
         "q3": 93.0
@@ -157,12 +169,14 @@
       "denominator": null,
       "peer": {
         "count": 6,
+        "mean": 92.5,
         "median": 100.0,
         "q1": 100.0,
         "q3": 100.0
       },
       "aspirant": {
         "count": 3,
+        "mean": 50.0,
         "median": 50.0,
         "q1": 25.0,
         "q3": 75.0
@@ -179,12 +193,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 73.3,
         "median": 74.0,
         "q1": 70.25,
         "q3": 77.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 84.875,
         "median": 84.5,
         "q1": 81.75,
         "q3": 89.25
@@ -201,12 +217,14 @@
       "denominator": null,
       "peer": {
         "count": 4,
+        "mean": 75.0,
         "median": 83.5,
         "q1": 58.5,
         "q3": 100.0
       },
       "aspirant": {
         "count": 2,
+        "mean": 83.5,
         "median": 83.5,
         "q1": 75.25,
         "q3": 91.75
@@ -223,12 +241,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 70.3,
         "median": 69.5,
         "q1": 62.5,
         "q3": 72.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 80.625,
         "median": 83.0,
         "q1": 77.0,
         "q3": 85.25
@@ -245,12 +265,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 72.2,
         "median": 68.0,
         "q1": 67.0,
         "q3": 80.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 85.25,
         "median": 88.5,
         "q1": 80.0,
         "q3": 90.25
@@ -267,12 +289,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 80.4,
         "median": 80.5,
         "q1": 77.5,
         "q3": 82.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 89.75,
         "median": 91.0,
         "q1": 87.75,
         "q3": 91.25
@@ -289,12 +313,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 74.2,
         "median": 77.0,
         "q1": 69.25,
         "q3": 81.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 88.75,
         "median": 89.5,
         "q1": 86.75,
         "q3": 90.25
@@ -311,12 +337,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 82.0,
         "median": 80.5,
         "q1": 71.75,
         "q3": 97.0
       },
       "aspirant": {
         "count": 8,
+        "mean": 91.125,
         "median": 93.0,
         "q1": 88.25,
         "q3": 93.0
@@ -333,12 +361,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 67.6,
         "median": 70.5,
         "q1": 54.0,
         "q3": 78.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 84.5,
         "median": 86.0,
         "q1": 83.75,
         "q3": 88.25
@@ -355,12 +385,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 71.4,
         "median": 70.0,
         "q1": 66.25,
         "q3": 78.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 84.625,
         "median": 87.5,
         "q1": 82.0,
         "q3": 89.0
@@ -377,12 +409,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 79.8,
         "median": 79.5,
         "q1": 75.25,
         "q3": 83.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 90.375,
         "median": 92.0,
         "q1": 90.0,
         "q3": 92.0
@@ -399,12 +433,14 @@
       "denominator": null,
       "peer": {
         "count": 10,
+        "mean": 79.7,
         "median": 79.5,
         "q1": 77.25,
         "q3": 83.0
       },
       "aspirant": {
         "count": 8,
+        "mean": 88.5,
         "median": 89.0,
         "q1": 87.5,
         "q3": 90.25

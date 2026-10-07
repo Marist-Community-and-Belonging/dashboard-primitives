@@ -34,7 +34,7 @@ function renderOutcomeCard(outcome) {
   const article = document.createElement("article");
   article.className = "metric outcome-card";
   const year = outcome.cohort_year || outcome.data_year;
-  article.innerHTML = `<div class="metric-header"><div><h3>${outcome.display_name}</h3><p class="metric-interpretation">${outcome.description}</p></div></div><div class="metric-result"><p class="metric-value">${percent(outcome.value)}</p><p class="metric-year">${outcome.data_year}<br>${year === outcome.data_year ? "" : year}</p></div><div class="bullet-chart outcome-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${percent(outcome.peer.median)}</dd></div><div><dt>Aspirant median</dt><dd>${percent(outcome.aspirant.median)}</dd></div></dl>`;
+  article.innerHTML = `<div class="metric-header"><div><h3>${outcome.display_name}</h3><p class="metric-interpretation">${outcome.description}</p></div></div><div class="metric-result"><p class="metric-value">${percent(outcome.value)}</p><p class="metric-year">${outcome.data_year}<br>${year === outcome.data_year ? "" : year}</p></div><div class="bullet-chart outcome-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${percent(outcome.peer.median)}</dd></div><div><dt>Peer mean</dt><dd>${percent(outcome.peer.mean)}</dd></div><div><dt>Aspirant median</dt><dd>${percent(outcome.aspirant.median)}</dd></div><div><dt>Aspirant mean</dt><dd>${percent(outcome.aspirant.mean)}</dd></div></dl>`;
   document.querySelector("#outcome-grid").append(article);
 
   const width = 560;
@@ -51,7 +51,8 @@ function renderOutcomeCard(outcome) {
     const mark = svg.append("g").attr("class", "chart-mark");
     mark.append("rect").attr("x", x(summary.q1)).attr("y", y - 8).attr("width", Math.max(x(summary.q3) - x(summary.q1), 2)).attr("height", 16).attr("fill", fill).attr("stroke", stroke || fill);
     mark.append("line").attr("x1", x(summary.median)).attr("x2", x(summary.median)).attr("y1", y - 12).attr("y2", y + 12).attr("stroke", stroke || "#52555d").attr("stroke-width", 2);
-    addHover(mark, `${outcome.display_name}. ${label}: ${range(summary)}; median ${percent(summary.median)}.`);
+    mark.append("line").attr("x1", x(summary.mean)).attr("x2", x(summary.mean)).attr("y1", y - 8).attr("y2", y + 8).attr("stroke", stroke || "#52555d").attr("stroke-width", 2).attr("stroke-dasharray", "3 2");
+    addHover(mark, `${outcome.display_name}. ${label}: ${range(summary)}; ${label.split(" ")[0]} median ${percent(summary.median)}; ${label.split(" ")[0]} mean ${percent(summary.mean)}.`);
   });
   if (Number.isFinite(outcome.value)) {
     const mark = svg.append("g").attr("class", "chart-mark");
@@ -66,7 +67,7 @@ function renderOutcomes(dataset) {
   dataset.outcomes.forEach((outcome) => {
     renderOutcomeCard(outcome);
     const row = document.createElement("tr");
-    row.innerHTML = `<th scope="row">${outcome.display_name}</th><td>${percent(outcome.value)}</td><td>${percent(outcome.peer.median)}</td><td>${range(outcome.peer)}</td><td>${percent(outcome.aspirant.median)}</td><td>${range(outcome.aspirant)}</td><td>${outcome.cohort_year || outcome.data_year}</td>`;
+    row.innerHTML = `<th scope="row">${outcome.display_name}</th><td>${percent(outcome.value)}</td><td>${percent(outcome.peer.median)}</td><td>${percent(outcome.peer.mean)}</td><td>${range(outcome.peer)}</td><td>${percent(outcome.aspirant.median)}</td><td>${percent(outcome.aspirant.mean)}</td><td>${range(outcome.aspirant)}</td><td>${outcome.cohort_year || outcome.data_year}</td>`;
     document.querySelector("#outcome-table-body").append(row);
   });
 }
@@ -97,7 +98,7 @@ function renderEquity(dataset) {
       if (Number.isFinite(item.gap)) {
         svg.append("line").attr("class", `equity-gap-bar${item.gap < 0 ? " is-negative" : ""}`).attr("x1", x(0)).attr("x2", x(item.gap)).attr("y1", y).attr("y2", y).attr("stroke", item.gap < 0 ? "#8e2038" : "#3f7771").attr("stroke-width", 3);
         const mark = svg.append("circle").attr("class", "equity-dot").attr("cx", x(item.gap)).attr("cy", y).attr("r", 7).attr("fill", item.gap < 0 ? "#c91235" : "#3f7771").attr("stroke", "white").attr("stroke-width", 2);
-        addHover(mark, `${item.display_name}: ${percent(item.value)}; ${points(item.gap)} from Marist overall. Peer median ${percent(item.peer.median)}; aspirant median ${percent(item.aspirant.median)}.`);
+        addHover(mark, `${item.display_name}: ${percent(item.value)}; ${points(item.gap)} from Marist overall. Peer median ${percent(item.peer.median)}; peer mean ${percent(item.peer.mean)}; aspirant median ${percent(item.aspirant.median)}; aspirant mean ${percent(item.aspirant.mean)}.`);
         svg.append("text").attr("class", "equity-value-label").attr("x", width - 8).attr("y", y + 4).attr("text-anchor", "end").text(`${percent(item.value)} · ${points(item.gap)}`);
       } else {
         svg.append("text").attr("class", "equity-unavailable").attr("x", x(0) + 10).attr("y", y + 4).text("Unavailable");
@@ -110,7 +111,7 @@ function renderEquity(dataset) {
 
   dataset.subgroups.forEach((item) => {
     const row = document.createElement("tr");
-    row.innerHTML = `<th scope="row"><span class="table-category">${item.category}</span>${item.display_name}</th><td>${percent(item.value)}</td><td>${points(item.gap)}</td><td>${percent(item.peer.median)}</td><td>${percent(item.aspirant.median)}</td>`;
+    row.innerHTML = `<th scope="row"><span class="table-category">${item.category}</span>${item.display_name}</th><td>${percent(item.value)}</td><td>${points(item.gap)}</td><td>${percent(item.peer.median)}</td><td>${percent(item.peer.mean)}</td><td>${percent(item.aspirant.median)}</td><td>${percent(item.aspirant.mean)}</td>`;
     document.querySelector("#equity-table-body").append(row);
   });
 }

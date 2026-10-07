@@ -1,6 +1,9 @@
+import statistics
 import unittest
 
+from scripts.ipeds import build_affordability_resources as AFFORDABILITY
 from scripts.ipeds import build_overview as PIPELINE
+from scripts.ipeds import build_success_equity as SUCCESS
 
 
 class OverviewPipelineTests(unittest.TestCase):
@@ -48,6 +51,50 @@ class OverviewPipelineTests(unittest.TestCase):
             self.assertEqual(len(marist), 1)
             self.assertNotEqual(marist[0]["group"], "peer")
             self.assertNotEqual(marist[0]["group"], "aspirant")
+
+    def test_means_use_available_group_values_and_exclude_marist(self):
+        summary = PIPELINE.summary([
+            {"group": "marist", "value": 999},
+            {"group": "peer", "value": 2},
+            {"group": "peer", "value": 4},
+            {"group": "peer", "value": None},
+        ], "peer")
+        self.assertEqual(summary["mean"], 3)
+        self.assertEqual(summary["count"], 2)
+        for release in PIPELINE.SOURCE.list_releases():
+            result = PIPELINE.build(release["collection_year"])
+            for metric in result["metrics"]:
+                for group in ("peer", "aspirant"):
+                    values = [
+                        record["value"]
+                        for record in metric["institutions"]
+                        if record["group"] == group and record["value"] is not None
+                    ]
+                    self.assertAlmostEqual(metric[group]["mean"], sum(values) / len(values))
+                    self.assertEqual(metric[group]["median"], statistics.median(values))
+
+    def test_all_dataset_means_match_available_institution_values(self):
+        self.assertEqual(SUCCESS.summarize([2, None, 4])["mean"], 3)
+        for release in PIPELINE.SOURCE.list_releases():
+            year = release["collection_year"]
+            success = SUCCESS.build(year)
+            affordability = AFFORDABILITY.build(year)
+            for outcome in success["outcomes"]:
+                for group in ("peer", "aspirant"):
+                    values = [record["outcomes"][outcome["metric_id"]] for record in success["institutions"] if record["group"] == group and record["outcomes"][outcome["metric_id"]] is not None]
+                    self.assertAlmostEqual(outcome[group]["mean"], sum(values) / len(values))
+            for subgroup in success["subgroups"]:
+                for group in ("peer", "aspirant"):
+                    values = [record["subgroups"][subgroup["subgroup_id"]] for record in success["institutions"] if record["group"] == group and record["subgroups"][subgroup["subgroup_id"]] is not None]
+                    self.assertAlmostEqual(subgroup[group]["mean"], sum(values) / len(values))
+            for headline in affordability["headlines"]:
+                for group in ("peer", "aspirant"):
+                    values = [record[headline["metric_id"]] for record in affordability["institutions"] if record["group"] == group and record[headline["metric_id"]] is not None]
+                    self.assertAlmostEqual(headline[group]["mean"], sum(values) / len(values))
+            for band in affordability["income_bands"]:
+                for group in ("peer", "aspirant"):
+                    values = [record["income_net_prices"][band["band_id"]] for record in affordability["institutions"] if record["group"] == group and record["income_net_prices"][band["band_id"]] is not None]
+                    self.assertAlmostEqual(band[group]["mean"], sum(values) / len(values))
 
 
 if __name__ == "__main__":

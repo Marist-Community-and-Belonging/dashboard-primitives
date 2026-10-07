@@ -24,12 +24,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 5263.1,
         "median": 5541.5,
         "q1": 4186.25,
         "q3": 6100.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 7319.25,
         "median": 6306.5,
         "q1": 3581.0,
         "q3": 10011.0
@@ -187,12 +189,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 72.5,
         "median": 74.5,
         "q1": 66.75,
         "q3": 82.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 30.125,
         "median": 33.5,
         "q1": 21.5,
         "q3": 36.25
@@ -350,12 +354,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 86.6,
         "median": 85.5,
         "q1": 85.0,
         "q3": 89.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 92.875,
         "median": 93.0,
         "q1": 90.75,
         "q3": 95.25
@@ -513,12 +519,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 78.0,
         "median": 78.0,
         "q1": 73.75,
         "q3": 82.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 89.25,
         "median": 91.0,
         "q1": 88.5,
         "q3": 91.0
@@ -676,12 +684,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 38233.2,
         "median": 37043.5,
         "q1": 33548.25,
         "q3": 43359.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 35931.125,
         "median": 35332.0,
         "q1": 33649.0,
         "q3": 37880.75
@@ -839,12 +849,14 @@
       "status_flag": null,
       "peer": {
         "count": 10,
+        "mean": 17.0,
         "median": 16.0,
         "q1": 14.25,
         "q3": 21.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 13.875,
         "median": 13.0,
         "q1": 11.5,
         "q3": 16.5

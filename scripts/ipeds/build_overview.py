@@ -53,6 +53,7 @@ def summary(records: list[dict[str, object]], group: str) -> dict[str, float | i
     values = [float(record["value"]) for record in records if record["group"] == group and record["value"] is not None]
     return {
         "count": len(values),
+        "mean": statistics.fmean(values) if values else None,
         "median": statistics.median(values) if values else None,
         "q1": percentile(values, 0.25),
         "q3": percentile(values, 0.75),

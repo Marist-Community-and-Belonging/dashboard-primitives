@@ -49,14 +49,15 @@ type successDataset struct {
 func buildSuccessCSV(dataset successDataset) ([]byte, error) {
 	var output bytes.Buffer
 	writer := csv.NewWriter(&output)
-	header := []string{"category", "subgroup", "marist_rate", "gap_from_marist_overall", "peer_median", "aspirant_median", "numerator", "denominator", "cohort_year", "collection_year", "release_type", "source_variable"}
+	header := []string{"category", "subgroup", "marist_rate", "gap_from_marist_overall", "peer_median", "peer_mean", "aspirant_median", "aspirant_mean", "numerator", "denominator", "cohort_year", "collection_year", "release_type", "source_variable"}
 	if err := writer.Write(header); err != nil {
 		return nil, err
 	}
 	for _, subgroup := range dataset.Subgroups {
 		record := []string{
 			subgroup.Category, subgroup.DisplayName, formatCSVNumber(subgroup.Value), formatCSVNumber(subgroup.Gap),
-			formatCSVNumber(subgroup.Peer.Median), formatCSVNumber(subgroup.Aspirant.Median),
+			formatCSVNumber(subgroup.Peer.Median), formatCSVNumber(subgroup.Peer.Mean),
+			formatCSVNumber(subgroup.Aspirant.Median), formatCSVNumber(subgroup.Aspirant.Mean),
 			formatCSVNumber(subgroup.Numerator), formatCSVNumber(subgroup.Denominator), dataset.CohortYear,
 			dataset.Release.CollectionYear, dataset.Release.ReleaseType, subgroup.Variable,
 		}
