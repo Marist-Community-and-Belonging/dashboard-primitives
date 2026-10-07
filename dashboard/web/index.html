@@ -76,7 +76,7 @@
             <h2 id="headline-heading">How Marist compares now</h2>
             <p>Marist values, comparison-group medians and means, and each group’s middle 50%.</p>
           </div>
-          <a class="download-link" href="/api/v1/export.csv" download>Download CSV</a>
+          <a id="export-csv" class="download-link" href="/api/v1/export.csv" download>Download CSV</a>
         </div>
         <div class="section-heading legend-row">
           <div><p id="active-filter" class="active-filter" aria-live="polite"></p><p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p></div>
@@ -110,6 +110,15 @@
           <p>Collection year labels the IPEDS release. Measurement years and graduation cohorts may differ and appear with each measure. Missing or suppressed values remain unavailable, never zero.</p>
           <a href="https://nces.ed.gov/ipeds/use-the-data">Official IPEDS data source</a>
         </div>
+      </section>
+
+      <section class="report-export" aria-labelledby="report-export-heading">
+        <div>
+          <p class="eyebrow">Portable report</p>
+          <h2 id="report-export-heading">View this collection as a PDF</h2>
+          <p>Open a formatted report built from the same selected-year data shown above.</p>
+        </div>
+        <a id="report-pdf" class="report-download" href="/api/v1/report.pdf">Open report PDF</a>
       </section>
     </main>
 

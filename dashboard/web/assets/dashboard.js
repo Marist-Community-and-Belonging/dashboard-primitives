@@ -233,7 +233,8 @@ function renderDataset(dataset, related) {
   });
 
   const query = new URLSearchParams({ year: dataset.release.collection_year });
-  document.querySelector(".download-link").href = `/api/v1/export.csv?${query}`;
+  document.querySelector("#export-csv").href = `/api/v1/export.csv?${query}`;
+  document.querySelector("#report-pdf").href = `/api/v1/report.pdf?${query}`;
   prepareScrollReveals(grid);
   renderOverviewTrends();
 }

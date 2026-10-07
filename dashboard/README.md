@@ -11,6 +11,8 @@ go run .
 ```
 
 Open `http://localhost:8080/`. Set `DASHBOARD_ADDR` to change the listening address.
+PDF export also requires [`typst`](https://typst.app/) on `PATH`; its first run
+downloads the report template's Typst package dependency.
 Request logs use Go's `log/slog` package and include a compact timestamp,
 method, path, status, and duration. Interactive terminals color each line by
 level; redirected logs remain plain. Set `DASHBOARD_LOG_LEVEL` to `debug`,
@@ -60,6 +62,7 @@ Use the collection start year. The command checks the official NCES Access relea
 - `GET /api/v1/overview/releases`
 - `GET /api/v1/overview`
 - `GET /api/v1/export.csv`
+- `GET /api/v1/report.pdf`
 - `GET /api/v1/diversity-access`
 - `GET /api/v1/diversity-access/export.csv`
 - `GET /api/v1/success-equity`

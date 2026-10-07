@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"io/fs"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -231,6 +232,27 @@ func TestCSVExportMatchesOverview(t *testing.T) {
 	}
 	if !strings.Contains(strings.Join(records[0], ","), "peer_mean") || !strings.Contains(strings.Join(records[0], ","), "aspirant_mean") {
 		t.Fatalf("overview CSV header omits means: %v", records[0])
+	}
+}
+
+func TestPDFReportExport(t *testing.T) {
+	original := renderReportPDF
+	renderReportPDF = func(_ fs.FS, year int) ([]byte, error) {
+		if year != 2023 {
+			t.Fatalf("report year = %d, want 2023", year)
+		}
+		return []byte("%PDF-test"), nil
+	}
+	t.Cleanup(func() { renderReportPDF = original })
+
+	router := testRouter(t)
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/api/v1/report.pdf?year=2023%E2%80%9324", nil))
+	if response.Code != http.StatusOK || response.Header().Get("Content-Type") != "application/pdf" {
+		t.Fatalf("PDF response = %d %q", response.Code, response.Header().Get("Content-Type"))
+	}
+	if got := response.Header().Get("Content-Disposition"); got != `inline; filename="marist-ipeds-report-2023.pdf"` {
+		t.Fatalf("Content-Disposition = %q", got)
 	}
 }
 

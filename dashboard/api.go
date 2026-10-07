@@ -2,11 +2,22 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
 	"net/http"
+	"strconv"
 	"strings"
 
+	"github.com/Marist-Community-and-Belonging/report-gen-pdf/reportgen"
 	"github.com/gin-gonic/gin"
 )
+
+var renderReportPDF = func(content fs.FS, year int) ([]byte, error) {
+	report, err := reportgen.BuildFromFS(content, "web/data", year)
+	if err != nil {
+		return nil, err
+	}
+	return reportgen.Generate(report, reportgen.Options{})
+}
 
 func registerAPI(api *gin.RouterGroup, app application) {
 	api.GET("/health", func(c *gin.Context) {
@@ -51,5 +62,26 @@ func registerAPI(api *gin.RouterGroup, app application) {
 		year := strings.SplitN(dataset.dataset.Release.CollectionYear, "–", 2)[0]
 		c.Header("Content-Disposition", fmt.Sprintf(`attachment; filename="marist-ipeds-overview-%s.csv"`, year))
 		c.Data(http.StatusOK, "text/csv; charset=utf-8", dataset.csv)
+	})
+	api.GET("/report.pdf", func(c *gin.Context) {
+		dataset, ok := app.overview.selectYear(c)
+		if !ok {
+			return
+		}
+		yearLabel := dataset.dataset.Release.CollectionYear
+		year, err := strconv.Atoi(strings.SplitN(yearLabel, "–", 2)[0])
+		if err != nil {
+			_ = c.Error(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "report generation failed"})
+			return
+		}
+		pdf, err := renderReportPDF(app.content, year)
+		if err != nil {
+			_ = c.Error(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "report generation failed"})
+			return
+		}
+		c.Header("Content-Disposition", fmt.Sprintf(`inline; filename="marist-ipeds-report-%d.pdf"`, year))
+		c.Data(http.StatusOK, "application/pdf", pdf)
 	})
 }
