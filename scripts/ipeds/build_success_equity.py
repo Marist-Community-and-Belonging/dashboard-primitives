@@ -33,6 +33,7 @@ def summarize(values: list[float | None]) -> dict[str, float | int | None]:
     available = [float(value) for value in values if value is not None]
     return {
         "count": len(available),
+        "mean": statistics.fmean(available) if available else None,
         "median": statistics.median(available) if available else None,
         "q1": percentile(available, 0.25),
         "q3": percentile(available, 0.75),

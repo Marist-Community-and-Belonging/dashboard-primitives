@@ -47,7 +47,8 @@ function renderAffordabilityBand(container, metric) {
     const mark = svg.append("g").attr("class", "chart-mark");
     mark.append("rect").attr("x", scale(summary.q1)).attr("y", y - 5).attr("width", Math.max(3, scale(summary.q3) - scale(summary.q1))).attr("height", 10).attr("fill", fill).attr("stroke", label === "Aspirant" ? stroke : "none");
     mark.append("line").attr("x1", scale(summary.median)).attr("x2", scale(summary.median)).attr("y1", y - 9).attr("y2", y + 9).attr("stroke", stroke).attr("stroke-width", 2);
-    affordabilityHover(mark, `${label} middle 50%: ${affordabilityRange(summary, metric.unit)}; median ${affordabilityValue(summary.median, metric.unit)}.`);
+    mark.append("line").attr("x1", scale(summary.mean)).attr("x2", scale(summary.mean)).attr("y1", y - 6).attr("y2", y + 6).attr("stroke", stroke).attr("stroke-width", 2).attr("stroke-dasharray", "3 2");
+    affordabilityHover(mark, `${label} middle 50%: ${affordabilityRange(summary, metric.unit)}; ${label} median ${affordabilityValue(summary.median, metric.unit)}; ${label} mean ${affordabilityValue(summary.mean, metric.unit)}.`);
   });
   const marist = svg.append("circle").attr("class", "chart-mark").attr("cx", scale(metric.value)).attr("cy", 44).attr("r", 6).attr("fill", "#c91235").attr("stroke", "white").attr("stroke-width", 2);
   affordabilityHover(marist, `Marist: ${affordabilityValue(metric.value, metric.unit)}.`);
@@ -59,7 +60,7 @@ function renderAffordabilityHeadlines(dataset) {
   dataset.headlines.forEach((metric) => {
     const article = document.createElement("article");
     article.className = "metric";
-    article.innerHTML = `<div class="metric-header"><div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.description}</p></div></div><div class="metric-result"><p class="metric-value">${affordabilityValue(metric.value, metric.unit)}</p><p class="metric-year">${metric.data_year}</p></div><div class="bullet-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${affordabilityValue(metric.peer.median, metric.unit)}</dd></div><div><dt>Aspirant median</dt><dd>${affordabilityValue(metric.aspirant.median, metric.unit)}</dd></div></dl>`;
+    article.innerHTML = `<div class="metric-header"><div><h3>${metric.display_name}</h3><p class="metric-interpretation">${metric.description}</p></div></div><div class="metric-result"><p class="metric-value">${affordabilityValue(metric.value, metric.unit)}</p><p class="metric-year">${metric.data_year}</p></div><div class="bullet-chart"></div><dl class="comparison-values"><div><dt>Peer median</dt><dd>${affordabilityValue(metric.peer.median, metric.unit)}</dd></div><div><dt>Peer mean</dt><dd>${affordabilityValue(metric.peer.mean, metric.unit)}</dd></div><div><dt>Aspirant median</dt><dd>${affordabilityValue(metric.aspirant.median, metric.unit)}</dd></div><div><dt>Aspirant mean</dt><dd>${affordabilityValue(metric.aspirant.mean, metric.unit)}</dd></div></dl>`;
     grid.append(article);
     renderAffordabilityBand(article.querySelector(".bullet-chart"), metric);
   });
@@ -98,7 +99,7 @@ function renderIncomeChart(dataset) {
   body.replaceChildren();
   dataset.income_bands.forEach((band) => {
     const row = document.createElement("tr");
-    row.innerHTML = `<th scope="row">${band.display_name}</th><td>${affordabilityCurrency.format(band.marist)}</td><td>${affordabilityCurrency.format(band.peer.median)}</td><td>${affordabilityCurrency.format(band.aspirant.median)}</td>`;
+    row.innerHTML = `<th scope="row">${band.display_name}</th><td>${affordabilityValue(band.marist, "usd")}</td><td>${affordabilityValue(band.peer.median, "usd")}</td><td>${affordabilityValue(band.peer.mean, "usd")}</td><td>${affordabilityValue(band.aspirant.median, "usd")}</td><td>${affordabilityValue(band.aspirant.mean, "usd")}</td>`;
     body.append(row);
   });
 

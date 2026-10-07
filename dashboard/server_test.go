@@ -74,6 +74,9 @@ func TestAffordabilityDatasetAndExport(t *testing.T) {
 	if dataset.InstitutionCount != 19 || len(dataset.Headlines) != 2 || len(dataset.IncomeBands) != 5 || len(dataset.Institutions) != 19 {
 		t.Fatalf("unexpected affordability dataset dimensions: institutions=%d headlines=%d bands=%d records=%d", dataset.InstitutionCount, len(dataset.Headlines), len(dataset.IncomeBands), len(dataset.Institutions))
 	}
+	if dataset.Headlines[0].Peer.Mean == nil || dataset.Headlines[0].Aspirant.Mean == nil {
+		t.Fatal("affordability comparison means are unavailable")
+	}
 	exportResponse := httptest.NewRecorder()
 	router.ServeHTTP(exportResponse, httptest.NewRequest(http.MethodGet, "/api/v1/affordability-resources/export.csv?year=2023%E2%80%9324", nil))
 	records, err := csv.NewReader(strings.NewReader(exportResponse.Body.String())).ReadAll()
@@ -110,6 +113,9 @@ func TestSuccessEquityDatasetAndExport(t *testing.T) {
 	}
 	if len(records) != 15 {
 		t.Fatalf("success CSV rows = %d, want 15", len(records))
+	}
+	if !strings.Contains(strings.Join(records[0], ","), "peer_mean") || !strings.Contains(strings.Join(records[0], ","), "aspirant_mean") {
+		t.Fatalf("success CSV header omits means: %v", records[0])
 	}
 }
 
@@ -206,7 +212,7 @@ func TestOverviewDataset(t *testing.T) {
 		t.Fatalf("metric count = %d, want 6", len(dataset.Metrics))
 	}
 	for _, metric := range dataset.Metrics {
-		if metric.Value == nil || metric.Peer.Median == nil || metric.Aspirant.Median == nil {
+		if metric.Value == nil || metric.Peer.Median == nil || metric.Peer.Mean == nil || metric.Aspirant.Median == nil || metric.Aspirant.Mean == nil {
 			t.Fatalf("metric %s contains an unavailable headline value", metric.MetricID)
 		}
 	}
@@ -222,6 +228,9 @@ func TestCSVExportMatchesOverview(t *testing.T) {
 	}
 	if len(records) != 7 {
 		t.Fatalf("CSV rows = %d, want 7", len(records))
+	}
+	if !strings.Contains(strings.Join(records[0], ","), "peer_mean") || !strings.Contains(strings.Join(records[0], ","), "aspirant_mean") {
+		t.Fatalf("overview CSV header omits means: %v", records[0])
 	}
 }
 

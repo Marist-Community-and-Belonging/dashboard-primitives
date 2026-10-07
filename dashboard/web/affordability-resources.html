@@ -31,9 +31,10 @@
       <div class="dashboard-toolbar"><div class="toolbar-context"><strong class="sticky-page-title">Affordability by income</strong><p class="data-note" id="data-status" role="status">Loading the verified IPEDS affordability dataset…</p></div><form class="year-filter"><label for="year-select">Collection</label><div class="year-control"><select id="year-select" name="year" aria-describedby="year-availability"></select><span id="active-release" class="active-release"></span></div><small id="year-availability" class="sr-only">Loading available years…</small></form></div>
 
       <section class="dashboard-section" data-feature="affordability_headlines" data-collapsible aria-labelledby="affordability-heading">
-        <div class="section-heading"><div><h2 id="affordability-heading">Affordability indicators</h2><p>Marist values with peer and aspirant medians and middle ranges.</p></div></div>
+        <div class="section-heading"><div><h2 id="affordability-heading">Affordability indicators</h2><p>Marist values with peer and aspirant medians, means, and middle ranges.</p></div></div>
         <div class="legend" aria-label="Chart legend"><span><i class="key-marist"></i>Marist</span><span><i class="key-peer"></i>Peer middle 50%</span><span><i class="key-aspirant"></i>Aspirant middle 50%</span></div>
         <p class="comparison-context">Peers are the primary comparison group; aspirants are an additional benchmark.</p>
+        <p class="statistic-key"><span><i class="key-median"></i>Median (solid line)</span><span><i class="key-mean"></i>Mean/average (dashed line)</span></p>
         <div id="affordability-grid" class="metric-grid"></div>
       </section>
 
@@ -41,7 +42,7 @@
         <div class="section-heading"><div><h2 id="income-heading">Net price by family income</h2><p>Estimated annual cost after grants and scholarships for students receiving Title IV federal aid.</p></div></div>
         <p class="section-callout" id="income-callout"></p>
         <div id="income-chart" class="income-chart"></div>
-        <details class="detail-disclosure"><summary>View exact values</summary><div class="table-scroll compact-table"><table><caption class="sr-only">Net price by family-income band</caption><thead><tr><th scope="col">Family income</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Aspirant median</th></tr></thead><tbody id="income-table-body"></tbody></table></div></details>
+        <details class="detail-disclosure"><summary>View exact values</summary><div class="table-scroll compact-table"><table><caption class="sr-only">Net price by family-income band</caption><thead><tr><th scope="col">Family income</th><th scope="col">Marist</th><th scope="col">Peer median</th><th scope="col">Peer mean</th><th scope="col">Aspirant median</th><th scope="col">Aspirant mean</th></tr></thead><tbody id="income-table-body"></tbody></table></div></details>
       </section>
 
       <section class="dashboard-section" data-feature="affordability_trend" data-collapsible data-collapsed data-collapse-open="Explore trends" data-collapse-close="Hide trends" aria-labelledby="affordability-trend-heading">

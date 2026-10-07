@@ -20,12 +20,14 @@
       "data_year": "2019\u201320",
       "peer": {
         "count": 10,
+        "mean": 37542.9,
         "median": 37329.5,
         "q1": 34453.25,
         "q3": 41211.5
       },
       "aspirant": {
         "count": 8,
+        "mean": 34631.875,
         "median": 34899.5,
         "q1": 29918.5,
         "q3": 38567.0
@@ -43,12 +45,14 @@
       "data_year": "2019\u201320",
       "peer": {
         "count": 10,
+        "mean": 16.5,
         "median": 14.5,
         "q1": 13.25,
         "q3": 20.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 13.5,
         "median": 12.5,
         "q1": 10.75,
         "q3": 17.0
@@ -64,12 +68,14 @@
       "marist": 24902.0,
       "peer": {
         "count": 10,
+        "mean": 26224.5,
         "median": 25755.0,
         "q1": 21274.5,
         "q3": 29632.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 17014.5,
         "median": 15052.5,
         "q1": 11356.0,
         "q3": 23268.25
@@ -83,12 +89,14 @@
       "marist": 25958.0,
       "peer": {
         "count": 10,
+        "mean": 26211.1,
         "median": 23968.0,
         "q1": 22024.75,
         "q3": 30061.75
       },
       "aspirant": {
         "count": 8,
+        "mean": 17492.125,
         "median": 16176.0,
         "q1": 11144.0,
         "q3": 26205.75
@@ -102,12 +110,14 @@
       "marist": 30498.0,
       "peer": {
         "count": 10,
+        "mean": 30477.4,
         "median": 29897.0,
         "q1": 26216.75,
         "q3": 32758.0
       },
       "aspirant": {
         "count": 8,
+        "mean": 21850.625,
         "median": 19584.0,
         "q1": 18066.25,
         "q3": 27362.0
@@ -121,12 +131,14 @@
       "marist": 35139.0,
       "peer": {
         "count": 10,
+        "mean": 34548.2,
         "median": 33341.0,
         "q1": 31180.0,
         "q3": 36154.25
       },
       "aspirant": {
         "count": 8,
+        "mean": 29616.0,
         "median": 29160.5,
         "q1": 24997.0,
         "q3": 36318.75
@@ -140,12 +152,14 @@
       "marist": 42411.0,
       "peer": {
         "count": 10,
+        "mean": 40718.9,
         "median": 40003.0,
         "q1": 38104.5,
         "q3": 44205.0
       },
       "aspirant": {
         "count": 8,
+        "mean": 51406.625,
         "median": 50945.5,
         "q1": 48653.25,
         "q3": 54020.0
@@ -441,6 +455,6 @@
   ],
   "methodology": {
     "net_price": "Average net price estimates annual cost of attendance after grants and scholarships for aided full-time, first-time students.",
-    "income_bands": "Income-band values cover full-time, first-time students awarded Title IV federal financial aid. Peer and aspirant values are institution-level medians."
+    "income_bands": "Income-band values cover full-time, first-time students awarded Title IV federal financial aid. The median is the middle institution after sorting. The mean is the arithmetic average and is more sensitive to unusually high or low values, so the median remains the default."
   }
 }

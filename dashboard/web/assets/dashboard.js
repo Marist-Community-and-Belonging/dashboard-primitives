@@ -128,7 +128,9 @@ function metricCard(metric) {
     <div class="bullet-chart"></div>
     <dl class="comparison-values">
       <div><dt>Peer median · ${metric.peer.count} institutions</dt><dd>${formatValue(metric.peer.median, metric.unit)}</dd></div>
+      <div><dt>Peer mean</dt><dd>${formatValue(metric.peer.mean, metric.unit)}</dd></div>
       <div><dt>Aspirant median · ${metric.aspirant.count} institutions</dt><dd>${formatValue(metric.aspirant.median, metric.unit)}</dd></div>
+      <div><dt>Aspirant mean</dt><dd>${formatValue(metric.aspirant.mean, metric.unit)}</dd></div>
     </dl>
     <details class="metric-details"><summary>Definition and source</summary><p>${metric.interpretation} Status: ${Number.isFinite(metric.value) ? "reported" : titleCase(metric.status_flag || "unavailable")}. Source: ${metric.source_component}, variable ${metric.source_variable}.</p></details>`;
   return article;
@@ -187,10 +189,11 @@ function renderBullet(container, metric) {
   }
 
   if (Number.isFinite(metric.peer.q1) && Number.isFinite(metric.peer.q3)) {
-    const peerLabel = `Peer middle 50%: ${formatRange(metric.peer, metric.unit)}; median ${formatValue(metric.peer.median, metric.unit)}.`;
+    const peerLabel = `Peer middle 50%: ${formatRange(metric.peer, metric.unit)}; peer median ${formatValue(metric.peer.median, metric.unit)}; peer mean ${formatValue(metric.peer.mean, metric.unit)}.`;
     const peer = svg.append("g");
     peer.append("rect").attr("x", scale(metric.peer.q1)).attr("y", 12).attr("width", Math.max(3, scale(metric.peer.q3) - scale(metric.peer.q1))).attr("height", 10).attr("fill", "#858890");
     peer.append("line").attr("x1", scale(metric.peer.median)).attr("x2", scale(metric.peer.median)).attr("y1", 8).attr("y2", 26).attr("stroke", "#52555d").attr("stroke-width", 2);
+    peer.append("line").attr("x1", scale(metric.peer.mean)).attr("x2", scale(metric.peer.mean)).attr("y1", 11).attr("y2", 23).attr("stroke", "#52555d").attr("stroke-width", 2).attr("stroke-dasharray", "3 2");
     interactiveMark(peer, peerLabel);
   }
 
@@ -202,10 +205,11 @@ function renderBullet(container, metric) {
   }
 
   if (Number.isFinite(metric.aspirant.q1) && Number.isFinite(metric.aspirant.q3)) {
-    const aspirantLabel = `Aspirant middle 50%: ${formatRange(metric.aspirant, metric.unit)}; median ${formatValue(metric.aspirant.median, metric.unit)}.`;
+    const aspirantLabel = `Aspirant middle 50%: ${formatRange(metric.aspirant, metric.unit)}; aspirant median ${formatValue(metric.aspirant.median, metric.unit)}; aspirant mean ${formatValue(metric.aspirant.mean, metric.unit)}.`;
     const aspirant = svg.append("g");
     aspirant.append("rect").attr("x", scale(metric.aspirant.q1)).attr("y", 66).attr("width", Math.max(3, scale(metric.aspirant.q3) - scale(metric.aspirant.q1))).attr("height", 10).attr("fill", "#dbe9ff").attr("stroke", "#3c8cff");
     aspirant.append("line").attr("x1", scale(metric.aspirant.median)).attr("x2", scale(metric.aspirant.median)).attr("y1", 62).attr("y2", 80).attr("stroke", "#236bc8").attr("stroke-width", 2);
+    aspirant.append("line").attr("x1", scale(metric.aspirant.mean)).attr("x2", scale(metric.aspirant.mean)).attr("y1", 65).attr("y2", 77).attr("stroke", "#236bc8").attr("stroke-width", 2).attr("stroke-dasharray", "3 2");
     interactiveMark(aspirant, aspirantLabel);
   }
 }
@@ -217,7 +221,7 @@ function renderDataset(dataset, related) {
   document.querySelector("#active-release").textContent = titleCase(dataset.release.release_type);
   document.querySelector("#active-filter").textContent = `Showing ${dataset.release.collection_year} ${dataset.release.release_type} data`;
   document.querySelector("#data-status").innerHTML = `<strong>Verified final IPEDS data.</strong> Retrieved ${dataset.release.retrieved_at}.`;
-  document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer medians use ${dataset.metrics[0].peer.count} institutions; aspirant medians use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups.`;
+  document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer summaries use ${dataset.metrics[0].peer.count} institutions; aspirant summaries use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups. The median is the middle institution after sorting. The mean is the arithmetic average and is more sensitive to skew and extreme values, so the median remains the default.`;
   renderDashboardSnapshot(dataset, related);
 
   const grid = document.querySelector("#metric-grid");
