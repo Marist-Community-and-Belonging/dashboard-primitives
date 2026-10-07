@@ -87,7 +87,7 @@ def build(collection_year: str) -> dict[str, object]:
         "institutions": records,
         "methodology": {
             "net_price": "Average net price estimates annual cost of attendance after grants and scholarships for aided full-time, first-time students.",
-            "income_bands": "Income-band values cover full-time, first-time students awarded Title IV federal financial aid. Peer and aspirant medians describe typical institutions; means show outlier-sensitive group averages."
+            "income_bands": "Income-band values cover full-time, first-time students awarded Title IV federal financial aid. The median is the middle institution after sorting. The mean is the arithmetic average and is more sensitive to unusually high or low values, so the median remains the default."
         }
     }
 

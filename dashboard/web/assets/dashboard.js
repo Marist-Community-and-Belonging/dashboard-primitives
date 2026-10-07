@@ -221,7 +221,7 @@ function renderDataset(dataset, related) {
   document.querySelector("#active-release").textContent = titleCase(dataset.release.release_type);
   document.querySelector("#active-filter").textContent = `Showing ${dataset.release.collection_year} ${dataset.release.release_type} data`;
   document.querySelector("#data-status").innerHTML = `<strong>Verified final IPEDS data.</strong> Retrieved ${dataset.release.retrieved_at}.`;
-  document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer summaries use ${dataset.metrics[0].peer.count} institutions; aspirant summaries use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups. Medians describe typical institutions; means are sensitive to skew and extreme values.`;
+  document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer summaries use ${dataset.metrics[0].peer.count} institutions; aspirant summaries use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups. The median is the middle institution after sorting. The mean is the arithmetic average and is more sensitive to skew and extreme values, so the median remains the default.`;
   renderDashboardSnapshot(dataset, related);
 
   const grid = document.querySelector("#metric-grid");
