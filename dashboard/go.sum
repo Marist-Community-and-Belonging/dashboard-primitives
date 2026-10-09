@@ -2,6 +2,8 @@ github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.0 h1:MsbHRXSiv5IJW
 github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.0/go.mod h1:Rw1ykbRZz0boz8ZBKkv+zLJIcGw/6hHQQ10V+DXg610=
 github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.1 h1:9q7/8x4F6FdmAnORyvaslZdXFIKoTSTP4FHH0zK8R3c=
 github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.1/go.mod h1:Rw1ykbRZz0boz8ZBKkv+zLJIcGw/6hHQQ10V+DXg610=
+github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.2 h1:OUTr1BIm/FZzPMI2TrCOWHYkYvodhRsbFgzVukFF39Y=
+github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.2/go.mod h1:Rw1ykbRZz0boz8ZBKkv+zLJIcGw/6hHQQ10V+DXg610=
 github.com/bytedance/sonic v1.11.6 h1:oUp34TzMlL+OY1OUWxHqsdkgC/Zfc85zGqw9siXjrc0=
 github.com/bytedance/sonic v1.11.6/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1ZaiQtds4=
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
