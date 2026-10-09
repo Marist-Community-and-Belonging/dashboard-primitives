@@ -44,6 +44,7 @@
 .event-density-key i { width: 72px; height: 7px; border-radius: 999px; background: linear-gradient(90deg, #fff1f3, #8f0c27); }
 .month-toolbar button {
   width: fit-content;
+  min-height: 44px;
   padding: 7px 10px;
   border: 1px solid var(--line);
   background: var(--paper);
@@ -184,6 +185,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  min-height: 44px;
 }
 
 .involvement-key:hover,
@@ -296,6 +298,7 @@
   font: inherit;
   font-size: 12px;
   font-weight: 650;
+  min-height: 44px;
   padding: 6px 10px;
   transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease, color 140ms ease, transform 140ms ease;
 }
