@@ -8,6 +8,7 @@ const groupStyles = {
   peer: { label: "Peer", color: "#63666f", symbol: d3.symbolSquare },
   aspirant: { label: "Aspirant", color: "#3c8cff", symbol: d3.symbolTriangle },
 };
+const diversityState = { request: 0 };
 dataTooltip();
 
 function formatPercent(value) {
@@ -228,14 +229,19 @@ function renderDiversityTrend(history) {
 }
 
 async function loadDiversityYear(year) {
+  const request = ++diversityState.request;
   const status = document.querySelector("#data-status");
   status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} diversity and access data…`;
     const response = await fetch(`/api/v1/diversity-access?${new URLSearchParams({ year })}`, { headers: { Accept: "application/json" } });
     if (!response.ok) throw new Error(`Request failed with ${response.status}`);
-    renderPage(await response.json());
+    const dataset = await response.json();
+    if (request !== diversityState.request) return null;
+    renderPage(dataset);
+    return dataset;
   } catch (error) {
+    if (request !== diversityState.request) return null;
     status.textContent = "The diversity and access dataset is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");
     console.error(error);
@@ -246,8 +252,8 @@ async function loadDiversityYear(year) {
 async function loadPage() {
   try {
     const catalog = await setupCollectionYearSelector(loadDiversityYear);
-    await loadDiversityYear(catalog.selectedYear);
-    renderDiversityTrend(await fetchDatasetHistory("/api/v1/diversity-access", catalog.releases));
+    const selectedDataset = await loadDiversityYear(catalog.selectedYear);
+    renderDiversityTrend(await fetchDatasetHistory("/api/v1/diversity-access", catalog.releases, selectedDataset));
   } catch (error) {
     console.error(error);
   } finally {

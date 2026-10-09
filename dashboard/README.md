@@ -28,6 +28,9 @@ From the repository root, `make test-go` runs the same race-enabled Go test
 suite. Pull requests and dashboard changes run tests, vet, and a build in
 GitHub Actions.
 
+For public deployment, terminate HTTPS at a reverse proxy or CDN and enable
+gzip or Brotli there. Embedded static assets carry one-hour cache headers.
+
 ## Backend layout
 
 - `application.go` loads configuration, pages, and datasets at startup.

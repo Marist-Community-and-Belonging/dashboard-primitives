@@ -4,11 +4,12 @@ const trendFormatters = {
   index: new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }),
 };
 
-async function fetchDatasetHistory(endpoint, releases) {
+async function fetchDatasetHistory(endpoint, releases, selectedDataset = null) {
   return Promise.all(releases
     .slice()
     .sort((left, right) => left.collection_year.localeCompare(right.collection_year))
     .map(async (release) => {
+      if (selectedDataset?.release.collection_year === release.collection_year) return selectedDataset;
       const query = new URLSearchParams({ year: release.collection_year });
       const response = await fetch(`${endpoint}?${query}`, { headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error(`History request failed with ${response.status}`);

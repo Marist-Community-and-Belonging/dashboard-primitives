@@ -1,6 +1,9 @@
 package main
 
-import "io/fs"
+import (
+	"fmt"
+	"io/fs"
+)
 
 type application struct {
 	pages         map[string][]byte
@@ -52,6 +55,9 @@ func loadApplication(content fs.FS) (application, error) {
 	if err != nil {
 		return application{}, err
 	}
+	if err := validateDatasetYears(overview.byYear, diversity.byYear, success.byYear, affordability.byYear); err != nil {
+		return application{}, err
+	}
 
 	return application{
 		pages:         pages,
@@ -60,4 +66,22 @@ func loadApplication(content fs.FS) (application, error) {
 		success:       success,
 		affordability: affordability,
 	}, nil
+}
+
+func validateDatasetYears(overview map[string]embeddedDataset[overviewDataset], diversity map[string]embeddedDataset[diversityDataset], success map[string]embeddedDataset[successDataset], affordability map[string]embeddedDataset[affordabilityDataset]) error {
+	if len(overview) != len(diversity) || len(overview) != len(success) || len(overview) != len(affordability) {
+		return fmt.Errorf("embedded dataset collections do not match")
+	}
+	for year := range overview {
+		if _, ok := diversity[year]; !ok {
+			return fmt.Errorf("diversity dataset missing collection %s", year)
+		}
+		if _, ok := success[year]; !ok {
+			return fmt.Errorf("success dataset missing collection %s", year)
+		}
+		if _, ok := affordability[year]; !ok {
+			return fmt.Errorf("affordability dataset missing collection %s", year)
+		}
+	}
+	return nil
 }

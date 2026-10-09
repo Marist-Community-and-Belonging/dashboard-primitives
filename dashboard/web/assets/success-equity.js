@@ -1,5 +1,6 @@
 const successPercent = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1, style: "percent" });
 const successPoint = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+const successState = { request: 0 };
 dataTooltip();
 
 function percent(value) {
@@ -147,14 +148,19 @@ function renderSuccessTrends(history) {
 }
 
 async function loadSuccessYear(year) {
+  const request = ++successState.request;
   const status = document.querySelector("#data-status");
   status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} success and equity data…`;
     const response = await fetch(`/api/v1/success-equity?${new URLSearchParams({ year })}`, { cache: "no-cache", headers: { Accept: "application/json" } });
     if (!response.ok) throw new Error(`Request failed with ${response.status}`);
-    renderPage(await response.json());
+    const dataset = await response.json();
+    if (request !== successState.request) return null;
+    renderPage(dataset);
+    return dataset;
   } catch (error) {
+    if (request !== successState.request) return null;
     status.textContent = "The success and equity dataset is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");
     console.error(error);
@@ -165,8 +171,8 @@ async function loadSuccessYear(year) {
 async function loadPage() {
   try {
     const catalog = await setupCollectionYearSelector(loadSuccessYear);
-    await loadSuccessYear(catalog.selectedYear);
-    renderSuccessTrends(await fetchDatasetHistory("/api/v1/success-equity", catalog.releases));
+    const selectedDataset = await loadSuccessYear(catalog.selectedYear);
+    renderSuccessTrends(await fetchDatasetHistory("/api/v1/success-equity", catalog.releases, selectedDataset));
   } catch (error) {
     console.error(error);
   } finally {

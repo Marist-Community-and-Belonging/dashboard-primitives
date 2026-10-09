@@ -250,6 +250,7 @@ async function loadProfileYear(year) {
     if (request !== profileState.request) return;
     renderSelectedProfile({ overview, diversity, success, affordability });
     if (profileState.history.length) renderProfileHistory(profileState.history);
+    return overview;
   } catch (error) {
     if (request !== profileState.request) return;
     status.textContent = "The Marist profile is temporarily unavailable. Please try again later.";
@@ -263,11 +264,13 @@ async function loadMaristProfile() {
   const status = document.querySelector("#data-status");
   try {
     const catalog = await setupCollectionYearSelector(loadProfileYear);
-    await loadProfileYear(catalog.selectedYear);
+    const selectedOverview = await loadProfileYear(catalog.selectedYear);
     const history = await Promise.all(catalog.releases
       .slice()
       .sort((left, right) => left.collection_year.localeCompare(right.collection_year))
-      .map((release) => fetchProfileDataset("/api/v1/overview", release.collection_year)));
+      .map((release) => release.collection_year === selectedOverview?.release.collection_year
+        ? selectedOverview
+        : fetchProfileDataset("/api/v1/overview", release.collection_year)));
     renderProfileHistory(history);
   } catch (error) {
     status.textContent = "The Marist profile is temporarily unavailable. Please try again later.";
