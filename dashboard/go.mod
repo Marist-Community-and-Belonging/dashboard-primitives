@@ -3,7 +3,7 @@ module marist-ipeds-dashboard
 go 1.22
 
 require (
-	github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.0
+	github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.1
 	github.com/gin-gonic/gin v1.10.1
 )
 
