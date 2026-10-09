@@ -33,17 +33,19 @@ function renderTrendChart(container, options) {
   const height = 300;
   const margin = { top: 30, right: 120, bottom: 52, left: options.unit === "usd" ? 78 : 58 };
   const groups = [
-    { key: "marist", label: "Marist", color: "#c91235", dash: null },
-    { key: "peer", label: "Peer median", color: "#63666f", dash: "6 4" },
-    { key: "aspirant", label: "Aspirant median", color: "#3c8cff", dash: "2 4" },
+    { key: "marist", label: "Marist", color: "#c91235", dash: null, symbol: d3.symbolCircle },
+    { key: "peer", label: "Peer median", color: "#63666f", dash: "6 4", symbol: d3.symbolSquare },
+    { key: "aspirant", label: "Aspirant median", color: "#3c8cff", dash: "2 4", symbol: d3.symbolTriangle },
   ];
+  const selectedYear = new URLSearchParams(window.location.search).get("year");
   const values = options.points.flatMap((point) => groups.map((group) => point[group.key])).filter(Number.isFinite);
   const extent = d3.extent(values);
   const padding = Math.max((extent[1] - extent[0]) * .16, options.unit === "index" ? .015 : options.unit === "percent" ? 2 : 1000);
   const y = d3.scaleLinear().domain([extent[0] - padding, extent[1] + padding]).nice().range([height - margin.bottom, margin.top]);
   const x = d3.scalePoint().domain(options.points.map((point) => point.year)).range([margin.left, width - margin.right]);
   const svg = d3.select(article).select(".trend-visual").append("svg").attr("viewBox", `0 0 ${width} ${height}`).attr("role", "group").attr("aria-label", `${options.title} from ${options.points[0].year} to ${options.points.at(-1).year}`);
-  svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`).call(d3.axisBottom(x).tickSizeOuter(0));
+  const xAxis = svg.append("g").attr("class", "trend-x-axis").attr("transform", `translate(0,${height - margin.bottom})`).call(d3.axisBottom(x).tickSizeOuter(0));
+  xAxis.selectAll(".tick").attr("data-year", (year) => year).classed("is-selected", (year) => year === selectedYear);
   svg.append("g").attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((value) => trendValue(value, options.unit)));
   svg.append("g").attr("class", "trend-gridlines").attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(width - margin.left - margin.right)).tickFormat(""));
 
@@ -53,7 +55,7 @@ function renderTrendChart(container, options) {
     svg.append("path").datum(points).attr("class", "trend-line").attr("d", line).attr("fill", "none").attr("stroke", group.color).attr("stroke-width", group.key === "marist" ? 3 : 2.25).attr("stroke-dasharray", group.dash);
     points.filter((point) => Number.isFinite(point.value)).forEach((point) => {
       const label = `${options.title}, ${point.year}, ${group.label}: ${trendValue(point.value, options.unit)}.`;
-      const mark = svg.append("circle").attr("class", "trend-point").attr("cx", x(point.year)).attr("cy", y(point.value)).attr("r", group.key === "marist" ? 5 : 4).attr("fill", group.color).attr("stroke", "white").attr("stroke-width", 1.5).attr("tabindex", 0).attr("role", "img").attr("aria-label", label);
+      const mark = svg.append("path").attr("class", "trend-point").classed("is-selected", point.year === selectedYear).attr("data-year", point.year).attr("d", d3.symbol().type(group.symbol).size(group.key === "marist" ? 78 : 64)).attr("transform", `translate(${x(point.year)},${y(point.value)})`).attr("fill", group.color).attr("stroke", point.year === selectedYear ? "#202127" : "white").attr("stroke-width", point.year === selectedYear ? 2.5 : 1.5).attr("tabindex", 0).attr("role", "img").attr("aria-current", point.year === selectedYear ? "true" : null).attr("aria-label", label);
       mark.on("pointerenter", function (event) {
         d3.select(this).classed("is-active", true);
         showDataTooltip(label, event.clientX, event.clientY);

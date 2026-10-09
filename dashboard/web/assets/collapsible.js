@@ -37,14 +37,20 @@ function updateHorizontalScroll(element) {
   const overflows = element.scrollWidth > element.clientWidth + 1;
   element.classList.toggle("has-horizontal-overflow", overflows);
   element.tabIndex = overflows ? 0 : -1;
-  if (overflows) element.setAttribute("aria-label", "Scrollable comparison data");
-  else element.removeAttribute("aria-label");
+  if (overflows) {
+    const chart = !element.classList.contains("table-scroll");
+    element.setAttribute("aria-label", chart ? "Scrollable chart" : "Scrollable comparison data");
+    element.dataset.scrollHint = chart ? "Swipe to view full chart" : "Swipe to compare";
+  } else {
+    element.removeAttribute("aria-label");
+    delete element.dataset.scrollHint;
+  }
 }
 
 const horizontalScrollObserver = new ResizeObserver((entries) => entries.forEach(({ target }) => updateHorizontalScroll(target)));
 
 function prepareHorizontalScroll(root = document) {
-  root.querySelectorAll(".table-scroll").forEach((element) => {
+  root.querySelectorAll(".table-scroll, .trend-visual, .profile-mini-chart, .income-chart, .equity-group").forEach((element) => {
     if (!element.dataset.scrollPrepared) {
       element.dataset.scrollPrepared = "true";
       element.addEventListener("scroll", () => element.classList.toggle("is-scrolled", element.scrollLeft > 8), { passive: true });

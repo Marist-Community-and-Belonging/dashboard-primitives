@@ -9,11 +9,24 @@ function updateCollectionLinks(year) {
   if (active) nav.scrollLeft = active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
 }
 
+function updateTrendSelection(year) {
+  document.querySelectorAll(".trend-point[data-year]").forEach((point) => {
+    const selected = point.dataset.year === year;
+    point.classList.toggle("is-selected", selected);
+    point.setAttribute("stroke", selected ? "#202127" : "white");
+    point.setAttribute("stroke-width", selected ? "2.5" : "1.5");
+    if (selected) point.setAttribute("aria-current", "true");
+    else point.removeAttribute("aria-current");
+  });
+  document.querySelectorAll(".trend-x-axis .tick[data-year]").forEach((tick) => tick.classList.toggle("is-selected", tick.dataset.year === year));
+}
+
 function updateCollectionURL(year, replace = false) {
   const url = new URL(window.location.href);
   url.searchParams.set("year", year);
   window.history[replace ? "replaceState" : "pushState"]({}, "", url);
   updateCollectionLinks(year);
+  updateTrendSelection(year);
 }
 
 function setYearChanging(changing) {
@@ -75,6 +88,7 @@ async function setupCollectionYearSelector(onChange) {
     try {
       await onChange(historyYear);
       updateCollectionLinks(historyYear);
+      updateTrendSelection(historyYear);
     } catch (error) {
       select.value = previousYear;
     } finally {
