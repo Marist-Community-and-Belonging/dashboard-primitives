@@ -300,6 +300,15 @@ func TestDatasetResponseHeaders(t *testing.T) {
 	}
 }
 
+func TestAssetCacheHeaders(t *testing.T) {
+	router := testRouter(t)
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/assets/dashboard.css", nil))
+	if got := response.Header().Get("Cache-Control"); got != "public, max-age=3600" {
+		t.Fatalf("Cache-Control = %q, want public, max-age=3600", got)
+	}
+}
+
 func testRouter(t *testing.T) http.Handler {
 	t.Helper()
 	router, err := newRouter(webAssets)

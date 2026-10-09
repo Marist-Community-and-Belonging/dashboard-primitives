@@ -263,7 +263,9 @@ async function loadYear(year) {
       optionalDataset("/api/v1/affordability-resources"),
       optionalDataset("/api/v1/campus-involvement/events"),
     ]);
-    if (request === dashboardState.request) renderDataset(dataset, { diversity, success, affordability, campus });
+    if (request !== dashboardState.request) return null;
+    renderDataset(dataset, { diversity, success, affordability, campus });
+    return dataset;
   } catch (error) {
     if (request !== dashboardState.request) return;
     status.textContent = "The comparison dataset is temporarily unavailable. Please try again later.";
@@ -277,8 +279,9 @@ async function loadDashboard() {
   const status = document.querySelector("#data-status");
   try {
     const catalog = await setupCollectionYearSelector(loadYear);
-    dashboardState.history = await fetchDatasetHistory("/api/v1/overview", catalog.releases);
-    await loadYear(catalog.selectedYear);
+    const selectedDataset = await loadYear(catalog.selectedYear);
+    dashboardState.history = await fetchDatasetHistory("/api/v1/overview", catalog.releases, selectedDataset);
+    renderOverviewTrends();
   } catch (error) {
     status.textContent = "The comparison dataset is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");

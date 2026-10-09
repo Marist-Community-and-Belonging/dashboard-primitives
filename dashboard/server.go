@@ -27,7 +27,7 @@ func newRouterWithLogger(content fs.FS, logger *slog.Logger) (*gin.Engine, error
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
-	router.Use(requestLogger(logger), recoveryLogger(logger), securityHeaders())
+	router.Use(requestLogger(logger), recoveryLogger(logger), securityHeaders(), assetCacheHeaders())
 
 	assets, err := fs.Sub(content, "web/assets")
 	if err != nil {
@@ -58,6 +58,15 @@ func securityHeaders() gin.HandlerFunc {
 		c.Header("Referrer-Policy", "strict-origin-when-cross-origin")
 		c.Header("X-Content-Type-Options", "nosniff")
 		c.Header("X-Frame-Options", "DENY")
+		c.Next()
+	}
+}
+
+func assetCacheHeaders() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if strings.HasPrefix(c.Request.URL.Path, "/assets/") {
+			c.Header("Cache-Control", "public, max-age=3600")
+		}
 		c.Next()
 	}
 }

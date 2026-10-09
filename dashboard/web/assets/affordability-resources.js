@@ -6,6 +6,7 @@ const affordabilityGroups = {
   peer: { label: "Peer", color: "#63666f", symbol: d3.symbolSquare },
   aspirant: { label: "Aspirant", color: "#3c8cff", symbol: d3.symbolTriangle },
 };
+const affordabilityState = { request: 0 };
 dataTooltip();
 
 function affordabilityValue(value, unit) {
@@ -139,14 +140,19 @@ function renderAffordabilityTrends(history) {
 }
 
 async function loadAffordabilityYear(year) {
+  const request = ++affordabilityState.request;
   const status = document.querySelector("#data-status");
   status.setAttribute("role", "status");
   try {
     status.textContent = `Loading ${year} affordability data…`;
     const response = await fetch(`/api/v1/affordability-resources?${new URLSearchParams({ year })}`, { cache: "no-cache", headers: { Accept: "application/json" } });
     if (!response.ok) throw new Error(`Request failed with ${response.status}`);
-    renderAffordabilityPage(await response.json());
+    const dataset = await response.json();
+    if (request !== affordabilityState.request) return null;
+    renderAffordabilityPage(dataset);
+    return dataset;
   } catch (error) {
+    if (request !== affordabilityState.request) return null;
     status.textContent = "The affordability dataset is temporarily unavailable. Please try again later.";
     status.setAttribute("role", "alert");
     console.error(error);
@@ -157,8 +163,8 @@ async function loadAffordabilityYear(year) {
 async function loadAffordabilityPage() {
   try {
     const catalog = await setupCollectionYearSelector(loadAffordabilityYear);
-    await loadAffordabilityYear(catalog.selectedYear);
-    renderAffordabilityTrends(await fetchDatasetHistory("/api/v1/affordability-resources", catalog.releases));
+    const selectedDataset = await loadAffordabilityYear(catalog.selectedYear);
+    renderAffordabilityTrends(await fetchDatasetHistory("/api/v1/affordability-resources", catalog.releases, selectedDataset));
   } catch (error) {
     console.error(error);
   } finally {
