@@ -107,7 +107,7 @@ footer {
   font-weight: 750;
   text-decoration: none;
 }
-.report-download:hover { background: var(--red); color: white; }
+.report-download:hover { background: var(--red-dark); color: white; }
 .report-export {
   display: flex;
   align-items: center;
