@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/fs"
 	"net/http"
@@ -16,7 +17,51 @@ var renderReportPDF = func(content fs.FS, year int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	report, err = clarifyReportJSON(report)
+	if err != nil {
+		return nil, err
+	}
 	return reportgen.Generate(report, reportgen.Options{})
+}
+
+func clarifyReportJSON(payload []byte) ([]byte, error) {
+	var report map[string]any
+	if err := json.Unmarshal(payload, &report); err != nil {
+		return nil, fmt.Errorf("decode report: %w", err)
+	}
+	intro, ok := report["intro"].(string)
+	if !ok {
+		return nil, fmt.Errorf("report intro is missing")
+	}
+	report["intro"] = intro + " IPEDS is the federal Integrated Postsecondary Education Data System. Peers are Marist's primary official comparison group; aspirants are a second official group used for additional context. Neither group is a ranking or prediction. A collection names the release, not one shared measurement period. Dollar amounts are nominal, not adjusted for inflation. Unavailable means missing or suppressed, never zero."
+	chapters, ok := report["chapters"].([]any)
+	if !ok {
+		return nil, fmt.Errorf("report chapters are missing")
+	}
+	foundOverview := false
+	for _, raw := range chapters {
+		chapter, ok := raw.(map[string]any)
+		if !ok || chapter["heading"] != "Overview" {
+			continue
+		}
+		chapter["body"] = "Comparisons are descriptive; higher or lower is not automatically better."
+		callouts, ok := chapter["callouts"].([]any)
+		if !ok || len(callouts) == 0 {
+			return nil, fmt.Errorf("overview comparison callout is missing")
+		}
+		callout, ok := callouts[0].(map[string]any)
+		if !ok {
+			return nil, fmt.Errorf("overview comparison callout is invalid")
+		}
+		callout["label"] = "How to read comparison bands"
+		callout["body"] = "Each shaded band shows the middle half of the comparison group. The solid tick is the median (middle institution), the dashed tick is the mean (average), and the red line is Marist."
+		foundOverview = true
+		break
+	}
+	if !foundOverview {
+		return nil, fmt.Errorf("overview report chapter is missing")
+	}
+	return json.Marshal(report)
 }
 
 func registerAPI(api *gin.RouterGroup, app application) {

@@ -74,7 +74,7 @@ function renderDashboardSnapshot(dataset, related) {
       title: "Affordability",
       question: "What remains after grants and scholarships?",
       values: [{ label: "Average net price", value: formatValue(netPrice.value, netPrice.unit) }, { label: lowestIncome?.display_name || "Lowest income band", value: lowestIncome ? formatValue(lowestIncome.marist, "usd") : "Unavailable" }],
-      note: `${netPrice.data_year}. Income-band values cover Title IV aid recipients.`,
+      note: `${netPrice.data_year}. Income-band values cover students receiving federal student aid (Title IV).`,
       href: `/affordability-resources?year=${year}`,
       linkLabel: "Explore affordability",
     }),

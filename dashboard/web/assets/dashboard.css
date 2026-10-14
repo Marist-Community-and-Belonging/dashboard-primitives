@@ -403,6 +403,7 @@ h1 {
   color: var(--gray);
   font-size: 12px;
 }
+.comparison-context a { color: inherit; font-weight: 700; text-underline-offset: 3px; }
 .statistic-key { display: flex; gap: 18px; margin: 7px 0 0; color: var(--gray); font-size: 11px; }
 .statistic-key span { display: inline-flex; align-items: center; gap: 7px; }
 .statistic-key i { display: inline-block; width: 24px; height: 0; }

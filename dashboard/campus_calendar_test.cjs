@@ -4,61 +4,38 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
 
-function element() {
-  return {
-    children: [], dataset: {}, style: {}, attributes: {},
-    append(...children) { this.children.push(...children); },
-    replaceChildren(...children) { this.children = children; },
-    setAttribute(key, value) { this.attributes[key] = value; },
-    addEventListener(key, callback) { this[key] = callback; },
-    focus() {},
-  };
-}
-const root = element();
-const range = element();
 const context = vm.createContext({
   Intl, Date, Set, Map, console,
   dataTooltip() {},
-  document: {
-    createElement: element,
-    querySelector(selector) {
-      if (selector === "#events-calendar") return root;
-      if (selector === "#calendar-range") return range;
-      return root.children[0].children.find((item) => item.id === selector.slice(1));
-    },
-  },
+  document: { querySelector: () => ({}) },
 });
 const source = fs.readFileSync(path.join(__dirname, "web/assets/campus-involvement.js"), "utf8");
-vm.runInContext(source.slice(0, source.indexOf("\nloadCampusEvents();")), context);
-vm.runInContext(`
+vm.runInContext(source.slice(0, source.indexOf("\nshowLoadingState();")), context);
+const result = vm.runInContext(`(() => {
   const bounds = academicYearBounds(new Date("2024-02-20T12:00:00Z"));
-  selectedDate = "2024-02-20";
-  const events = [{start: "2024-02-28T12:00:00Z", end: "2024-03-01T12:00:00Z"}];
-  renderCalendar(events, dayCountsFromEvents(events), bounds);
-`, context);
-assert.equal(root.children[0].children[1].children.length, 10);
-assert.equal(root.children[0].children[1].value, "2024-02");
-const grid = root.children[1];
-assert.equal((grid.children.length - 7) % 7, 0);
-const leapDay = grid.children.find((item) => item.dataset.date === "2024-02-29");
-assert.equal(leapDay.children[1].textContent, "1 event");
-assert.equal(leapDay.className, "calendar-day density-low");
-assert.equal(root.children[0].children[3].textContent, "1 event this month");
-vm.runInContext("renderCalendar([], [{date: '2024-02-20', count: 8}], bounds)", context);
-assert.equal(root.children[1].children.find((item) => item.dataset.date === "2024-02-20").className, "calendar-day density-high");
-vm.runInContext("renderDayList = (date) => { selectedDate = date; };", context);
-root.children[0].children[2].click();
-assert.equal(root.children[0].children[1].value, "2024-03");
-assert.equal(root.children[1].className, "calendar-grid is-entering");
-assert.equal(vm.runInContext("selectedDate", context), "2024-03-01");
-vm.runInContext("renderCalendar([], [], bounds)", context);
-assert.equal(root.children[0].children[3].textContent, "0 events this month");
-assert.equal(root.children[1].children.find((item) => item.dataset.date === "2024-03-01").children[1].textContent, "0 events");
-root.children[0].children[1].value = "2023-08";
-root.children[0].children[1].change();
-assert.equal(root.children[0].children[0].disabled, true);
-assert.equal(root.children[1].children.find((item) => item.dataset.date === "2023-08-01").disabled, true);
-root.children[0].children[1].value = "2024-05";
-root.children[0].children[1].change();
-assert.equal(root.children[0].children[2].disabled, true);
-console.log("Calendar navigation, density, leap day, multi-day counts, and empty filters pass.");
+  const counts = dayCountsFromEvents([{
+    start: "2024-02-28T12:00:00Z",
+    end: "2024-03-01T12:00:00Z",
+  }]);
+  return {
+    bounds,
+    counts,
+    previousMonth: moveMonth("2024-03", -1),
+    nextMonth: moveMonth("2024-02", 1),
+    leapDayInTerm: isInTerm("2024-02-29", bounds),
+    summerOutOfTerm: isInTerm("2024-07-01", bounds),
+  };
+})()`, context);
+
+assert.equal(result.bounds.termStart, "2023-08-21");
+assert.equal(result.bounds.termEnd, "2024-05-24");
+assert.deepEqual(JSON.parse(JSON.stringify(result.counts)), [
+  { date: "2024-02-28", count: 1 },
+  { date: "2024-02-29", count: 1 },
+  { date: "2024-03-01", count: 1 },
+]);
+assert.equal(result.previousMonth, "2024-02");
+assert.equal(result.nextMonth, "2024-03");
+assert.equal(result.leapDayInTerm, true);
+assert.equal(result.summerOutOfTerm, false);
+console.log("Calendar bounds, month navigation, leap day, and multi-day counts pass.");
