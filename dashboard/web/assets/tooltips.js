@@ -60,6 +60,10 @@ function hideDataTooltip() {
   dataTooltip().hidden = true;
 }
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") hideDataTooltip();
+});
+
 function linkLegendHighlights(legend, chart) {
   const items = [...legend.querySelectorAll("[data-highlight]")];
   const marks = [...chart.querySelectorAll("[data-highlight]")];

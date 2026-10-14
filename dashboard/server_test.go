@@ -256,6 +256,19 @@ func TestPDFReportExport(t *testing.T) {
 	}
 }
 
+func TestClarifyReportJSON(t *testing.T) {
+	report, err := clarifyReportJSON([]byte(`{"intro":"Source data.","chapters":[{"heading":"Overview","body":"old","callouts":[{"label":"old","body":"old"}]}]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	text := string(report)
+	for _, want := range []string{"Integrated Postsecondary Education Data System", "not automatically better", "middle half"} {
+		if !strings.Contains(text, want) {
+			t.Fatalf("clarified report omits %q: %s", want, text)
+		}
+	}
+}
+
 func TestSecurityHeaders(t *testing.T) {
 	router := testRouter(t)
 	response := httptest.NewRecorder()
