@@ -106,8 +106,13 @@ footer {
   font-size: 14px;
   font-weight: 750;
   text-decoration: none;
+  transition: box-shadow 140ms ease;
 }
-a.report-download:hover { background: var(--red); color: white; }
+a.report-download:hover {
+  background: var(--red-dark);
+  color: white;
+  box-shadow: 0 0 0 3px rgb(159 15 43 / 18%);
+}
 .report-export {
   display: flex;
   align-items: center;
