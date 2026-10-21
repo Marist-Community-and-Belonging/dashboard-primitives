@@ -4,11 +4,11 @@ A public-facing dashboard comparing Marist University with its official peer and
 
 ## Project status
 
-The official data-access spike is complete, the 19-institution comparison set is verified against the 2023 IPEDS directory, and the Overview and Diversity & Access datasets are served by a Go/Gin application with an embedded D3 interface.
+The official data-access spike is complete, the 19-institution comparison set is verified against the 2023 IPEDS directory, and the Overview and Diversity & Access datasets are served by a Go/Flare application with an embedded D3 interface.
 
 ## Repository layout
 
-- `dashboard/` — Go/Gin service and embedded static dashboard
+- `dashboard/` — Go/Flare service and embedded static dashboard
 - `data/config/` — checked-in institution and group configuration
 - `data/raw/` — immutable official downloads, excluded from Git
 - `data/processed/` — deterministic dashboard-ready outputs
@@ -18,7 +18,7 @@ See [docs/handoff.md](docs/handoff.md) for the product brief, [docs/ipeds-access
 
 ## Local setup
 
-Requirements: Go 1.22 or later and Python 3.11 or later.
+Requirements: Go 1.25.5 or later and Python 3.11 or later.
 
 ```sh
 cd dashboard

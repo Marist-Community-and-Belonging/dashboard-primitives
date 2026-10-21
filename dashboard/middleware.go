@@ -6,23 +6,23 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"github.com/deglebe/flare"
 )
 
-func requestLogger(logger *slog.Logger) gin.HandlerFunc {
-	return func(c *gin.Context) {
+func requestLogger(logger *slog.Logger) flare.Handler {
+	return func(c *flare.Ctx) {
 		started := time.Now()
 		c.Next()
 
-		status := c.Writer.Status()
+		status := c.Response.StatusCode()
 		fields := []any{
 			"status", status,
 			"duration", time.Since(started).Round(time.Microsecond),
 		}
-		if len(c.Errors) > 0 {
-			fields = append(fields, "error", c.Errors.Last().Err)
+		if err := c.UserValue("error"); err != nil {
+			fields = append(fields, "error", err)
 		}
-		message := c.Request.Method + " " + c.Request.URL.Path
+		message := string(c.Method()) + " " + string(c.Path())
 		switch {
 		case status >= http.StatusInternalServerError:
 			logger.Error(message, fields...)
@@ -34,14 +34,14 @@ func requestLogger(logger *slog.Logger) gin.HandlerFunc {
 	}
 }
 
-func recoveryLogger(logger *slog.Logger) gin.HandlerFunc {
-	return gin.CustomRecovery(func(c *gin.Context, recovered any) {
+func recoveryLogger(logger *slog.Logger) flare.Handler {
+	return flare.RecoverWith(func(c *flare.Ctx, recovered any) {
 		logger.Error("panic recovered",
 			"error", recovered,
-			"method", c.Request.Method,
-			"path", c.Request.URL.Path,
+			"method", string(c.Method()),
+			"path", string(c.Path()),
 			"stack", string(debug.Stack()),
 		)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, map[string]any{"error": "internal server error"})
 	})
 }

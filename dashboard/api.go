@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/Marist-Community-and-Belonging/report-gen-pdf/reportgen"
-	"github.com/gin-gonic/gin"
+	"github.com/deglebe/flare"
 )
 
 var renderReportPDF = func(content fs.FS, year int) ([]byte, error) {
@@ -64,12 +64,12 @@ func clarifyReportJSON(payload []byte) ([]byte, error) {
 	return json.Marshal(report)
 }
 
-func registerAPI(api *gin.RouterGroup, app application) {
-	api.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"status": "ok", "release": app.overview.defaultYear})
+func registerAPI(api *flare.Router, app application) {
+	api.GET("/health", func(c *flare.Ctx) {
+		c.JSON(http.StatusOK, map[string]any{"status": "ok", "release": app.overview.defaultYear})
 	})
-	api.GET("/overview/releases", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
+	api.GET("/overview/releases", func(c *flare.Ctx) {
+		c.JSON(http.StatusOK, map[string]any{
 			"default_year": app.overview.defaultYear,
 			"releases":     app.overview.releases(),
 		})
@@ -80,35 +80,37 @@ func registerAPI(api *gin.RouterGroup, app application) {
 	registerDatasetRoutes(api, "/affordability-resources", "affordability-resources", app.affordability)
 
 	campusEvents := &campusEventsCache{}
-	api.GET("/campus-involvement/events", func(c *gin.Context) {
+	api.GET("/campus-involvement/events", func(c *flare.Ctx) {
 		payload, err := campusEvents.get()
 		if err != nil {
-			c.JSON(http.StatusBadGateway, gin.H{"error": "campus events feed unavailable"})
+			c.JSON(http.StatusBadGateway, map[string]any{"error": "campus events feed unavailable"})
 			return
 		}
-		c.Header("Cache-Control", "public, max-age=60")
+		c.Response.Header.Set("Cache-Control", "public, max-age=60")
 		c.JSON(http.StatusOK, payload)
 	})
 
 	// Keep the original overview export URL for downstream compatibility.
-	api.GET("/overview", func(c *gin.Context) {
+	api.GET("/overview", func(c *flare.Ctx) {
 		dataset, ok := app.overview.selectYear(c)
 		if !ok {
 			return
 		}
-		c.Header("Cache-Control", "public, max-age=300")
-		c.Data(http.StatusOK, "application/json; charset=utf-8", dataset.json)
+		c.Response.Header.Set("Cache-Control", "public, max-age=300")
+		c.SetContentType("application/json; charset=utf-8")
+		c.SetBody(dataset.json)
 	})
-	api.GET("/export.csv", func(c *gin.Context) {
+	api.GET("/export.csv", func(c *flare.Ctx) {
 		dataset, ok := app.overview.selectYear(c)
 		if !ok {
 			return
 		}
 		year := strings.SplitN(dataset.dataset.Release.CollectionYear, "–", 2)[0]
-		c.Header("Content-Disposition", fmt.Sprintf(`attachment; filename="marist-ipeds-overview-%s.csv"`, year))
-		c.Data(http.StatusOK, "text/csv; charset=utf-8", dataset.csv)
+		c.Response.Header.Set("Content-Disposition", fmt.Sprintf(`attachment; filename="marist-ipeds-overview-%s.csv"`, year))
+		c.SetContentType("text/csv; charset=utf-8")
+		c.SetBody(dataset.csv)
 	})
-	api.GET("/report.pdf", func(c *gin.Context) {
+	api.GET("/report.pdf", func(c *flare.Ctx) {
 		dataset, ok := app.overview.selectYear(c)
 		if !ok {
 			return
@@ -116,17 +118,18 @@ func registerAPI(api *gin.RouterGroup, app application) {
 		yearLabel := dataset.dataset.Release.CollectionYear
 		year, err := strconv.Atoi(strings.SplitN(yearLabel, "–", 2)[0])
 		if err != nil {
-			_ = c.Error(err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "report generation failed"})
+			c.SetUserValue("error", err)
+			c.JSON(http.StatusInternalServerError, map[string]any{"error": "report generation failed"})
 			return
 		}
 		pdf, err := renderReportPDF(app.content, year)
 		if err != nil {
-			_ = c.Error(err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "report generation failed"})
+			c.SetUserValue("error", err)
+			c.JSON(http.StatusInternalServerError, map[string]any{"error": "report generation failed"})
 			return
 		}
-		c.Header("Content-Disposition", fmt.Sprintf(`inline; filename="marist-ipeds-report-%d.pdf"`, year))
-		c.Data(http.StatusOK, "application/pdf", pdf)
+		c.Response.Header.Set("Content-Disposition", fmt.Sprintf(`inline; filename="marist-ipeds-report-%d.pdf"`, year))
+		c.SetContentType("application/pdf")
+		c.SetBody(pdf)
 	})
 }

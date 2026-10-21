@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/gin-gonic/gin"
+	"github.com/deglebe/flare"
 )
 
 type embeddedDataset[T any] struct {
@@ -76,14 +76,14 @@ func loadDatasetCollection[T any](content fs.FS, definition datasetDefinition[T]
 	return collection, nil
 }
 
-func (collection datasetCollection[T]) selectYear(c *gin.Context) (embeddedDataset[T], bool) {
+func (collection datasetCollection[T]) selectYear(c *flare.Ctx) (embeddedDataset[T], bool) {
 	year := c.Query("year")
 	if year == "" {
 		year = collection.defaultYear
 	}
 	dataset, ok := collection.byYear[year]
 	if !ok {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "collection year is unavailable", "year": year})
+		c.JSON(http.StatusBadRequest, map[string]any{"error": "collection year is unavailable", "year": year})
 		return embeddedDataset[T]{}, false
 	}
 	return dataset, true
@@ -100,22 +100,24 @@ func (collection datasetCollection[T]) releases() []releaseMetadata {
 	return releases
 }
 
-func registerDatasetRoutes[T any](group *gin.RouterGroup, path, exportName string, collection datasetCollection[T]) {
-	group.GET(path, func(c *gin.Context) {
+func registerDatasetRoutes[T any](group *flare.Router, path, exportName string, collection datasetCollection[T]) {
+	group.GET(path, func(c *flare.Ctx) {
 		dataset, ok := collection.selectYear(c)
 		if !ok {
 			return
 		}
-		c.Header("Cache-Control", "public, max-age=300")
-		c.Data(http.StatusOK, "application/json; charset=utf-8", dataset.json)
+		c.Response.Header.Set("Cache-Control", "public, max-age=300")
+		c.SetContentType("application/json; charset=utf-8")
+		c.SetBody(dataset.json)
 	})
-	group.GET(path+"/export.csv", func(c *gin.Context) {
+	group.GET(path+"/export.csv", func(c *flare.Ctx) {
 		dataset, ok := collection.selectYear(c)
 		if !ok {
 			return
 		}
 		year := strings.SplitN(collection.release(dataset.dataset).CollectionYear, "–", 2)[0]
-		c.Header("Content-Disposition", fmt.Sprintf(`attachment; filename="marist-ipeds-%s-%s.csv"`, exportName, year))
-		c.Data(http.StatusOK, "text/csv; charset=utf-8", dataset.csv)
+		c.Response.Header.Set("Content-Disposition", fmt.Sprintf(`attachment; filename="marist-ipeds-%s-%s.csv"`, exportName, year))
+		c.SetContentType("text/csv; charset=utf-8")
+		c.SetBody(dataset.csv)
 	})
 }
