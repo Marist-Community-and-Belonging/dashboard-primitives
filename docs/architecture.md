@@ -2,7 +2,7 @@
 
 ## Runtime
 
-The dashboard ships as one Go binary. Gin provides HTTP routing, response headers, versioned data endpoints, and CSV export. Go's `embed` package packages the static site, D3 library, and processed overview dataset into that binary. Go's `log/slog` package provides structured request and lifecycle logs.
+The dashboard ships as one Go binary. Flare provides HTTP routing, response headers, versioned data endpoints, and CSV export. Go's `embed` package packages the static site, D3 library, and processed overview dataset into that binary. Go's `log/slog` package provides structured request and lifecycle logs.
 
 ```text
 Official final IPEDS release listing and Complete Data File archives
@@ -15,7 +15,7 @@ scripts/ipeds/build_{overview,diversity_access,success_equity,affordability_reso
         ↓
 dashboard/web/data/*-{2019..2023}.json
         ↓
-Go embed → Gin routes → HTML/CSS/JavaScript/D3
+Go embed → Flare routes → HTML/CSS/JavaScript/D3
 ```
 
 The browser never calls NCES directly. Page availability and performance therefore do not depend on live federal services.

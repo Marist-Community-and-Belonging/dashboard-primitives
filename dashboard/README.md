@@ -1,8 +1,12 @@
 # Dashboard service
 
-The Marist IPEDS Benchmark Dashboard is a Go service using Gin to serve a static D3 interface and versioned data endpoints. All browser assets and five final IPEDS collections are embedded in the compiled binary.
+The Marist IPEDS Benchmark Dashboard is a Go service using Flare to serve a static D3 interface and versioned data endpoints. All browser assets and five final IPEDS collections are embedded in the compiled binary.
 
 The reusable design, chart, interaction, data, accessibility, and LLM implementation specification is documented in [`../docs/dashboard-design-system.md`](../docs/dashboard-design-system.md).
+
+Requires Go 1.25.5 or later. Flare uses fasthttp directly; embedded assets use
+`fasthttp.FS`. Routes use strict trailing slashes, so API clients should use the
+exact endpoint paths listed below.
 
 ## Run locally
 

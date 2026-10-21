@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"context"
 	"embed"
-	"errors"
 	"io"
 	"log/slog"
-	"net/http"
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/valyala/fasthttp"
 )
 
 const (
@@ -87,31 +88,35 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	if err != nil {
 		return err
 	}
-	server := &http.Server{
-		Addr:              address,
-		Handler:           router,
-		ReadHeaderTimeout: defaultReadHeaderTimeout,
-		ReadTimeout:       defaultReadTimeout,
-		WriteTimeout:      defaultWriteTimeout,
-		IdleTimeout:       defaultIdleTimeout,
+	server := &router.Server
+	server.Handler = router.Handler()
+	server.ReadTimeout = defaultReadHeaderTimeout
+	server.HeaderReceived = func(*fasthttp.RequestHeader) fasthttp.RequestConfig {
+		return fasthttp.RequestConfig{ReadTimeout: defaultReadTimeout}
 	}
+	server.WriteTimeout = defaultWriteTimeout
+	server.IdleTimeout = defaultIdleTimeout
+	server.NoDefaultServerHeader = true
+	listener, err := net.Listen("tcp", address)
+	if err != nil {
+		return err
+	}
+
+	defer listener.Close()
 
 	serverErrors := make(chan error, 1)
 	go func() {
-		logger.Info("dashboard listening", "address", address)
-		serverErrors <- server.ListenAndServe()
+		logger.Info("dashboard listening", "address", listener.Addr().String())
+		serverErrors <- server.Serve(listener)
 	}()
 
 	select {
 	case err := <-serverErrors:
-		if errors.Is(err, http.ErrServerClosed) {
-			return nil
-		}
 		return err
 	case <-ctx.Done():
 		logger.Info("dashboard shutting down")
 		shutdownContext, cancel := context.WithTimeout(context.Background(), defaultShutdownTimeout)
 		defer cancel()
-		return server.Shutdown(shutdownContext)
+		return server.ShutdownWithContext(shutdownContext)
 	}
 }

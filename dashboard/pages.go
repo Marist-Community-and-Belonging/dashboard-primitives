@@ -3,9 +3,8 @@ package main
 import (
 	"fmt"
 	"io/fs"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/deglebe/flare"
 )
 
 // pageFiles is the only backend registration needed for a new static page.
@@ -30,11 +29,11 @@ func loadPages(content fs.FS) (map[string][]byte, error) {
 	return pages, nil
 }
 
-func registerPages(router *gin.Engine, pages map[string][]byte) {
+func registerPages(router *flare.Engine, pages map[string][]byte) {
 	for route, payload := range pages {
-		page := payload
-		handler := func(c *gin.Context) {
-			c.Data(http.StatusOK, "text/html; charset=utf-8", page)
+		handler := func(c *flare.Ctx) {
+			c.SetContentType("text/html; charset=utf-8")
+			c.SetBody(payload)
 		}
 		router.GET(route, handler)
 		router.HEAD(route, handler)
