@@ -4,7 +4,7 @@ go 1.25.5
 
 require (
 	github.com/Marist-Community-and-Belonging/report-gen-pdf v0.1.2
-	github.com/deglebe/flare v0.1.1
+	github.com/deglebe/flare v0.1.2
 	github.com/valyala/fasthttp v1.74.0
 )
 
