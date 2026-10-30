@@ -9,7 +9,7 @@ const revealObserver = window.matchMedia("(prefers-reduced-motion: reduce)").mat
     }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
 
 function prepareScrollReveals(root = document) {
-  const items = root.querySelectorAll(".metric, .composition-row, .access-card, .trend-card, .gap-row:not(.gap-header), .equity-group, .chart-reveal, .profile-panel, .profile-trend-card");
+  const items = root.querySelectorAll(".metric, .composition-row, .access-card, .trend-card, .gap-row:not(.gap-header), .equity-group, .chart-reveal");
   items.forEach((item) => {
     if (item.classList.contains("reveal-item")) return;
     item.classList.add("reveal-item");

@@ -438,8 +438,7 @@ h1 {
 .overview-snapshot.dashboard-loading-target:empty::before,
 .metric-grid.dashboard-loading-target:empty::before,
 .outcome-grid.dashboard-loading-target:empty::before,
-.access-grid.dashboard-loading-target:empty::before,
-.profile-trend-grid.dashboard-loading-target:empty::before { min-height: 320px; }
+.access-grid.dashboard-loading-target:empty::before { min-height: 320px; }
 .key-marist { width: 8px !important; height: 8px !important; border-radius: 50%; background: var(--red); }
 .key-peer { background: #858890; }
 .key-aspirant { border: 1px solid var(--blue); background: #dbe9ff; }
@@ -748,74 +747,6 @@ td:first-child { font-weight: 650; }
 .trend-point:focus { filter: drop-shadow(0 0 3px rgb(32 33 39 / 40%)); stroke: var(--ink); stroke-width: 3px; }
 .trend-values { margin-bottom: 0; }
 
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
-  padding: 16px;
-  background: #e5e7e9;
-  border-top: 2px solid var(--ink);
-}
-.profile-panel {
-  min-width: 0;
-  padding: 20px;
-  border: 1px solid #b9bcc1;
-  border-radius: 7px;
-  background: var(--paper);
-}
-.profile-panel header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid var(--line);
-}
-.profile-panel h3 { margin: 0; font-size: 16px; }
-.profile-panel header p { margin: 0; color: var(--gray); font-size: 11px; text-align: right; }
-.profile-enrollment { grid-column: span 4; }
-.profile-composition { grid-column: span 8; }
-.profile-outcomes { grid-column: span 7; }
-.profile-affordability { grid-column: span 5; }
-.profile-value-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-}
-.profile-value-grid-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.profile-kpi { min-width: 0; padding: 4px 16px 4px 0; }
-.profile-kpi + .profile-kpi { padding-left: 16px; border-left: 1px solid var(--soft-line); }
-.profile-kpi-value { margin: 0; font: 700 clamp(24px, 2.4vw, 34px)/1 Georgia, "Times New Roman", serif; }
-.profile-kpi-label { margin: 7px 0 0; color: var(--red-dark); font-size: 11px; font-weight: 750; }
-.profile-kpi-definition { margin: 4px 0 0; color: var(--gray); font-size: 10px; line-height: 1.35; }
-.profile-composition-chart { overflow: hidden; }
-.profile-composition-chart svg { display: block; width: 100%; height: auto; }
-.profile-legend { margin: 12px 0 16px; }
-.profile-inline-values {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--soft-line);
-}
-.profile-inline-values div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px 0 0; }
-.profile-inline-values div + div { padding-left: 16px; border-left: 1px solid var(--soft-line); }
-.profile-inline-values span { color: var(--gray); font-size: 11px; }
-.profile-inline-values strong { font-size: 13px; }
-.profile-trend-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 18px;
-}
-.profile-trend-card { min-width: 0; padding: 18px; border: 1px solid var(--line); }
-.profile-trend-card header { min-height: 58px; }
-.profile-trend-card h3 { margin: 0; font-size: 15px; }
-.profile-trend-card header p { margin: 4px 0 12px; color: var(--gray); font-size: 11px; }
-.profile-mini-chart { overflow-x: auto; }
-.profile-mini-chart svg { display: block; width: 100%; min-width: 520px; height: auto; }
-.profile-mini-chart .tick text { fill: var(--gray); font: 9px Inter, ui-sans-serif, system-ui, sans-serif; }
-.profile-trend-latest { margin: 4px 0 0; color: var(--red-dark); font-size: 11px; font-weight: 750; }
-.profile-mini-chart .trend-point.is-selected { filter: drop-shadow(0 0 3px rgb(32 33 39 / 25%)); }
-
 .methodology {
   display: grid;
   grid-template-columns: .8fr 1.2fr;
@@ -900,18 +831,6 @@ footer a { color: var(--red-dark); font-weight: 700; text-underline-offset: 3px;
     box-shadow: 8px 0 10px -10px rgb(32 33 39 / 45%);
   }
   .table-scroll thead th:first-child { z-index: 3; }
-  .profile-grid { grid-template-columns: 1fr; padding: 12px; }
-  .profile-enrollment,
-  .profile-composition,
-  .profile-outcomes,
-  .profile-affordability { grid-column: auto; }
-  .profile-value-grid-four { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 18px; }
-  .profile-value-grid-four .profile-kpi:nth-child(3) { padding-left: 0; border-left: 0; }
-  .profile-trend-grid { grid-template-columns: 1fr; }
-}
-
-@media (min-width: 1000px) {
-  .profile-trend-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (min-width: 1100px) {
@@ -942,14 +861,6 @@ footer a { color: var(--red-dark); font-weight: 700; text-underline-offset: 3px;
   .composition-legend { gap: 7px 12px; }
   .equity-group { overflow-x: auto; padding: 14px; }
   .equity-group svg { min-width: 620px; }
-  .profile-panel { padding: 16px; }
-  .profile-panel header { align-items: start; flex-direction: column; gap: 3px; }
-  .profile-panel header p { text-align: left; }
-  .profile-value-grid { grid-template-columns: 1fr; }
-  .profile-kpi,
-  .profile-kpi + .profile-kpi,
-  .profile-value-grid-four .profile-kpi:nth-child(3) { padding: 11px 0; border-left: 0; border-top: 1px solid var(--soft-line); }
-  .profile-kpi:first-child { padding-top: 0; border-top: 0; }
   footer { flex-direction: column; }
 }
 

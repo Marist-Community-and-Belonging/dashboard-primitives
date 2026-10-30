@@ -1,4 +1,5 @@
 const trendFormatters = {
+  students: new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }),
   percent: new Intl.NumberFormat("en-US", { maximumFractionDigits: 1, style: "percent" }),
   usd: new Intl.NumberFormat("en-US", { maximumFractionDigits: 0, style: "currency", currency: "USD" }),
   index: new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }),

@@ -1,7 +1,6 @@
 (() => {
   const selector = [
     "#overview-snapshot", "#metric-grid", "#overview-trends",
-    "#profile-enrollment-values", "#profile-composition-chart", "#profile-outcome-values", "#profile-affordability-values", "#profile-trends",
     "#composition-chart", "#access-grid", "#diversity-trend", "#scatterplot",
     "#outcome-grid", "#success-trends", "#equity-chart",
     "#affordability-grid", "#income-chart", "#affordability-trends",

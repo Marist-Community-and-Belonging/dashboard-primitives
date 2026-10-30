@@ -50,7 +50,7 @@ function updateHorizontalScroll(element) {
 const horizontalScrollObserver = new ResizeObserver((entries) => entries.forEach(({ target }) => updateHorizontalScroll(target)));
 
 function prepareHorizontalScroll(root = document) {
-  root.querySelectorAll(".table-scroll, .trend-visual, .profile-mini-chart, .income-chart, .equity-group").forEach((element) => {
+  root.querySelectorAll(".table-scroll, .trend-visual, .income-chart, .equity-group").forEach((element) => {
     if (!element.dataset.scrollPrepared) {
       element.dataset.scrollPrepared = "true";
       element.addEventListener("scroll", () => element.classList.toggle("is-scrolled", element.scrollLeft > 8), { passive: true });

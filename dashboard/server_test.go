@@ -25,7 +25,6 @@ func TestDashboardRoutes(t *testing.T) {
 		{"/diversity-access", "text/html"},
 		{"/success-equity", "text/html"},
 		{"/affordability-resources", "text/html"},
-		{"/marist-profile", "text/html"},
 		{"/campus-involvement", "text/html"},
 		{"/assets/dashboard.css", "text/css"},
 		{"/assets/campus-involvement.css", "text/css"},
@@ -33,7 +32,6 @@ func TestDashboardRoutes(t *testing.T) {
 		{"/assets/diversity-access.js", "text/javascript"},
 		{"/assets/success-equity.js", "text/javascript"},
 		{"/assets/affordability-resources.js", "text/javascript"},
-		{"/assets/marist-profile.js", "text/javascript"},
 		{"/assets/campus-involvement.js", "text/javascript"},
 		{"/assets/collapsible.js", "text/javascript"},
 		{"/assets/tooltips.js", "text/javascript"},
@@ -375,5 +373,22 @@ func TestPDFReportFailure(t *testing.T) {
 	}
 	if !strings.Contains(output.String(), "render unavailable") {
 		t.Fatalf("failure log = %s", output.String())
+	}
+}
+
+func TestProfileRedirectPreservesCollection(t *testing.T) {
+	router := testRouter(t)
+	query := "year=2021%E2%80%9322&view=values"
+	for _, method := range []string{http.MethodGet, http.MethodHead} {
+		response := testRequest(t, router, method, "http://example.com/marist-profile?"+query)
+		if response.StatusCode() != http.StatusMovedPermanently {
+			t.Fatalf("%s status = %d", method, response.StatusCode())
+		}
+		if got := string(response.Header.Peek("Location")); got != "http://example.com/?"+query {
+			t.Fatalf("redirect = %q", got)
+		}
+		if len(response.Header.Peek("Content-Security-Policy")) == 0 {
+			t.Fatal("redirect bypasses security headers")
+		}
 	}
 }

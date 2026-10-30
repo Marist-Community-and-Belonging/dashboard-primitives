@@ -23,7 +23,7 @@ The browser never calls NCES directly. Page availability and performance therefo
 ## HTTP surface
 
 - `/` serves the embedded dashboard shell.
-- `/marist-profile` serves a Marist-only selected-year profile and multi-year institutional trends assembled from the same versioned datasets.
+- Overview includes Marist-only selected-year values, enrollment and admissions trends, and all six headline measures across available years. `/marist-profile` redirects to Overview and preserves query parameters.
 - `/assets/*` serves embedded CSS, JavaScript, D3, and the favicon.
 - `/api/v1/overview/releases` lists the validated collections embedded in the binary.
 - `/api/v1/overview?year={collection year}` serves the exact processed dataset used by the charts. With no year, it serves the latest embedded final collection.
@@ -69,7 +69,7 @@ behavior.
 - The year control on every page is populated from the embedded release catalog. The five final collections from 2019–20 through 2023–24 are available.
 - Year changes fetch and render only the selected dataset, update browser history without reloading the document, and preserve the selected year across section navigation.
 - Historical charts request every embedded final collection and show Marist with peer and aspirant medians. The selected-year charts and CSV exports remain separate from the five-year trend.
-- The Marist Profile page reuses all four selected-year endpoints for its at-a-glance view and the Overview history for six Marist-only trends. It has no manually maintained values.
+- Overview reuses all four selected-year endpoints for its Marist values table and the Overview history for enrollment/admissions charts and the six-measure historical table. It has no manually maintained values.
 - Cards and chart marks use a shared intersection observer for one-time viewport reveals. Re-rendered year-specific marks receive a fresh reveal, while reduced-motion preferences bypass the animation timing.
 - Metric metadata defines whether higher or lower values are favorable. A small positive tag is calculated from the selected year at runtime and appears only when Marist compares favorably with the peer median. The tag gives the exact difference, and the same rule applies automatically to newly ingested final collections.
 - Pointer details appear in a viewport-aware floating tooltip beside the cursor; keyboard focus anchors the same tooltip beside the selected mark. These overlays never change document layout, and interquartile ranges remain available in the ordinary HTML comparison table.

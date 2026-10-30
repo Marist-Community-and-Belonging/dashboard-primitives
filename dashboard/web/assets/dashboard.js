@@ -47,12 +47,12 @@ function renderDashboardSnapshot(dataset, related) {
   const year = encodeURIComponent(dataset.release.collection_year);
   snapshot.replaceChildren(
     snapshotCard({
-      title: "Marist profile",
+      title: "Enrollment and admissions",
       question: "How large and selective is Marist?",
       values: [{ label: "Undergraduates", value: formatValue(enrollment.value, enrollment.unit) }, { label: "Acceptance rate", value: formatValue(acceptance.value, acceptance.unit) }],
       note: `${enrollment.data_year}. Enrollment and admissions are reported directly to IPEDS.`,
-      href: `/marist-profile?year=${year}`,
-      linkLabel: "Explore Marist profile",
+      href: "#overview-trends-section",
+      linkLabel: "Explore enrollment and admissions trends",
     }),
     snapshotCard({
       title: "Diversity and access",
@@ -89,13 +89,39 @@ function renderDashboardSnapshot(dataset, related) {
   );
 }
 
+function renderMaristValues(dataset, related) {
+  const rows = [];
+  const add = (area, name, value, unit, period) => rows.push(`<tr><td>${area}</td><th scope="row">${name}</th><td>${formatValue(value, unit)}</td><td>${period || "Unavailable"}</td></tr>`);
+  const enrollment = dataset.metrics.find((metric) => metric.metric_id === "undergraduate_enrollment");
+  dataset.metrics.filter((metric) => ["undergraduate_enrollment", "acceptance_rate"].includes(metric.metric_id))
+    .forEach((metric) => add("Enrollment and admissions", metric.display_name, metric.value, metric.unit, metric.data_year));
+  const composition = related.diversity?.groups.find((group) => group.group === "marist");
+  add("Student composition", "Women", composition?.women_share, "percent", enrollment.data_year);
+  add("Student composition", "Men", composition?.men_share, "percent", enrollment.data_year);
+  if (related.diversity) {
+    related.diversity.categories.forEach((category) => add("Race and ethnicity", category.display_name, composition?.normalized_shares[category.category_id], "percent", related.diversity.data_year));
+  } else {
+    add("Race and ethnicity", "Undergraduate composition", null, "percent", enrollment.data_year);
+  }
+  if (related.success) {
+    related.success.outcomes.forEach((outcome) => add("Student outcomes", outcome.display_name, outcome.value, "percent", outcome.cohort_year || outcome.data_year));
+  } else {
+    add("Student outcomes", "Outcome data", null, "percent", null);
+  }
+  dataset.metrics.filter((metric) => ["average_net_price", "pell_share"].includes(metric.metric_id))
+    .forEach((metric) => add("Affordability and access", metric.display_name, metric.value, metric.unit, metric.data_year));
+  const lowestIncome = related.affordability?.income_bands[0];
+  add("Affordability and access", `Net price, income ${lowestIncome?.display_name || "Lowest income band"}`, lowestIncome?.marist, "usd", related.affordability?.headlines[0].data_year);
+  document.querySelector("#overview-values-body").innerHTML = rows.join("");
+}
+
 function renderOverviewTrends() {
   const container = document.querySelector("#overview-trends");
   if (!dashboardState.history.length) return;
   container.replaceChildren();
   [
-    { id: "retention_rate", title: "First-year retention", description: "Share of full-time, first-time students returning the following fall." },
-    { id: "average_net_price", title: "Average net price", description: "Nominal annual cost after grants and scholarships for aided full-time, first-time students." },
+    { id: "undergraduate_enrollment", title: "Undergraduate enrollment", description: "Fall undergraduate headcount." },
+    { id: "acceptance_rate", title: "Acceptance rate", description: "Share of applicants offered admission." },
   ].forEach((config) => {
     const metrics = dashboardState.history.map((dataset) => dataset.metrics.find((metric) => metric.metric_id === config.id));
     if (metrics.some((metric) => !metric)) return;
@@ -111,6 +137,12 @@ function renderOverviewTrends() {
       })),
     });
   });
+  const metrics = dashboardState.history.at(-1).metrics;
+  document.querySelector("#overview-history-head").innerHTML = `<tr><th scope="col">Collection</th>${metrics.map((metric) => `<th scope="col">${metric.display_name}</th>`).join("")}</tr>`;
+  document.querySelector("#overview-history-body").innerHTML = dashboardState.history.map((dataset) => `<tr><th scope="row">${dataset.release.collection_year}</th>${metrics.map(({ metric_id }) => {
+    const metric = dataset.metrics.find((item) => item.metric_id === metric_id);
+    return `<td>${formatValue(metric?.value, metric?.unit)}</td>`;
+  }).join("")}</tr>`).join("");
 }
 
 function metricCard(metric) {
@@ -223,6 +255,7 @@ function renderDataset(dataset, related) {
   document.querySelector("#data-status").innerHTML = `<strong>Verified final IPEDS data.</strong> Retrieved ${dataset.release.retrieved_at}.`;
   document.querySelector("#data-provenance").textContent = `${dataset.release.source}. Retrieved ${dataset.release.retrieved_at}. Peer summaries use ${dataset.metrics[0].peer.count} institutions; aspirant summaries use ${dataset.metrics[0].aspirant.count}. Marist is excluded from both groups. The median is the middle institution after sorting. The mean is the arithmetic average and is more sensitive to skew and extreme values, so the median remains the default.`;
   renderDashboardSnapshot(dataset, related);
+  renderMaristValues(dataset, related);
 
   const grid = document.querySelector("#metric-grid");
   grid.replaceChildren();

@@ -875,7 +875,7 @@ This repository demonstrates the playbook in these locations:
 | Runtime and APIs | `dashboard/main.go` |
 | Global design tokens and responsive layout | `dashboard/web/assets/dashboard.css` |
 | Shared year state, tooltips, and reveal behavior | `dashboard/web/assets/dashboard.js` |
-| Institution-only at-a-glance profile | `dashboard/web/marist-profile.html` and `dashboard/web/assets/marist-profile.js` |
+| Institution-only values and history | `dashboard/web/index.html` and `dashboard/web/assets/dashboard.js` |
 | Overview comparison cards | `dashboard/web/assets/overview.js` |
 | Composition, gaps, and scatterplots | `dashboard/web/assets/diversity-access.js` |
 | Outcomes and centered subgroup gaps | `dashboard/web/assets/success-equity.js` |

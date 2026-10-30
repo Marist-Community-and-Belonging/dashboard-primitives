@@ -25,6 +25,11 @@ jobs:
         with:
           go-version-file: dashboard/go.mod
           cache-dependency-path: dashboard/go.sum
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Frontend tests
+        run: node dashboard_test.cjs
       - name: Test
         run: go test -race -cover ./...
       - name: Vet

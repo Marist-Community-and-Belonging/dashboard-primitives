@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/fs"
+	"net/http"
 
 	"github.com/deglebe/flare"
 )
@@ -13,7 +14,6 @@ var pageFiles = map[string]string{
 	"/affordability-resources": "web/affordability-resources.html",
 	"/campus-involvement":      "web/campus-involvement.html",
 	"/diversity-access":        "web/diversity-access.html",
-	"/marist-profile":          "web/marist-profile.html",
 	"/success-equity":          "web/success-equity.html",
 }
 
@@ -30,6 +30,15 @@ func loadPages(content fs.FS) (map[string][]byte, error) {
 }
 
 func registerPages(router *flare.Engine, pages map[string][]byte) {
+	profileRedirect := func(c *flare.Ctx) {
+		target := "/"
+		if query := c.URI().QueryString(); len(query) > 0 {
+			target += "?" + string(query)
+		}
+		c.Redirect(http.StatusMovedPermanently, target)
+	}
+	router.GET("/marist-profile", profileRedirect)
+	router.HEAD("/marist-profile", profileRedirect)
 	for route, payload := range pages {
 		handler := func(c *flare.Ctx) {
 			c.SetContentType("text/html; charset=utf-8")
