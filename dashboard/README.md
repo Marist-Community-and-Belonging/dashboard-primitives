@@ -5,7 +5,7 @@ The Marist IPEDS Benchmark Dashboard is a Go service using Flare to serve a stat
 The reusable design, chart, interaction, data, accessibility, and LLM implementation specification is documented in [`../docs/dashboard-design-system.md`](../docs/dashboard-design-system.md).
 
 Requires Go 1.25.5 or later. Flare uses fasthttp directly; embedded assets use
-`fasthttp.FS`. Routes use strict trailing slashes, so API clients should use the
+Flare’s `StaticFS`. Routes use strict trailing slashes, so API clients should use the
 exact endpoint paths listed below.
 
 ## Run locally

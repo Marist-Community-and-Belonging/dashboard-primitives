@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/deglebe/flare"
-	"github.com/valyala/fasthttp"
 )
 
 const apiPrefix = "/api/v1"
@@ -33,17 +32,7 @@ func newRouterWithLogger(content fs.FS, logger *slog.Logger) (*flare.Engine, err
 	if err != nil {
 		return nil, fmt.Errorf("open embedded assets: %w", err)
 	}
-	assetHandler := (&fasthttp.FS{
-		FS:              assets,
-		IndexNames:      []string{"index.html"},
-		AcceptByteRange: true,
-		PathRewrite:     fasthttp.NewPathPrefixStripper(len("/assets")),
-	}).NewRequestHandler()
-	serveAsset := func(c *flare.Ctx) { assetHandler(c.RequestCtx) }
-	router.GET("/assets/", serveAsset)
-	router.HEAD("/assets/", serveAsset)
-	router.GET("/assets/*filepath", serveAsset)
-	router.HEAD("/assets/*filepath", serveAsset)
+	router.Group("/assets").StaticFS("/", assets)
 
 	registerPages(router, application.pages)
 	registerAPI(router.Group(apiPrefix), application)

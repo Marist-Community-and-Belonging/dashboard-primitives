@@ -334,6 +334,7 @@ func TestAssetHTTPContracts(t *testing.T) {
 		{http.MethodGet, "/assets/dashboard.css", "bytes=0-9", http.StatusPartialContent},
 		{http.MethodGet, "/assets/missing.css", "", http.StatusNotFound},
 		{http.MethodGet, "/assets/", "", http.StatusForbidden},
+		{http.MethodHead, "/assets/", "", http.StatusForbidden},
 		{http.MethodPost, "/api/v1/overview", "", http.StatusNotFound},
 		{http.MethodGet, "/missing.json", "", http.StatusNotFound},
 	} {
